@@ -44,7 +44,7 @@
 ├── src
 │   ├── api : # API 호출 모음
 │   ├── components : # component
-│   └── container : # container
+│   └── containers : # container
 │   └── core : # lib 나 util 파일 모음
 │       └── lib : # 정규식, 날짜 계산 등 라이브러리 모음
 │       └── util : # 라우터 경로, 헤더 타이틀 등 모음
