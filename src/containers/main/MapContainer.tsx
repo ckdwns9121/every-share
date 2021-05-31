@@ -1,11 +1,7 @@
 
 /* 지도 페이지 */
-
-type Props={
-    modal? : string | undefined
-}
-
-function MapContainer({modal}:Props){
+import {MatchModal} from '../../types/RouterParams';
+function MapContainer({modal}:MatchModal){
     console.log(modal);
     return(
         <div>

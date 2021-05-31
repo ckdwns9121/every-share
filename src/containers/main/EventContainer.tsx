@@ -1,11 +1,8 @@
 /* 이벤트 페이지 */
 
+import {MatchId} from '../../types/RouterParams';
 
-type IProps= {
-    id: string 
-}
-
-function EventContainer({id}:IProps){
+function EventContainer({id}:MatchId){
     return(
         <div>
            이벤트

@@ -1,7 +1,6 @@
 import LikeContainer from '../../containers/main/LikeContainer';
 
 function LikePage(){
-
     return(
         <LikeContainer />
     )

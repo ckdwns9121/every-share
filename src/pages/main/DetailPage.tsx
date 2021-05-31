@@ -1,10 +1,8 @@
 import DetailContainer from '../../containers/main/DetailContainer';
 import {RouteComponentProps} from 'react-router-dom';
+import {MatchId} from '../../types/RouterParams';
 
-type IProps= {
-    id: string 
-}
-function DetailPage({match} : RouteComponentProps<IProps>){
+function DetailPage({match} : RouteComponentProps<MatchId>){
     const {id} = match.params;
     return(
         <DetailContainer id={id}/>

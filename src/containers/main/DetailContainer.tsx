@@ -1,11 +1,8 @@
 /* 매물 상세보기 페이지 */
 
 
-type Props= {
-    id : string
-}
-
-function DetailContainer({id}:Props){
+import {MatchId} from '../../types/RouterParams';
+function DetailContainer({id}:MatchId){
     console.log(id);
     return(
         <div>

@@ -1,11 +1,8 @@
 import MapContainer from '../../containers/main/MapContainer';
 import {RouteComponentProps} from 'react-router-dom';
+import {MatchModal} from '../../types/RouterParams';
 
-type IProps= {
-    modal?: string | undefined
-}
-
-function MapPage({match} : RouteComponentProps<IProps>){
+function MapPage({match} : RouteComponentProps<MatchModal>){
     const {modal} = match.params;
     console.log(modal);
     return(
