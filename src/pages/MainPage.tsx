@@ -19,7 +19,10 @@ import ErrorPage from './ErrorPage';
 import { Route, Switch,Redirect} from "react-router-dom";
 import { Paths } from "../core/utils/path";
 
+
+
 function MainPage() {
+
   return (
     <Switch>
       <Route path={Paths.index}
