@@ -46,8 +46,8 @@
 │   ├── components : # component
 │   └── container : # container
 │   └── core : # lib 나 util 파일 모음
-│       └── lib
-│       └── util
+│       └── lib : # 정규식, 날짜 계산 등 라이브러리 모음
+│       └── util : # 라우터 경로, 헤더 타이틀 등 모음
 │   └── hooks # custom hooks 모음
 │   └── pages # 라우팅 페이지 구성
 │   └── static # 정적 이미지 모음 svg, img file
