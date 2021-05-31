@@ -13,22 +13,22 @@ import {
     Redirect
 } from "react-router-dom";
 
-import { Paths } from "../core/utils/path";
+import { RoutePaths } from "../core/utils/path";
 
 
 function AuthPage(){
 
     return(
         <Switch>
-          <Route path={Paths.auth.index} 
+          <Route path={RoutePaths.auth.index} 
             render={() =>(
                 <Switch>
-                    <Route path ={Paths.auth.login} component={LoginPage}/>
-                    <Route path ={Paths.auth.signin} component={SigninPage}/>
-                    <Route path ={Paths.auth.signup} component={SignupPage}/>
-                    <Route path ={Paths.auth.sign_complete} component={SignupCompletePage}/>
-                    <Route path ={Paths.auth.find.index} component={FindPage}/>
-                    <Route exact path ={Paths.auth.index} render ={()=> <Redirect to={Paths.auth.login}/>}/>
+                    <Route path ={RoutePaths.auth.login} component={LoginPage}/>
+                    <Route path ={RoutePaths.auth.signin} component={SigninPage}/>
+                    <Route path ={RoutePaths.auth.signup} component={SignupPage}/>
+                    <Route path ={RoutePaths.auth.sign_complete} component={SignupCompletePage}/>
+                    <Route path ={RoutePaths.auth.find.index} component={FindPage}/>
+                    <Route exact path ={RoutePaths.auth.index} render ={()=> <Redirect to={RoutePaths.auth.login}/>}/>
                     <Route component ={ErrorPage}/>
                 </Switch>
             )}

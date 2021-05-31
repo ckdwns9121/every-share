@@ -4,7 +4,7 @@ import {
   Switch,
   useLocation,
 } from "react-router-dom";
-import { Paths } from "./core/utils/path";
+import { RoutePaths } from "./core/utils/path";
 import AuthPage from "./pages/AuthPage";
 import MainPage from "./pages/MainPage";
 import ErrorPage from './pages/ErrorPage';
@@ -15,8 +15,8 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path={Paths.auth.index} component={AuthPage} />
-          <Route path={Paths.index} component={MainPage} />
+          <Route path={RoutePaths.auth.index} component={AuthPage} />
+          <Route path={RoutePaths.index} component={MainPage} />
           <Route component={ErrorPage} />
         </Switch>
       </Router>

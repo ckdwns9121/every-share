@@ -1,6 +1,7 @@
 import { ComponentType } from "react";
 import { RouteComponentProps } from "react-router";
-import {Paths} from '../core/utils/path';
+import {RoutePaths} from '../core/utils/path';
+
 import MapPage from '../pages/MainPage';
 import DetailPage from '../pages/main/DetailPage';
 
@@ -19,11 +20,11 @@ export interface RouterServiceModel{
 
 export const MainPageRoute : RouterServiceModel[] =[
     {
-        path : Paths.main.index,
+        path : RoutePaths.main.index,
         component : MapPage,
     },
     {
-        path : Paths.main.detail,
+        path : RoutePaths.main.detail,
         component : DetailPage,
     }
 ]

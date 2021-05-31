@@ -1,4 +1,4 @@
-export const Paths ={
+export const RoutePaths ={
     index:'/',
     main:{
         index: '/map',
