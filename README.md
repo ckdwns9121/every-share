@@ -36,3 +36,24 @@
 |   |   └── password_complete : 비밀번호 찾기 완료
 └── 
 ``` 
+
+
+2. 디렉토리 구조
+
+```bash
+├── src
+│   ├── api : # API 호출 모음
+│   ├── components : # component
+│   └── container : # container
+│   └── core : # lib 나 util 파일 모음
+│       └── lib
+│       └── util
+│   └── hooks # custom hooks 모음
+│   └── pages # 라우팅 페이지 구성
+│   └── static # 정적 이미지 모음 svg, img file
+│   └── store # redux, redux-saga , reducer 등 전역 상태관리
+│   └── styles # 전역 스타일링 모음
+│   └── types # 타입선언에 대한 모음
+|
+└── 
+``` 
