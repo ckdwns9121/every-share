@@ -16,7 +16,7 @@ import {
 } from "./main";
 import ErrorPage from './ErrorPage';
 
-import { Route, Switch,} from "react-router-dom";
+import { Route, Switch,Redirect} from "react-router-dom";
 import { Paths } from "../core/utils/path";
 
 function MainPage() {
@@ -36,7 +36,7 @@ function MainPage() {
                     <Route path = {`${Paths.main.realty.write}/:modal?`} component={RealtyWrite}/>
                     <Route path = {`${Paths.main.realty.modify}/:id`} component={RealtyModify}/>
                     <Route path = {Paths.main.realty.enrollment} component={RealtyEnrollment}/>
-                    <Route exact path={Paths.main.realty.index} render = {()=> <ErrorPage path={Paths.main.realty.contact}/>}/>
+                    <Route exact path={Paths.main.realty.index} render = {()=> <Redirect to={Paths.main.realty.contact}/>}/>
                     <Route component={ErrorPage}/>
                 </Switch>
                 }
@@ -49,12 +49,12 @@ function MainPage() {
                     <Route path = {Paths.main.mypage.update.name} component={UpdateName}/>
                     <Route path = {Paths.main.mypage.update.password} component={UpdatePassword}/>
                     <Route path = {Paths.main.mypage.update.phone_number} component={UpdatePhone}/>
-                    <Route exact path={Paths.main.mypage.update.index} render = {()=> <ErrorPage path={Paths.main.mypage.update.name}/>}/>
+                    <Route exact path={Paths.main.mypage.update.index} render = {()=> <Redirect to={Paths.main.mypage.update.name}/>}/>
                     <Route component={ErrorPage}/>
                 </Switch>
                 }
             />
-            <Route exact path={Paths.index} render = {()=> <ErrorPage path={Paths.main.index}/>} />
+            <Route exact path={Paths.index} render = {()=> <Redirect to={Paths.main.index}/>} />
             <Route component = {ErrorPage} />
           </Switch>
         )}
