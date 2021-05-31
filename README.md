@@ -4,6 +4,6 @@
 
 > Main
 >> main : 맵 :/modal? (address: 주소검색 list: 이지역 매물)
->> detail : 매물 상세보기
->> realty 
->>> contact : 내가 문의한 매물
+    >> detail : 매물 상세보기
+    >> realty 
+        >>> contact : 내가 문의한 매물
