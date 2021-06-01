@@ -2,29 +2,26 @@ import { ComponentType } from "react";
 import { RouteComponentProps } from "react-router";
 import {RoutePaths} from '../core/utils/path';
 
-import MapPage from '../pages/MainPage';
-import DetailPage from '../pages/main/DetailPage';
+import MapPage from '../containers/main/MapContainer';
+import DetailPage from '../containers/main/DetailContainer';
 
 export interface RouterServiceModel{
     path:string,
-    component : 
-    | ComponentType<RouteComponentProps<any>  & { routes?: RouterServiceModel[] }> 
-    | ComponentType<any> & {route?:RouterServiceModel[]}
+    component :  | ComponentType<RouteComponentProps<any>  & { routes?: RouterServiceModel[] }> | ComponentType<any> & {route?:RouterServiceModel[]}
     redirect?: string,
     title?: string,
     exact?: boolean,
-    sideProps?:{
-        onClick? : ()=>void;
-    }
+    isAccess ?: boolean,
+    children?: RouterServiceModel[],
+    
 }
-
 export const MainPageRoute : RouterServiceModel[] =[
     {
         path : RoutePaths.main.index,
         component : MapPage,
     },
     {
-        path : RoutePaths.main.detail,
+        path : `${RoutePaths.main.detail}/:id`,
         component : DetailPage,
-    }
+    },
 ]

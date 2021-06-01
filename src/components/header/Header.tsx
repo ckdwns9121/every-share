@@ -1,0 +1,49 @@
+
+import {useRef , useEffect, useState} from 'react';
+import styles from './Header.module.scss';
+import cn from 'classnames/bind';
+import {useHistory,useLocation} from 'react-router';
+import {RoutePaths} from '../../core/utils/path';
+import Arrow from '../asset/Arrow';
+import {IconButton} from '@material-ui/core';
+
+const cx = cn.bind(styles);
+
+interface Props{
+    title:string
+}
+
+function Header({title}:Props){
+    
+    const history = useHistory();
+    const headerRef = useRef<HTMLDivElement | null>(null);
+    const [shadow, setShadow] = useState(false);
+
+    useEffect(() => {
+        if(headerRef.current){
+            const headerHeight = headerRef.current.getBoundingClientRect().height;
+            console.log(headerHeight);
+            const headerControll = () => setShadow(window.scrollY > headerHeight);
+            window.addEventListener('scroll', headerControll);
+            return () => window.removeEventListener('scroll', headerControll);
+        }
+    }, []);
+
+  
+    return(
+        <div className={styles['header']} ref={headerRef}>
+        <div className={cx('content', { shadow })}>
+            <IconButton
+                className={styles['back-btn']}
+                onClick={() =>history.goBack()}
+            >
+                <Arrow />
+            </IconButton>
+            <div className={styles['title']}>{title}</div>
+        </div>
+    </div>
+    )
+}
+
+
+export default Header;

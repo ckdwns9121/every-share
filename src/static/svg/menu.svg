@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="자산_64_4x-8" data-name="자산 64@4x-8" width="17" height="17" transform="translate(20 48)" fill="#333"/>
+    </clipPath>
+  </defs>
+  <g id="마스크_그룹_70" data-name="마스크 그룹 70" transform="translate(-20 -48)" clip-path="url(#clip-path)">
+    <g id="menu" transform="translate(21.417 50.125)">
+      <g id="_x33__6_" transform="translate(0 0)">
+        <g id="그룹_4993" data-name="그룹 4993">
+          <path id="패스_2508" data-name="패스 2508" d="M13.458,12.533H.708a.708.708,0,0,0,0,1.417h12.75a.708.708,0,0,0,0-1.417ZM.708,2.617h12.75a.708.708,0,1,0,0-1.417H.708a.708.708,0,1,0,0,1.417Zm12.75,4.25H.708a.708.708,0,0,0,0,1.417h12.75a.708.708,0,0,0,0-1.417Z" transform="translate(0 -1.2)" fill="#333"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,39 @@
+
+@import '../../styles/_Root.scss';
+@import '../../styles/_Value.scss';
+@import '../../styles/_Modal.scss';
+
+
+
+
+.app-bar{
+    width: 100%;
+    height: $header;
+    // border:1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .address-input{
+        width: 100%;
+        input{
+            letter-spacing: $letter-spaceing;
+            font-size: 18px;
+            width: 100%;
+            padding-left:15px;
+        }
+    }
+  
+}
+
+.address-list{
+    padding-top:15px;
+}
+
+html{
+    body{
+        .back{
+            padding:0;
+
+        }
+    }
+}

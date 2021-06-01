@@ -5,7 +5,7 @@ $font-size: 12px;
 $mg-top: 48px;
 $pd-top: 48px;
 $header: 48px;
-$padding: 20px;
+$space: 20px;
 $padding-side: 0 20px;
 $main-color:#034b9d;
 $disable-color: #DBDBDB;
@@ -14,7 +14,7 @@ $level1 : 3000; //modal
 $level2 : 2800; //dim
 $level3 : 2500; //button
 $level4 : 2400;
-
+$letter-spaceing : -1px;
 
 // 모바일 컨테이너 믹스인
 @mixin container($pd-top :48px) {
@@ -27,4 +27,6 @@ $level4 : 2400;
     position: relative;
     // box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.15);
 }
-
+:global(.MuiDialog-root){
+    z-index: $level1 !important;
+}

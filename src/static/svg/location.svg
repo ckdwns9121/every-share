@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28.99" height="28.99" viewBox="0 0 28.99 28.99">
+  <g id="그룹_5119" data-name="그룹 5119" transform="translate(-29.51 -102.5)">
+    <g id="타원_189" data-name="타원 189" transform="translate(34 107)" fill="none" stroke="#555" stroke-width="1.5">
+      <circle cx="10" cy="10" r="10" stroke="none"/>
+      <circle cx="10" cy="10" r="9.25" fill="none"/>
+    </g>
+    <g id="타원_190" data-name="타원 190" transform="translate(39 112)" fill="none" stroke="#555" stroke-width="1.5">
+      <circle cx="5" cy="5" r="5" stroke="none"/>
+      <circle cx="5" cy="5" r="4.25" fill="none"/>
+    </g>
+    <path id="패스_2591" data-name="패스 2591" d="M34,117H30.01" fill="none" stroke="#555" stroke-linecap="round" stroke-width="1"/>
+    <path id="패스_2593" data-name="패스 2593" d="M34,117H30.01" transform="translate(24)" fill="none" stroke="#555" stroke-linecap="round" stroke-width="1"/>
+    <path id="패스_2594" data-name="패스 2594" d="M34,117H30.01" transform="translate(161 96.99) rotate(90)" fill="none" stroke="#555" stroke-linecap="round" stroke-width="1"/>
+    <path id="패스_2595" data-name="패스 2595" d="M34,117H30.01" transform="translate(161 72.99) rotate(90)" fill="none" stroke="#555" stroke-linecap="round" stroke-width="1"/>
+  </g>
+</svg>

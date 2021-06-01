@@ -18,10 +18,11 @@ import ErrorPage from './ErrorPage';
 
 import { Route, Switch,Redirect} from "react-router-dom";
 import { RoutePaths } from "../core/utils/path";
-
-
+// import {MainPageRoute ,RouterServiceModel} from '../types/RouteServiceModel';
 
 function MainPage() {
+
+  // const route = MainPageRoute.map((item : RouterServiceModel)=> <Route path={item.path} component={item.component} key={item.path}/>)
 
   return (
     <Switch>
