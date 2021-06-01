@@ -95,6 +95,7 @@ function MapContainer({modal}:MatchModal){
           level: 3
         };
         let map = new window.kakao.maps.Map(container, options);
+        kakao_map.current = map;
     },[])
 
     return(
@@ -116,8 +117,8 @@ function MapContainer({modal}:MatchModal){
                 </div>
             </div>
             <div className={styles['left-bar']}>
-                <CircleButton src={ZOOMIN}/>
-                <CircleButton src={ZOOMOUT}/>
+                <CircleButton src={ZOOMIN} onClick={()=>zoomMap('in')}/>
+                <CircleButton src={ZOOMOUT} onClick={()=>zoomMap('out')}/>
             </div>
             <div className={styles['right-bar']}>
                 <CircleButton src={FILTER}/>
