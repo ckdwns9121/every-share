@@ -1,6 +1,6 @@
 
 
-import {useCallback, useEffect,useRef,useState, Fragment} from 'react';
+import {useCallback, useEffect,useRef,useState, useReducer,Fragment} from 'react';
 import styles from './MapContainer.module.scss';
 
 //lib
@@ -23,6 +23,7 @@ import {setLevel} from '../../store/map';
 import CircleButton from '../../components/button/CircleButton';
 import {IconButton,ButtonBase} from '@material-ui/core';
 import SlideMenu from '../../components/menu/SlideMenu';
+import BottomModal from '../../components/modal/BottomModal';
 
 //asset
 
@@ -44,11 +45,13 @@ declare global {
 
 type Zoom = 'in' | 'out';
 
+
 function MapContainer({modal}:MatchModal){
 
-
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
+    const [filterOpen ,setFilterOpen] = useState<boolean>(false);
     const handleOpen =(type:boolean)=> setMenuOpen(type);
+    const handleFilterOpen =(type:boolean) =>setFilterOpen(type);
     const history = useHistory();
     const dispatch = useDispatch();
     const {position,level,area,address} = useSelector((state:RootState) =>state.map);
@@ -121,13 +124,14 @@ function MapContainer({modal}:MatchModal){
                 <CircleButton src={ZOOMOUT} onClick={()=>zoomMap('out')}/>
             </div>
             <div className={styles['right-bar']}>
-                <CircleButton src={FILTER}/>
+                <CircleButton src={FILTER} onClick={()=>handleFilterOpen(true)}/>
                 <CircleButton src={LOCATION}/>
             </div>
             <SlideMenu open={menuOpen} handleClose={()=>handleOpen(false)}/>
             <div id="map" style={{ width: '100%', height: '100vh', zIndex: 1 }}/>
         </div>
         <AddressModal open={modal==='address'}/>
+        <BottomModal open ={filterOpen} handleClose={()=>handleFilterOpen(false)}/>
         </Fragment>
 
     )

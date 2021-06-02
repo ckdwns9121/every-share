@@ -36,7 +36,7 @@ const BottomModal = ({ open, handleClose }:Props) => {
                     </div>
                 </div>
             </div>
-            <Backdrop open={open} className={styles['dim']} />
+            <Backdrop open={open} className={styles['dim']}  onClick={handleClose}/>
         </>
     );
 };
