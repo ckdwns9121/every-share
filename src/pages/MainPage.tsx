@@ -40,13 +40,13 @@ function MainPage() {
                     <Route path = {`${RoutePaths.main.realty.write}/:modal?`} component={RealtyWrite}/>
                     <Route path = {`${RoutePaths.main.realty.modify}/:id`} component={RealtyModify}/>
                     <Route path = {RoutePaths.main.realty.enrollment} component={RealtyEnrollment}/>
+                    <Route path = {RoutePaths.main.realty.like} component={Like}/>
                     <Route exact path={RoutePaths.main.realty.index} render = {()=> <Redirect to={RoutePaths.main.realty.contact}/>}/>
                     <Route component={ErrorPage}/>
                 </Switch>
                 }
             />
             <Route path={RoutePaths.main.mypage.index} exact component={Mypage} />
-            <Route path={RoutePaths.main.like} exact component={Like} />
             <Route path={RoutePaths.main.mypage.update.index}
                 render ={()=> 
                 <Switch> 

@@ -1,8 +1,12 @@
-import {Fragment, ReactNode} from 'react';
+import {Fragment} from 'react';
 import styles from './SlideMenu.module.scss'
 import cn from 'classnames/bind';
-import {ButtonBase,IconButton} from '@material-ui/core';
 
+//components
+import {ButtonBase,Icon,IconButton} from '@material-ui/core';
+
+
+//svg
 import TIME from '../../static/svg/side/time.svg'; //최근본방
 import LIKE from '../../static/svg/side/like.svg'; //찜한매물
 import CONTACT from '../../static/svg/side/contact.svg';
@@ -14,11 +18,15 @@ import QNA from '../../static/svg/side/qna.svg';
 import PUSH from '../../static/svg/side/push.svg';
 import SETTING from '../../static/svg/side/setting.svg';
 
+//hooks
+import {useHistory} from 'react-router-dom';
+import {RoutePaths} from '../../core/utils/path';
+
 const cx = cn.bind(styles);
 
 interface Props{
     open : boolean,
-    handleClose?: ()=>void
+    handleClose: ()=>void
 }
 
 interface ItemProps {
@@ -26,8 +34,69 @@ interface ItemProps {
     icon : string,
     onClick ?:()=>void,
 }
+interface MenuComponent {
+    icon: string,
+    text:string,
+    path? : string,
+    onClick :()=>void;
+}
 
 function SlideMenu ({open,handleClose} : Props){
+
+    const history = useHistory();
+
+    const SlideMenu : MenuComponent[] =[
+        {
+            text:'최근 본방',
+            icon : TIME,
+            onClick :  ()=> onClick(RoutePaths.main.index),
+        },
+        {
+            text:'좋아요한 매물',
+            icon : LIKE,
+            onClick :  ()=> onClick(RoutePaths.main.realty.like),
+        },
+        {
+            text:'내가 문의한 매물',
+            icon : CONTACT,
+            onClick :  ()=> onClick(RoutePaths.main.realty.contact),
+        },
+        {
+            text:'내가 등록한 매물',
+            icon : ENROLLMENT,
+            onClick :  ()=> onClick(RoutePaths.main.realty.enrollment),
+        },
+        {
+            text:'이벤트',
+            icon : EVENT,
+            onClick :  ()=> onClick(RoutePaths.main.event.index),
+        },
+        {
+            text:'자주묻는 질문',
+            icon : QNA,
+            onClick :  ()=> onClick('/'),
+        },
+        {
+            text:'공지사항',
+            icon : NOTICE,
+            onClick :  ()=> onClick('/'),
+        },
+        {
+            text:'1:1 문의',
+            icon : ANQ,
+            onClick :  ()=> onClick('/'),
+        },
+    
+    ]
+
+    const onClick = (path:string) =>{
+        handleClose();
+        setTimeout(()=>{
+            history.push(path);
+        },500)
+    }
+  
+
     return(
         <Fragment>
             <div className={cx('slide-menu',{open})}>
@@ -50,15 +119,7 @@ function SlideMenu ({open,handleClose} : Props){
                     </div>
                 </div>
                 <div className={styles['menu-list']}>
-                    <SlideMenuItem icon={TIME} text ={"최근 본방"}/>
-                    <SlideMenuItem icon={LIKE} text ={"좋아요한 매물"}/>
-                    <SlideMenuItem icon={CONTACT} text ={"내가 문의한 매물"}/>
-                    <SlideMenuItem icon={ENROLLMENT} text ={"내가 등록한 매물"}/>
-                    <SlideMenuItem icon={EVENT} text ={"이벤트"}/>
-                    <SlideMenuItem icon={ANQ} text ={"자주묻는 질문"}/>
-                    <SlideMenuItem icon={NOTICE} text ={"공지사항"}/>
-                    <SlideMenuItem icon={QNA} text ={"1:1 문의"}/>
-
+                    {SlideMenu.map((item : MenuComponent) => <SlideMenuItem icon={item.icon} text={item.text} onClick={item.onClick} key={item.path}/>)}
                 </div>
             </div>
             <div className={cx('dim',{open})} onClick={handleClose}/>

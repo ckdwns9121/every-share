@@ -1,0 +1,7 @@
+@import '../../styles/_Root.scss';
+@import '../../styles/_Value.scss';
+
+
+.container{
+    @include container;
+}

@@ -9,6 +9,7 @@ export const RoutePaths={
             write :'/realty/write',
             modify :'/realty/modify',
             enrollment:'/realty/enrollment',
+            like:'/realty/like'
         },
         mypage:{
             index:'/mypage',
@@ -23,7 +24,6 @@ export const RoutePaths={
             index:'/event_list',
             detail:'/event'
         },
-        like: '/like'
     },
     auth: {
         index: '/auth',
@@ -53,6 +53,8 @@ export const RouteTitle  ={
             write :'매물 등록',
             modify :'매물 수정',
             enrollment:'등록한 매물',
+            like: '내가 찜한 매물'
+
         },
         mypage:{
             index:'마이페이지',
@@ -67,7 +69,6 @@ export const RouteTitle  ={
             index:'이벤트',
             detail:'이벤트'
         },
-        like: '내가 찜한 매물'
     },
     auth: {
         index: '',
