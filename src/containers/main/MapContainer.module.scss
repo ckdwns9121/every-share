@@ -10,6 +10,7 @@ $side-space :10px;
     .app-bar{
         position:fixed;
         height: 48px;
+        max-width: $max-width;
         width: 100%;
         background-color: #fff;
         z-index:$level3;
@@ -18,9 +19,10 @@ $side-space :10px;
         justify-content: space-between;
         .app-bar-text{
            width: 100%;
-            padding: 5px 0;
-            display: flex;
-            align-items: center;
+           max-width: 648px;
+           padding: 5px 0;
+           display: flex;
+        align-items: center;
         }
         .app-bar-icon{
             display: flex;

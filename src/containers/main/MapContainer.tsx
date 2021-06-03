@@ -111,7 +111,7 @@ function MapContainer({modal}:MatchModal){
                     </ButtonBase>
                 </div>
                 <div className={styles['app-bar-icon']}>
-                    <IconButton className={styles['icon']}>
+                    <IconButton className={styles['icon']}  onClick={()=>history.push(`${RoutePaths.main.index}/address`)}>
                         <img src={SEARCH}/>
                     </IconButton>
                     <IconButton className={styles['icon']} onClick={()=>handleOpen(true)}>

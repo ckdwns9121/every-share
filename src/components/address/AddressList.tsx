@@ -10,6 +10,18 @@ interface Address{
     lng?: number,
     post_num ?: number
 }
+
+function AddressItemList(){
+    return(
+        <>
+            <AddressItem addr={'동아대학교 승학캠퍼스'} jibun={'낙동대로 515번길 49'}/>
+            <AddressItem addr={'동아대학교 승학캠퍼스'} jibun={'낙동대로 515번길 49'}/>
+            <AddressItem addr={'동아대학교 승학캠퍼스'} jibun={'낙동대로 515번길 49'}/>
+            <AddressItem addr={'동아대학교 승학캠퍼스'} jibun={'낙동대로 515번길 49'}/>
+            <AddressItem addr={'동아대학교 승학캠퍼스'} jibun={'낙동대로 515번길 49'}/>
+        </>
+    )
+}
 function AddressItem ({addr,jibun,lat,lng,post_num}:Address){
     return(
         <ButtonBase className={styles['item']}>
@@ -23,4 +35,4 @@ function AddressItem ({addr,jibun,lat,lng,post_num}:Address){
     )
 }
 
-export default AddressItem;
+export default AddressItemList;

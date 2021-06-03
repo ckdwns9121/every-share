@@ -1,0 +1,52 @@
+@import '../../styles/_Root.scss';
+
+.container{
+    @include container;
+    background-color:$main-color;
+    color:#fff;
+
+    background-image: url('../../static/image/background.png');
+    background-repeat: no-repeat;
+    background-position: center bottom;
+
+    .content{
+
+        .service-logo{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            padding-top: 120px;
+            .logo-title{
+                padding-left: 20px;
+            }
+        }
+        .wrapper{
+            margin-top:250px;
+            padding: $padding-side;
+        }
+    }
+}
+
+html{
+    body{
+        .login-button{
+            margin-bottom:15px;
+            width: 100%;
+            height: 50px;
+            background-color:#00BF19;
+            border-radius: 50px;
+            padding:0;
+            display: block;
+            position: relative;
+            text-align: left;
+            padding-left:60px;
+            font-size: 14px;
+            font-weight: 200;
+            .src{
+                position: absolute;
+                left:24px;
+            }
+        }
+    }
+}

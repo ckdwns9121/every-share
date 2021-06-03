@@ -51,7 +51,7 @@ export default function AddressModal({open} : ModalOpen) {
                 </IconButton>
             </div>
             <div className={styles['address-list']}> 
-              <AddressList addr={"동아대학교 승학캠퍼스"} jibun={'낙동대로 515번길 49'}/>
+              <AddressList/>
             </div>  
         </DialogContent>
       </Dialog>
