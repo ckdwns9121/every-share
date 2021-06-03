@@ -101,7 +101,7 @@ function SlideMenu ({open,handleClose} : Props){
         <Fragment>
             <div className={cx('slide-menu',{open})}>
                 <div className={styles['wrapper']}>
-                    <ButtonBase className={styles['user-profile']}>
+                    <ButtonBase className={styles['user-profile']} onClick={()=>onClick(RoutePaths.auth.index)}>
                         <div className={styles['user-name']}>
                                 박창준
                         </div>

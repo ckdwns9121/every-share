@@ -28,7 +28,7 @@ function SignupCompleteContainer(){
         </div>
    </div>
    <div className={styles['button']}>
-     <BasicButton name={'매물보러가기'} onClick={()=>history.push(RoutePaths.main.index)}/>
+     <BasicButton name={'매물보러가기'} onClick={()=>history.push(RoutePaths.auth.signin)}/>
    </div>
    </>
     )

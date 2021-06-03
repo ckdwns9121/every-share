@@ -46,7 +46,7 @@ function SigninContainer(){
                         <input type='password' name="password" placeholder={"비밀번호를 입력해주세요"} />
                     </div>
                     <div className={styles['find-info']}>
-                        <div className={styles['link']}>
+                        <div className={styles['link']} onClick={()=>history.push(RoutePaths.auth.find.index)}>
                              아이디 / 비밀번호 찾기
                         </div>
                     </div>
