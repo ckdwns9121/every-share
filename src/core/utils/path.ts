@@ -39,7 +39,7 @@ export const RoutePaths={
             password_complete: '/auth/find/password_complete',
         },
     },
-    url: 'http://localhost:4000/',
+    url: 'http://localhost:4000/api',
 }
 
 

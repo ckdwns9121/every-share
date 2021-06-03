@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {RoutePaths as API_PATH} from '../core/utils/path';
 
+
 export const requsetPostSignup = async (
     email: string,
     name: string | null,
@@ -12,7 +13,6 @@ export const requsetPostSignup = async (
 ) => {
     try {
         const URL = API_PATH.url +'/users/signup';
-        API_PATH
         const formdata ={
             email,
             name,
@@ -35,7 +35,7 @@ export const requsetPostSignup = async (
 
 export const requestPostSignin =(email:string,password:string) =>{
     try{
-        const URL = API_PATH.url +'/users/signin';
+        const URL ='/api/users/signin';
 
         const formdata={
             email,password,
@@ -50,7 +50,7 @@ export const requestPostSignin =(email:string,password:string) =>{
 
 export const  requestGetUser =async (access_token : string) =>{
 
-    const URL = API_PATH.url +'/users';
+    const URL = '/api/users';
 
     const config={
         headers:{

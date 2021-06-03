@@ -1,4 +1,5 @@
 /* 이메일 로그인 페이지 */
+import {useState} from 'react';
 import styles from './SigninContainer.module.scss';
 import LOGO from '../../static/svg/logo2.svg';
 import {ButtonBase,IconButton} from '@material-ui/core';
@@ -15,21 +16,43 @@ import FACEBOOK_LOGIN from '../../static/svg/auth/icon_face.svg';
 import BasicButton from '../../components/button/BasicButton';
 import cn from 'classnames/bind';
 
+
+//api
+
+import {requestPostSignin} from '../../api/auth';
+
 const cx= cn.bind(styles);
 
 function SigninContainer(){
 
     const history = useHistory();
 
+
+    const [form,setForm] = useState<{email:string , password:string}>({email:'', password :''});
+
+    const {email,password} = form;
+
+    const handleChange =(e:React.ChangeEvent<HTMLInputElement>) =>{
+        const {name,value} = e.target;
+        setForm({
+            ...form,
+            [name]: value
+          });
+
+    }
     const onClickLogin = async ()=>{
         try{
-            history.push(RoutePaths.main.index);
+            const res= await requestPostSignin(email,password);
+            console.log(res);
+            if(res?.data.message==='success'){
+                localStorage.setItem('access_token' , res.data.token);
+                history.push(RoutePaths.main.index);
+            }
         }
         catch(e){
 
         }
     }
-
     return(
         <div className={styles['container']}>
             <div className={styles['content']}>
@@ -40,10 +63,10 @@ function SigninContainer(){
                 </div>
                 <div className={styles['wrapper']}>
                     <div className={styles['input-box']}>
-                        <input type='text' name="email" placeholder={"이메일을 입력해주세요"} />
+                        <input type='text' name="email" placeholder={"이메일을 입력해주세요"}  value ={email} onChange={handleChange}/>
                     </div>
                     <div className={styles['input-box']}>
-                        <input type='password' name="password" placeholder={"비밀번호를 입력해주세요"} />
+                        <input type='password' name="password" placeholder={"비밀번호를 입력해주세요"}  value={password} onChange={handleChange}/>
                     </div>
                     <div className={styles['find-info']}>
                         <div className={styles['link']} onClick={()=>history.push(RoutePaths.auth.find.index)}>
