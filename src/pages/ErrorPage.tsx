@@ -6,7 +6,7 @@ import ERROR from '../static/svg/error.svg';
 import BasicButton from '../components/button/BasicButton';
 
 function ErrorPage (){
-    const histroy = useHistory();
+    const history = useHistory();
     return(
     <Fragment>
         <Header title={'오류안내'}/>
@@ -26,7 +26,7 @@ function ErrorPage (){
               </div>
          </div>
          <div className={styles['button']}>
-         <BasicButton name={'이전페이지'} onClick={()=>histroy.goBack()}/>
+         <BasicButton name={'이전페이지'} onClick={()=>history.goBack()}/>
          </div>
     </Fragment>
   

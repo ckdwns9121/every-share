@@ -10,9 +10,9 @@ const RenderHeader = () => {
     return <Header title={RouteTitle.auth.signin} />;
   }
   // 회원가입
-  else if (pathname === RoutePaths.auth.signup) {
-    return <Header title={RouteTitle.auth.signup} />;
-  }
+  // else if (pathname === RoutePaths.auth.signup) {
+  //   return <Header title={RouteTitle.auth.signup} />;
+  // }
   // 회원가입 완료
   else if (pathname === RoutePaths.auth.sign_complete) {
     return <Header title={RouteTitle.auth.sign_complete} />;

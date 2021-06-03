@@ -119,7 +119,7 @@ function SlideMenu ({open,handleClose} : Props){
                     </div>
                 </div>
                 <div className={styles['menu-list']}>
-                    {SlideMenu.map((item : MenuComponent) => <SlideMenuItem icon={item.icon} text={item.text} onClick={item.onClick} key={item.path}/>)}
+                    {SlideMenu.map((item : MenuComponent,index:number) => <SlideMenuItem icon={item.icon} text={item.text} onClick={item.onClick} key={index}/>)}
                 </div>
             </div>
             <div className={cx('dim',{open})} onClick={handleClose}/>

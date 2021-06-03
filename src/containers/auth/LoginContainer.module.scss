@@ -4,27 +4,29 @@
     @include container;
     background-color:$main-color;
     color:#fff;
-
+    min-height: 100vh;
     background-image: url('../../static/image/background.png');
     background-position: 50% 100%;
     background-repeat: no-repeat;
     background-size: 100%;
     overflow: hidden;
+    position: relative;
     .content{
-
         .service-logo{
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: row;
-            padding-top: 120px;
+            padding-top: 10vh;
             .logo-title{
                 padding-left: 20px;
             }
         }
         .wrapper{
-            margin-top:250px;
+            width: 100%;
+            position:absolute;
             padding: $padding-side;
+            bottom:24px;
         }
     }
 }

@@ -12,7 +12,7 @@ import {useHistory} from 'react-router-dom';
 import KAKAO_LOGIN from '../../static/svg/auth/icon_kakao.svg';
 import NAVER_LOGIN from '../../static/svg/auth/icon_naver.svg';
 import FACEBOOK_LOGIN from '../../static/svg/auth/icon_face.svg';
-
+import BasicButton from '../../components/button/BasicButton';
 import cn from 'classnames/bind';
 
 const cx= cn.bind(styles);
@@ -51,12 +51,9 @@ function SigninContainer(){
                         </div>
                     </div>
                     <div className={styles['button-box']}>
-                    <ButtonBase className={cx('basic-button')} disabled={false} disableRipple={false} onClick={onClickLogin} >
-                            로그인
-                    </ButtonBase>
-                    <ButtonBase className={cx('basic-button',{gray:true})}  disableRipple={false} onClick={()=>history.push(RoutePaths.auth.signup)} >
-                            회원가입
-                    </ButtonBase>
+                        <BasicButton name={"로그인"} disable={false} onClick={onClickLogin}/>
+                        <BasicButton name={"회원가입"} disable={false} color={'gray'} onClick={()=>history.push(RoutePaths.auth.signup)}/>
+
                     </div>
                     <div className={styles['sns-box']}>
                         <div className={styles['sns-text']}>

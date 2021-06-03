@@ -14,13 +14,14 @@ const cx = cn.bind(styles);
 interface Props{
     name:string,
     disable? : boolean,
-    onClick:()=>void,
+    onClick: ()=> void | Promise<void>
+    color ?: string
 }
 
 
-const BasicButton =({name ,disable, onClick} : Props)=>{
+const BasicButton =({name ,disable, onClick,color} : Props)=>{
     return(
-        <ButtonBase className={cx('basic-button',{disable})}  disableRipple={disable} onClick={onClick} >
+        <ButtonBase className={cx('basic-button',{disable},color)}  disableRipple={disable} onClick={onClick} >
             {name}
         </ButtonBase>
     )
