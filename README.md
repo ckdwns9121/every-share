@@ -11,7 +11,7 @@
 |   |   └── enrollment : 내가 등록한 매물           
 |   |   └── write : 매물 등록하기 (:/modal? preview :등록전 미리보기)          
 |   |   └── modify : 매물 수정하기
-|   |   └── modify : 찜한 매물
+|   |   └── like : 찜한 매물
 │   └── mypage
 |   |   └── index : 마이페이지
 |   |   └── update
