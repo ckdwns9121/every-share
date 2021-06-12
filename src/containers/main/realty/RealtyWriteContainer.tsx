@@ -1,4 +1,5 @@
 import styles from "./RealtyWriteContainer.module.scss";
+import plusIcon from "../../../static/svg/plug.svg";
 
 type TitleComponentProps = {
   text: string;
@@ -109,13 +110,19 @@ function RealtyWriteContainer() {
           <div className={styles["register-box"]}>
             <p className={styles["subTitle"]}>매물 사진 등록</p>
             <p className={styles["notice"]}>실 사진을 등록해주세요</p>
-            <input type="file" className={styles["fileInput"]} />
+            <div className={styles["fileInput-box"]}>
+              <label htmlFor="realty-picture">매물 사진 등록</label>
+              <input type="file" id="realty-picture" />
+            </div>
           </div>
 
           <div className={styles["register-box"]}>
             <p className={styles["subTitle"]}>임시 계약서 등록</p>
             <p className={styles["notice"]}>임시계약서를 등록할 시 개인정보는 가려주세요</p>
-            <input type="file" className={styles["fileInput"]} />
+            <div className={styles["fileInput-box"]}>
+              <label htmlFor="contract">임시 계약서 등록</label>
+              <input type="file" id="contract" />
+            </div>
           </div>
 
           <div className={styles["description-box"]}>

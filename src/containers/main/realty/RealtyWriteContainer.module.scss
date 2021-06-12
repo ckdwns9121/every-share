@@ -230,10 +230,35 @@ html {
                     margin-bottom: 6px;
                 }
 
-                .fileInput {
+                .fileInput-box {
                     width: 100%;
                     height: 44px;
                     border: 1px solid #707070;
+
+                    & label {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        height: 100%;
+                        color: #000;
+                        font-size: 12px;
+                        background-image: url('../../../static/svg/plus.svg');
+                        background-repeat: no-repeat;
+                        background-size: 20px 20px;
+                        background-position: 33% 60%;
+                    }
+
+                    & input[type="file"] {
+                        position: absolute;
+                        width: 1px;
+                        height: 1px;
+                        padding: 0;
+                        margin: -1px;
+                        overflow: hidden;
+                        clip: rect(0, 0, 0, 0);
+                        border: 0;
+                    }
                 }
 
             }
