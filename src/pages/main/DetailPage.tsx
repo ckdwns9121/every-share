@@ -4,10 +4,10 @@ import {MatchId} from '../../types/RouterParams';
 
 function DetailPage({match} : RouteComponentProps<MatchId>){
 
-    const {id} = match.params;
-    
+    const {id,modal} = match.params;
+    console.log(match.params);
     return(
-        <DetailContainer id={id}/>
+        <DetailContainer id={id} modal={modal}/>
     )
 }
 

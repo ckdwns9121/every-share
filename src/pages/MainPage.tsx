@@ -30,7 +30,7 @@ function MainPage() {
         render={() => (
           <Switch>
             <Route path={`${RoutePaths.main.index}/:modal?`} component={Map} />
-            <Route path={`${RoutePaths.main.detail}/:id`} component={Detail} />
+            <Route path={`${RoutePaths.main.detail}/:modal?/:id`} component={Detail} />
             <Route path={RoutePaths.main.event.index} component={EventList} />
             <Route path={`${RoutePaths.main.event.detail}/:id`} component={Event} />
             <Route path={RoutePaths.main.realty.index}

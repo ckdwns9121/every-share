@@ -1,10 +1,10 @@
 /* 회원가입 완료 페이지 */
+
 import styles from './SignupCompleteContainer.module.scss';
 
 import {useHistory} from 'react-router-dom';
 import {RoutePaths} from '../../core/utils/path';
 import BasicButton from '../../components/button/BasicButton';
-
 import COMPLETE from '../../static/svg/complete.svg';
 
 function SignupCompleteContainer(){

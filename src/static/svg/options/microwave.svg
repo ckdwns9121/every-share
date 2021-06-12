@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="33.244" height="23.278" viewBox="0 0 33.244 23.278">
+  <defs>
+    <clipPath id="clip">
+      <use xlink:href="#fill"/>
+    </clipPath>
+    <clipPath id="clip-2">
+      <use xlink:href="#fill-2"/>
+    </clipPath>
+    <clipPath id="clip-3">
+      <use xlink:href="#fill-3"/>
+    </clipPath>
+    <clipPath id="clip-4">
+      <use xlink:href="#fill-4"/>
+    </clipPath>
+    <clipPath id="clip-5">
+      <use xlink:href="#fill-5"/>
+    </clipPath>
+    <clipPath id="clip-6">
+      <use xlink:href="#fill-6"/>
+    </clipPath>
+    <clipPath id="clip-7">
+      <use xlink:href="#fill-7"/>
+    </clipPath>
+    <clipPath id="clip-8">
+      <use xlink:href="#fill-8"/>
+    </clipPath>
+    <clipPath id="clip-9">
+      <use xlink:href="#fill-9"/>
+    </clipPath>
+  </defs>
+  <g id="그룹_5036" data-name="그룹 5036" transform="translate(-177.708 -705.935)">
+    <g id="그룹_5035" data-name="그룹 5035" transform="translate(178.208 706.435)">
+      <path id="패스_2542" data-name="패스 2542" d="M-949.809,5309.37v9.833" transform="translate(969.745 -5304.417)" fill="none" stroke="#000" stroke-width="1"/>
+      <path id="패스_2543" data-name="패스 2543" d="M-904.85,5292.806v2.881h3.946v-2.881h-3.946Z" transform="translate(930.729 -5290.309)" fill="none" stroke="#000" stroke-width="1"/>
+      <path id="패스_2544" data-name="패스 2544" d="M-1079.583,5290.806l-1.315,1.393" transform="translate(1083.485 -5288.309)" fill="none" stroke="#000" stroke-width="2"/>
+      <path id="패스_2545" data-name="패스 2545" d="M-1074.656,5290.806l-4.823,4.837" transform="translate(1082.253 -5288.309)" fill="none" stroke="#000" stroke-width="1"/>
+      <path id="패스_2546" data-name="패스 2546" d="M-1091.31,5421.77v2.41h5.574v-2.41Z" transform="translate(1096.12 -5401.902)" fill="none" stroke="#000" stroke-width="1"/>
+      <path id="패스_2567" data-name="패스 2567" d="M-1091.31,5421.77v2.41h5.574v-2.41Z" transform="translate(1113.463 -5401.902)" fill="none" stroke="#000" stroke-width="1"/>
+      <path id="패스_2549" data-name="패스 2549" d="M-926.146,5273.009V5292.7" transform="translate(949.214 -5272.868)" fill="none" stroke="#000" stroke-width="1"/>
+      <g id="타원_188" data-name="타원 188" transform="translate(26.396 14.83)" fill="none" stroke="#000" stroke-width="5">
+        <circle cx="1.522" cy="1.522" r="1.522" stroke="none"/>
+        <circle cx="1.522" cy="1.522" r="0.978" fill="none"/>
+      </g>
+      <g id="그룹_5033" data-name="그룹 5033" transform="translate(24.94 7.552)">
+        <g id="사각형_2991" data-name="사각형 2991" transform="translate(0)" fill="none" stroke="#000" stroke-width="2">
+          <rect id="fill" width="1.323" height="1.323" stroke="none"/>
+          <path d="M0,0.32346951961517334h1.3234695196151733M1,0v1.3234695196151733M1.3234695196151733,1h-1.3234695196151733M0.32346951961517334,1.3234695196151733v-1.3234695196151733" fill="none" clip-path="url(#clip)"/>
+        </g>
+        <g id="사각형_2994" data-name="사각형 2994" transform="translate(0 1.721)" fill="none" stroke="#000" stroke-width="2">
+          <rect id="fill-2" width="1.323" height="1.323" stroke="none"/>
+          <path d="M0,0.32346951961517334h1.3234695196151733M1,0v1.3234695196151733M1.3234695196151733,1h-1.3234695196151733M0.32346951961517334,1.3234695196151733v-1.3234695196151733" fill="none" clip-path="url(#clip-2)"/>
+        </g>
+        <g id="사각형_2997" data-name="사각형 2997" transform="translate(0 3.441)" fill="none" stroke="#000" stroke-width="2">
+          <rect id="fill-3" width="1.323" height="1.323" stroke="none"/>
+          <path d="M0,0.32346951961517334h1.3234695196151733M1,0v1.3234695196151733M1.3234695196151733,1h-1.3234695196151733M0.32346951961517334,1.3234695196151733v-1.3234695196151733" fill="none" clip-path="url(#clip-3)"/>
+        </g>
+        <g id="사각형_2992" data-name="사각형 2992" transform="translate(2.25)" fill="none" stroke="#000" stroke-width="2">
+          <rect id="fill-4" width="1.323" height="1.323" stroke="none"/>
+          <path d="M0,0.32346951961517334h1.3234695196151733M1,0v1.3234695196151733M1.3234695196151733,1h-1.3234695196151733M0.32346951961517334,1.3234695196151733v-1.3234695196151733" fill="none" clip-path="url(#clip-4)"/>
+        </g>
+        <g id="사각형_2995" data-name="사각형 2995" transform="translate(2.25 1.721)" fill="none" stroke="#000" stroke-width="2">
+          <rect id="fill-5" width="1.323" height="1.323" stroke="none"/>
+          <path d="M0,0.32346951961517334h1.3234695196151733M1,0v1.3234695196151733M1.3234695196151733,1h-1.3234695196151733M0.32346951961517334,1.3234695196151733v-1.3234695196151733" fill="none" clip-path="url(#clip-5)"/>
+        </g>
+        <g id="사각형_2998" data-name="사각형 2998" transform="translate(2.25 3.441)" fill="none" stroke="#000" stroke-width="2">
+          <rect id="fill-6" width="1.323" height="1.323" stroke="none"/>
+          <path d="M0,0.32346951961517334h1.3234695196151733M1,0v1.3234695196151733M1.3234695196151733,1h-1.3234695196151733M0.32346951961517334,1.3234695196151733v-1.3234695196151733" fill="none" clip-path="url(#clip-6)"/>
+        </g>
+        <g id="사각형_2993" data-name="사각형 2993" transform="translate(4.5)" fill="none" stroke="#000" stroke-width="2">
+          <rect id="fill-7" width="1.323" height="1.323" stroke="none"/>
+          <path d="M0,0.32346951961517334h1.3234695196151733M1,0v1.3234695196151733M1.3234695196151733,1h-1.3234695196151733M0.32346951961517334,1.3234695196151733v-1.3234695196151733" fill="none" clip-path="url(#clip-7)"/>
+        </g>
+        <g id="사각형_2996" data-name="사각형 2996" transform="translate(4.5 1.721)" fill="none" stroke="#000" stroke-width="2">
+          <rect id="fill-8" width="1.323" height="1.323" stroke="none"/>
+          <path d="M0,0.32346951961517334h1.3234695196151733M1,0v1.3234695196151733M1.3234695196151733,1h-1.3234695196151733M0.32346951961517334,1.3234695196151733v-1.3234695196151733" fill="none" clip-path="url(#clip-8)"/>
+        </g>
+        <g id="사각형_2999" data-name="사각형 2999" transform="translate(4.5 3.441)" fill="none" stroke="#000" stroke-width="2">
+          <rect id="fill-9" width="1.323" height="1.323" stroke="none"/>
+          <path d="M0,0.32346951961517334h1.3234695196151733M1,0v1.3234695196151733M1.3234695196151733,1h-1.3234695196151733M0.32346951961517334,1.3234695196151733v-1.3234695196151733" fill="none" clip-path="url(#clip-9)"/>
+        </g>
+      </g>
+      <path id="패스_2550" data-name="패스 2550" d="M-1529.444,5105.118v19.868h32.244v-19.868Z" transform="translate(1529.444 -5105.118)" fill="none" stroke="#000" stroke-linejoin="bevel" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

@@ -37,6 +37,12 @@ import MENU from '../../static/svg/menu.svg';
 //modal
 import AddressModal from '../../components/modal/AddressModal';
 
+//api
+
+//lib
+import {getDistanceFromLatLonInKm} from '../../core/lib/distance';
+
+
 declare global {
     interface Window {
       kakao: any;
@@ -55,9 +61,11 @@ function MapContainer({modal}:MatchModal){
     const history = useHistory();
     const dispatch = useDispatch();
     const {position,level,area,address} = useSelector((state:RootState) =>state.map);
+    const {realties} = useSelector((state:RootState) =>state.realties);
     const kakao_map = useRef<any>(null); //카카오 맵
-    const map_position = useRef<any>(null); //지도 첫렌더시 좌표
+    const map_position = useRef<any>({lat:33.450701, lng: 126.570667}); //지도 첫렌더시 좌표
     const map_level = useRef<number>(5); // 디폴트 레벨 -> //4 : 100m 6: 500m 7:1km
+    const cluster_marker = useRef<any>(null);
 
 
 
@@ -90,6 +98,136 @@ function MapContainer({modal}:MatchModal){
         const moveLatLon = new window.kakao.maps.LatLng(lat, lng);
         kakao_map.current.setCenter(moveLatLon);
     }, []);
+
+
+    //매물 마커를 생성하는 함수
+    const createParkingMarker = useCallback(() => {
+        // onLoading('parking/GET_LIST');
+        if (cluster_marker.current !== null) {
+            cluster_marker.current.clear();
+        }
+        const map = kakao_map.current;
+
+        cluster_marker.current = new window.kakao.maps.MarkerClusterer({
+            map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+            averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+            minLevel: 5, // 클러스터 할 최소 지도 레벨
+            disableClickZoom: true, // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
+            styles: [
+                {
+                    // calculator 각 사이 값 마다 적용될 스타일을 지정한다
+                    width: '40px',
+                    height: '40px',
+                    background: 'rgba(34, 34, 34, .8)',
+                    borderRadius: '30px',
+                    color: '#fff',
+                    border: '1px solid white',
+                    boxSizing: 'border-box',
+                    fontSize: '15px',
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    lineHeight: '40px',
+                },
+            ],
+        });
+
+        //맵의 중심좌표가 변경되었을 시 이벤트
+        window.kakao.maps.event.addListener(map, 'center_changed', () => {
+            const level = map.getLevel();
+            const latlng = map.getCenter();
+            map_level.current = level;
+      
+            map_position.current.lat = latlng.getLat();
+            map_position.current.lng = latlng.getLng();
+            const { lat, lng } = map_position.current;
+            // dispatch(get_area({ lat, lng }));
+            // const new_position = { lat, lng };
+            const new_position = { lat, lng };
+            localStorage.setItem('position', JSON.stringify(new_position));
+        });
+
+
+        // const markdata = realties.filter((item) => {
+        //     return (
+        //         item.addr.indexOf(area['type1']) !== -1 ||
+        //         item.addr.indexOf(area['type2']) !== -1
+        //     );
+        // });
+        // 마커 생성
+        // 스토리지에서 마지막 user_position을 기준으로 마커데이터 생성 ex) 대구좌표 -> 대구 주변 렌더
+
+        // const storage_position = JSON.parse(sessionStorage.getItem('user_position'));
+        if (true) {
+            const data = realties.map((el : any) => {
+                // const distance = getDistanceFromLatLonInKm(
+                //     el.lat,
+                //     el.lng,
+                //     storage_position.lat,
+                //     storage_position.lng,
+                // );
+                const content = `<div onclick="onClickOverlay(${
+                    el.place_id
+                })" class="custom-overlay" title=${JSON.stringify(
+                    el,
+                )} ><span>ㅎㅇKm</span></div>`;
+                var customOverlay = new window.kakao.maps.CustomOverlay({
+                    map: map,
+                    position: new window.kakao.maps.LatLng(el.lat, el.lng),
+                    content: content,
+                    yAnchor: 1,
+                    clickable: true,
+                    zIndex: 1600,
+                });
+                customOverlay.setMap(map);
+                return customOverlay;
+            });
+            console.log('클러스터 생성');
+            cluster_marker.current.addMarkers(data);
+
+            /*
+                클러스터 클릭이벤트
+                클러스트를 클릭하면 슬라이드 메뉴 생성
+                10개 이상이면 지도 줌 인
+            */
+            window.kakao.maps.event.addListener(
+                cluster_marker.current,
+                'clusterclick',
+                (cluster : any ) => {
+                    const overlays = cluster.getMarkers();
+                    console.log('클러스터 클릭');
+                    // if (overlays.length > 10) {
+                    //     var level = map.getLevel() - 1;
+                    //     map.setLevel(level, {
+                    //         anchor: cluster.getCenter(),
+                    //         animate: 300,
+                    //     });
+                    // } else {
+                    //     slide_view.current = !slide_view.current;
+
+                    //     const slides = overlays.map((overlay) => {
+                    //         const data = overlay.getContent();
+                    //         const t_index = data.indexOf('title=');
+                    //         const close_index = data.indexOf('>');
+                    //         const str = data.substring(
+                    //             t_index + 6,
+                    //             close_index,
+                    //         );
+                    //         return JSON.parse(str);
+                    //     });
+                    //     setSlideList(slides);
+                    //     setOnSlide(slide_view.current);
+                    // }
+                },
+            );
+        }
+        // // 윈도우 클릭이벤트 넘겨야 하는 주차장 마커 클릭함수
+        // window.onClickOverlay = (place_id) => {
+        //     history.push(Paths.main.detail + '?place_id=' + place_id);
+        // };
+        // offLoading('parking/GET_LIST');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [area, dispatch, history, realties]);
+
     
     useEffect(()=>{
         let container = document.getElementById('map');
@@ -100,6 +238,10 @@ function MapContainer({modal}:MatchModal){
         let map = new window.kakao.maps.Map(container, options);
         kakao_map.current = map;
     },[])
+
+    useEffect(()=>{
+        createParkingMarker();
+    },[realties])
 
     return(
         <Fragment>

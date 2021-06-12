@@ -22,7 +22,6 @@ function Header({title}:Props){
     useEffect(() => {
         if(headerRef.current){
             const headerHeight = headerRef.current.getBoundingClientRect().height;
-            console.log(headerHeight);
             const headerControll = () => setShadow(window.scrollY > headerHeight);
             window.addEventListener('scroll', headerControll);
             return () => window.removeEventListener('scroll', headerControll);

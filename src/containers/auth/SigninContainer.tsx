@@ -48,6 +48,9 @@ function SigninContainer(){
                 localStorage.setItem('access_token' , res.data.token);
                 history.push(RoutePaths.main.index);
             }
+            else{
+                alert(res?.data.message);
+            }
         }
         catch(e){
 

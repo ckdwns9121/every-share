@@ -21,24 +21,34 @@ import { useToken } from "./hooks/useStore";
 import { RoutePaths } from "./core/utils/path";
 import {requestGetUser} from './api/auth';
 
+//store
+import {useDispatch} from 'react-redux';
+import {set_user} from './store/user';
+import {getList} from './store/realties';
 
 function App() {
 
   const access_token = useToken();
+  const dispatch = useDispatch();
+
+  
   const callApiUserInfo = async()=>{
     try{
       if(access_token){
         const res = await requestGetUser(access_token);
-        console.log(res);
+        if(res?.data.message==='success'){
+          dispatch(set_user(res.data.user));
+        }
       }
     }
     catch(e){
-
+      console.log(e);
     }
   }
 
   useEffect(()=>{
     callApiUserInfo();
+    dispatch(getList({lat:0,lng:0,filter:[1,2,3,4]}));
   },[])
 
   return (

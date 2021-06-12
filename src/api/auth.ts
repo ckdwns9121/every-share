@@ -9,10 +9,10 @@ export const requsetPostSignup = async (
     phone_number: number | string,
     agree_sms: boolean,
     agree_push: boolean,
-    register_type: number
+    register_type: number | null
 ) => {
-    try {
-        const URL = API_PATH.url +'/users/signup';
+        console.log('가나');
+        const URL = '/api/users/signup';
         const formdata ={
             email,
             name,
@@ -22,15 +22,10 @@ export const requsetPostSignup = async (
             agree_push,
             register_type,
         }
-
+        console.log('오냐');
         const res = axios.post(URL,formdata);
         return res;
-
-    }
-    catch (e) {
-        console.log(e);
-        return e;
-    }
+    
 }
 
 export const requestPostSignin =(email:string,password:string) =>{
@@ -49,9 +44,7 @@ export const requestPostSignin =(email:string,password:string) =>{
 }
 
 export const  requestGetUser =async (access_token : string) =>{
-
     const URL = '/api/users';
-
     const config={
         headers:{
             'Authorization' :`Bearer ${access_token}`,

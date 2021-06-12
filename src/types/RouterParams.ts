@@ -1,6 +1,7 @@
 
 export interface MatchId{
-    id: string
+    id: string,
+    modal?:string | undefined
 }
 
 export interface MatchModal{
