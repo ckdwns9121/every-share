@@ -195,28 +195,29 @@ function MapContainer({modal}:MatchModal){
                 (cluster : any ) => {
                     const overlays = cluster.getMarkers();
                     console.log('클러스터 클릭');
-                    // if (overlays.length > 10) {
-                    //     var level = map.getLevel() - 1;
-                    //     map.setLevel(level, {
-                    //         anchor: cluster.getCenter(),
-                    //         animate: 300,
-                    //     });
-                    // } else {
-                    //     slide_view.current = !slide_view.current;
+                    if (overlays.length > 10) {
+                        var level = map.getLevel() - 1;
+                        map.setLevel(level, {
+                            anchor: cluster.getCenter(),
+                            animate: 300,
+                        });
+                    } else {
+                        // slide_view.current = !slide_view.current;
 
-                    //     const slides = overlays.map((overlay) => {
-                    //         const data = overlay.getContent();
-                    //         const t_index = data.indexOf('title=');
-                    //         const close_index = data.indexOf('>');
-                    //         const str = data.substring(
-                    //             t_index + 6,
-                    //             close_index,
-                    //         );
-                    //         return JSON.parse(str);
-                    //     });
-                    //     setSlideList(slides);
-                    //     setOnSlide(slide_view.current);
-                    // }
+                        const slides = overlays.map((overlay:any) => {
+                            const data = overlay.getContent();
+                            const t_index = data.indexOf('title=');
+                            const close_index = data.indexOf('>');
+                            const str = data.substring(
+                                t_index + 6,
+                                close_index,
+                            );
+                            return JSON.parse(str);
+                        });
+                        console.log(slides);
+                        // setSlideList(slides);
+                        // setOnSlide(slide_view.current);
+                    }
                 },
             );
         }
