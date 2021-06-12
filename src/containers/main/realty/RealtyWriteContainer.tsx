@@ -1,5 +1,11 @@
 import styles from "./RealtyWriteContainer.module.scss";
+import { useState } from "react";
 import plusIcon from "../../../static/svg/plug.svg";
+
+import realty1 from "../../../static/image/realty/rinda1.jpg";
+import realty2 from "../../../static/image/realty/rinda2.jpg";
+import contract1 from "../../../static/image/realty/contract1.gif";
+import defaultImage from "../../../static/image/realty/default.jpg";
 
 type TitleComponentProps = {
   text: string;
@@ -20,35 +26,35 @@ function RealtyWriteContainer() {
         <TitleComponent text="매물 기본 정보" />
 
         <div className={styles["info-box"]}>
-          <input type="text" placeholder="건물 이름" />
+          <input type="text" placeholder="린다포레스트" />
 
           <select>
+            <option>오피스텔</option>
             <option>건물 유형</option>
             <option>원룸</option>
-            <option>오피스텔</option>
           </select>
 
           <select>
-            <option>거래 종류</option>
             <option>단기</option>
+            <option>거래 종류</option>
             <option>장기</option>
           </select>
 
           <select>
+            <option>10층</option>
             <option>전체 층수</option>
-            <option>5층</option>
             <option>3층</option>
           </select>
 
           <div className={styles["divide"]}>
             <div className={styles["half-box"]}>
               <p>보증금</p>
-              <input type="text" className={styles["costInput"]} placeholder="300" />
+              <input type="text" className={styles["costInput"]} placeholder="3000" />
               <p>만원</p>
             </div>
             <div className={styles["half-box"]}>
               <p>월세</p>
-              <input type="text" className={styles["costInput"]} placeholder="10" />
+              <input type="text" className={styles["costInput"]} placeholder="30" />
               <p>만원</p>
             </div>
             <p className={styles["notice"]}>관리비 포함으로 작성.</p>
@@ -56,41 +62,25 @@ function RealtyWriteContainer() {
 
           <div className={styles["description-box"]}>
             <p className={styles["subTitle"]}>매물 설명</p>
-            <textarea
-              className={styles["description"]}
-              placeholder="방학때 본가에 가게 됐어요 😂 3개월만 사실분 구합니다.!
-                주차공간있고 방도 깨끗해요"
-            ></textarea>
+            <textarea className={styles["description"]} placeholder="방학때 본가에 가게 됐어요 😂 3개월만 사실분 구합니다!"></textarea>
           </div>
         </div>
         <TitleComponent text="위치 정보" />
         <div className={styles["locationInfo-box"]}>
-          <div className={styles["locationSelect-box"]}>
-            <select>
-              <option>부산광역시</option>
-            </select>
-            <select>
-              <option>사하구</option>
-            </select>
-            <select>
-              <option>하단동</option>
-            </select>
-          </div>
-
-          <input type="text" placeholder="주소검색" />
-          <input type="text" placeholder="상세주소" />
+          <input type="text" placeholder="부산광역시 사하구 하단동 492-46" />
+          <input type="text" placeholder="1동 202호" />
         </div>
 
         <TitleComponent text="대여 기간" />
         <div className={styles["date-box"]}>
           <div className={styles["date"]}>
             <p className={styles["subTitle"]}>입주 시작 일자</p>
-            <input type="date" />
+            <input type="date" defaultValue="2021-06-21" />
           </div>
 
           <div className={styles["date"]}>
             <p className={styles["subTitle"]}>입주 종료 일자</p>
-            <input type="date" />
+            <input type="date" defaultValue="2021-08-20" />
           </div>
         </div>
         <TitleComponent text="추가 정보" />
@@ -114,6 +104,13 @@ function RealtyWriteContainer() {
               <label htmlFor="realty-picture">매물 사진 등록</label>
               <input type="file" id="realty-picture" />
             </div>
+            <div className={styles["RegisteredImage-box"]}>
+              <img src={realty1} alt="realty1" />
+              <img src={realty2} alt="realty2" />
+              <img src={defaultImage} alt="defaultImage" />
+              <img src={defaultImage} alt="defaultImage" />
+              <img src={defaultImage} alt="defaultImage" />
+            </div>
           </div>
 
           <div className={styles["register-box"]}>
@@ -123,11 +120,18 @@ function RealtyWriteContainer() {
               <label htmlFor="contract">임시 계약서 등록</label>
               <input type="file" id="contract" />
             </div>
+            <div className={styles["RegisteredImage-box"]}>
+              <img src={contract1} alt="contract1" />
+              <img src={defaultImage} alt="defaultImage" />
+              <img src={defaultImage} alt="defaultImage" />
+              <img src={defaultImage} alt="defaultImage" />
+              <img src={defaultImage} alt="defaultImage" />
+            </div>
           </div>
 
           <div className={styles["description-box"]}>
             <p className={styles["subTitle"]}>추가 설명</p>
-            <textarea className={styles["description"]} placeholder="거주 공간에 추가적인 설명을 작성해주세요."></textarea>
+            <textarea className={styles["description"]} placeholder="최근에 헬스장도 생겨서 월 3만원에 이용이 가능합니다~!"></textarea>
           </div>
 
           <button className={styles["registerButton"]}>매물등록</button>
