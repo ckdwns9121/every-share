@@ -1,0 +1,6 @@
+@import '../../../styles/_Root.scss';
+
+.container{
+    @include container;
+    background-color: #fff;
+}

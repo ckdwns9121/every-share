@@ -6,6 +6,7 @@ import {ButtonBase,IconButton} from '@material-ui/core';
 
 import {RoutePaths} from '../../core/utils/path';
 import {useHistory} from 'react-router-dom'; 
+import { useDispatch } from 'react-redux';
 
 
 //aseet
@@ -18,14 +19,18 @@ import cn from 'classnames/bind';
 
 
 //api
+import {requestPostSignin,requestGetUser} from '../../api/auth';
 
-import {requestPostSignin} from '../../api/auth';
+//store
+
+import {set_user} from '../../store/user';
 
 const cx= cn.bind(styles);
 
 function SigninContainer(){
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
 
     const [form,setForm] = useState<{email:string , password:string}>({email:'', password :''});
@@ -46,6 +51,10 @@ function SigninContainer(){
             console.log(res);
             if(res?.data.message==='success'){
                 localStorage.setItem('access_token' , res.data.token);
+                const response = await requestGetUser(res.data.token);
+                if(response?.data.message==='success'){
+                  dispatch(set_user(response.data.user));
+                }
                 history.push(RoutePaths.main.index);
             }
             else{

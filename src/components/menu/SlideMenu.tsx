@@ -21,6 +21,8 @@ import SETTING from '../../static/svg/side/setting.svg';
 //hooks
 import {useHistory} from 'react-router-dom';
 import {RoutePaths} from '../../core/utils/path';
+import { useSelector } from 'react-redux';
+import {RootState} from '../../store';
 
 const cx = cn.bind(styles);
 
@@ -44,6 +46,8 @@ interface MenuComponent {
 function SlideMenu ({open,handleClose} : Props){
 
     const history = useHistory();
+
+    const {user} = useSelector((state:RootState) =>state.user);
 
     const SlideMenu : MenuComponent[] =[
         {
@@ -90,23 +94,40 @@ function SlideMenu ({open,handleClose} : Props){
     ]
 
     const onClick = (path:string) =>{
+        
         handleClose();
         setTimeout(()=>{
             history.push(path);
         },500)
     }
   
+    const onClickUser =()=>{
+        if(user){
+            handleClose();
+            setTimeout(()=>{
+                history.push(RoutePaths.main.mypage.index);
+            },500)
+        }
+        else{
+            handleClose();
+            setTimeout(()=>{
+                history.push(RoutePaths.auth.index);
+            },500)
+        }
+    }
 
     return(
         <Fragment>
             <div className={cx('slide-menu',{open})}>
                 <div className={styles['wrapper']}>
-                    <ButtonBase className={styles['user-profile']} onClick={()=>onClick(RoutePaths.auth.index)}>
+                    <ButtonBase className={styles['user-profile']} onClick={onClickUser}>
                         <div className={styles['user-name']}>
-                                박창준
+                            {!user ? '로그인이 필요합니다' :
+                                user?.name ===null ? `사용자${user.user_id}` : user?.name
+                            }
                         </div>
                         <div className={styles['user-email']}>
-                                ckdwns9121@naver.com
+                                {user?.email}
                         </div>
                     </ButtonBase>
                     <div className={styles['top-icon']}>

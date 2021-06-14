@@ -42,6 +42,11 @@ import AddressModal from '../../components/modal/AddressModal';
 //lib
 import {getDistanceFromLatLonInKm} from '../../core/lib/distance';
 
+import { searchAddress,requestGetAddressInfo } from '../../api/address';
+
+
+//type
+import {Address} from '../../types/Address';
 
 declare global {
     interface Window {
@@ -67,6 +72,8 @@ function MapContainer({modal}:MatchModal){
     const map_level = useRef<number>(5); // 디폴트 레벨 -> //4 : 100m 6: 500m 7:1km
     const cluster_marker = useRef<any>(null);
 
+    const [addr , setAddr] = useState<string>(''); //주소검색
+    const [addrList,setAddrList] = useState<Address[] | null>(null);
 
 
     // 지도를 렌더하는 함수
@@ -229,7 +236,20 @@ function MapContainer({modal}:MatchModal){
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [area, dispatch, history, realties]);
 
-    
+
+    //주소 검색 API
+    const onSearchAddr = useCallback(async()=>{
+        try{
+            const res = await searchAddress(addr);
+            if(res){
+                setAddrList(res);
+            }
+        }  
+        catch(e){
+            console.log(e);
+        }
+    },[addr])
+
     useEffect(()=>{
         let container = document.getElementById('map');
         let options = {
@@ -243,6 +263,14 @@ function MapContainer({modal}:MatchModal){
     useEffect(()=>{
         createParkingMarker();
     },[realties])
+
+    useEffect(()=>{
+        onSearchAddr();
+    },[onSearchAddr])
+
+    useEffect(()=>{
+        setAddr('');
+    },[modal])
 
     return(
         <Fragment>
@@ -273,7 +301,7 @@ function MapContainer({modal}:MatchModal){
             <SlideMenu open={menuOpen} handleClose={()=>handleOpen(false)}/>
             <div id="map" style={{ width: '100%', height: '100vh', zIndex: 1 }}/>
         </div>
-        <AddressModal open={modal==='address'}/>
+        <AddressModal open={modal==='address'} addr={addr}  onChange={(e)=> setAddr(e.target.value)} list={addrList}/>
         <BottomModal open ={filterOpen} handleClose={()=>handleFilterOpen(false)}/>
         </Fragment>
 

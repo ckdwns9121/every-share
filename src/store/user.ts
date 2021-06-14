@@ -13,16 +13,7 @@ type Actions = ActionType<typeof actions>
 type State =  User;
 
 const initState : State = {
-    user :{
-        user_id : -1,
-        email:'',
-        name:null,
-        password: '',
-        phone_number:'string',
-        agree_sms : 0,
-        agree_push: 0,
-        register_type : null,
-    }
+    user :null
 };
 
 const user = createReducer<State, Actions>(initState, {

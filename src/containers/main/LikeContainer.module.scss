@@ -4,5 +4,9 @@
 
 .container{
     @include container;
+    .content{
+           padding:$padding-side;
+           padding-top:20px;
+    }
 
 }

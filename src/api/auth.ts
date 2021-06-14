@@ -29,7 +29,6 @@ export const requsetPostSignup = async (
 }
 
 export const requestPostSignin =(email:string,password:string) =>{
-    try{
         const URL ='/api/users/signin';
 
         const formdata={
@@ -37,10 +36,7 @@ export const requestPostSignin =(email:string,password:string) =>{
         }
         const res = axios.post(URL,formdata);
         return res;
-    }
-    catch(e){
 
-    }
 }
 
 export const  requestGetUser =async (access_token : string) =>{

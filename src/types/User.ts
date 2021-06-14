@@ -11,5 +11,5 @@ export interface User{
         agree_push: number|boolean,
         register_type : string | null,
         native_token? :string | null,
-    }
+    } | null
 }

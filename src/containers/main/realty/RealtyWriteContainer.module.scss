@@ -1,9 +1,6 @@
 @import '../../../styles/Root';
 
-
-html {
-    body {
-
+.container{
         input,
         select {
             border: 1px solid #707070;
@@ -38,7 +35,6 @@ html {
         }
 
     }
-}
 
 
 .container {
@@ -68,7 +64,7 @@ html {
         }
 
         .info-box {
-            max-width: 328px;
+            padding: $padding-side;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -129,7 +125,7 @@ html {
         }
 
         .locationInfo-box {
-            max-width: 328px;
+            padding: $padding-side;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -139,7 +135,8 @@ html {
         }
 
         .date-box {
-            max-width: 328px;
+            padding: $padding-side;
+
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -161,7 +158,7 @@ html {
         }
 
         .additionalInfo-box {
-            max-width: 328px;
+            padding: $padding-side;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -271,6 +268,7 @@ html {
                 color: #fff;
                 font-size: 16px;
                 font-weight: bold;
+                margin-bottom:15px;
             }
         }
 
@@ -283,6 +281,20 @@ html {
                 color: #707070;
                 margin-bottom: 10px;
             }
+        }
+    }
+}
+
+html{
+    body{
+        .address-search{
+            width: 100%;
+            border:1px solid black;
+            height: 41px;
+            margin-bottom:15px;
+            border-radius: 0;
+            font-size: 15px;
+            letter-spacing: -1px;
         }
     }
 }

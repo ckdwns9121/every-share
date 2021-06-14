@@ -18,7 +18,7 @@ import Arrow from '../asset/Arrow';
 import SEARCH from '../../static/svg/search-light.svg';
 import AddressList from '../../components/address/AddressList';
 //type
-import {ModalOpen} from '../../types/Modal';
+import {Address} from '../../types/Address';
 
 
 const Transition = React.forwardRef(function Transition(
@@ -28,7 +28,12 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddressModal({open} : ModalOpen) {
+export default function AddressModal({open,addr,onChange,list} :{
+  open:boolean, 
+  addr:string ,
+  list: Address[] | null,
+  onChange:(e : React.ChangeEvent<HTMLInputElement>)=>void
+}) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -44,14 +49,14 @@ export default function AddressModal({open} : ModalOpen) {
                       <Arrow/>
                 </IconButton>
                 <div className={styles['address-input']}>
-                  <input className={styles['input']}type ="text" placeholder={'지역, 지하철역, 학교검색'}/>
+                  <input className={styles['input']}type ="text" value={addr} onChange={onChange}placeholder={'지역, 지하철역, 학교검색'}/>
                 </div>
                 <IconButton className={styles['address-search']}>
                     <img src={SEARCH} alt="검색"/>
                 </IconButton>
             </div>
             <div className={styles['address-list']}> 
-              <AddressList/>
+              <AddressList list={list}/>
             </div>  
         </DialogContent>
       </Dialog>

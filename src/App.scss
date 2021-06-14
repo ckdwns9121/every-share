@@ -50,15 +50,16 @@ ul {
     list-style: none;
 }
 select {
-    // /*ios대응*/
-    // -webkit-appearance: none;
-    // -moz-appearance: none;
-    // appearance: none;
-    // outline: none;
-    // /*화살표 배경 넣기*/
+    /*ios대응*/
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    /*화살표 배경 넣기*/
+
     // background: url('./static/asset/svg/select.svg') no-repeat calc(100% - 8px)
-    //     50% transparent;
-    // /*화살표 select박스 오른쪽 중앙 배치,배경 흰색*/
+        // 50% transparent;
+    /*화살표 select박스 오른쪽 중앙 배치,배경 흰색*/
 }
 select::-ms-expand {
     display: none; /* 화살표 없애기 for IE10, 11*/

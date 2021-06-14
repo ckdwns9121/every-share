@@ -5,7 +5,9 @@ import RealtyList from '../../components/item/RealtyList';
 function LikeContainer(){
     return(
         <div className={styles['container']}>
-           <RealtyList/>
+            <div className={styles['content']}>
+                <RealtyList/>
+            </div>
         </div>
     )
 }

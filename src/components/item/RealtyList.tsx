@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 
 //asset
 import TEST_IMAGE from '../../static/image/test.png';
+import { RoutePaths } from '../../core/utils/path';
 
 interface Props{
     background? : string,
@@ -31,7 +32,8 @@ function RealtyItemList (){
 function RealtyItem (){
 
     return(
-        <div className={styles['realty-item']}>
+        <Link to ={`${RoutePaths.main.detail}/1`}>
+            <div className={styles['realty-item']}>
             <div className={styles['realty-img']}>
                     <img src ={TEST_IMAGE}/>
             </div>
@@ -50,6 +52,8 @@ function RealtyItem (){
                 </div>
             </div>
         </div>
+    </Link>
+
     )
 }
 
