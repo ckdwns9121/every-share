@@ -38,7 +38,7 @@ function SignupContainer(){
         phone_number:'',
 
     });
-    const [agree,setAgree] = useState({privacy:false,service:false,sms:false});
+    const [agree,setAgree] = useState({privacy:true,service:true,sms:false});
     const { email,password,password_confirm,phone_number} = form;
     const {privacy,service, sms} = agree;
 

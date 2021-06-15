@@ -15,6 +15,9 @@ import {requestGetAddressInfo} from '../../../api/address';
 
 //hooks
 import {useToken} from '../../../hooks/useStore';
+import { useHistory } from "react-router";
+import { RoutePaths } from "../../../core/utils/path";
+
 
 
 type TitleComponentProps = {
@@ -40,6 +43,7 @@ const TitleComponent: React.FC<TitleComponentProps> = ({ text }) => {
 function RealtyWriteContainer() {
 
 
+  const history = useHistory();
   const access_token = useToken();
   const [realty_images , setImages] = useState<object[]>([]);
   const [contract_image , setContractImage] = useState<string>('');
@@ -100,6 +104,9 @@ function RealtyWriteContainer() {
           contract_image,
           )
           console.log(res);
+          if(res?.data.message==='success'){
+            history.push(RoutePaths.main.detail +'/' + res.data.data.realty_id);
+          }
       }
     }
     catch(e){

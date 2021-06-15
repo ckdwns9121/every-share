@@ -4,4 +4,5 @@ export interface Address{
     roadAddr: string,
     siNm?: string,
     zipNo?: string
+    onClick: (jibun : string) =>void | Promise<void>;
 }

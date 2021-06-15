@@ -7,28 +7,28 @@ import {Address} from '../../types/Address';
 
 interface Props{
     list : Address[]| null
+    onClick: (jibun : string) =>void;
 }
 
 
-function AddressItemList({list} : Props){
+function AddressItemList({list,onClick} : Props){
 
     const address_list = list?.map((item) =>
-    <AddressItem key ={item.jibunAddr}jibunAddr={item.jibunAddr} roadAddr ={item.roadAddr} siNm={item.siNm} zipNo={item.zipNo}/>
+    <AddressItem key ={item.jibunAddr}jibunAddr={item.jibunAddr} onClick={onClick} roadAddr ={item.roadAddr} siNm={item.siNm} zipNo={item.zipNo}/>
     )
     return(
         <>
         {address_list}
-            {/* <AddressItem addr={'동아대학교 승학캠퍼스'} jibun={'낙동대로 515번길 49'}/> */}
-            {/* <AddressItem addr={'동아대학교 승학캠퍼스'} jibun={'낙동대로 515번길 49'}/> */}
-            {/* <AddressItem addr={'동아대학교 승학캠퍼스'} jibun={'낙동대로 515번길 49'}/> */}
-            {/* <AddressItem addr={'동아대학교 승학캠퍼스'} jibun={'낙동대로 515번길 49'}/> */}
-            {/* <AddressItem addr={'동아대학교 승학캠퍼스'} jibun={'낙동대로 515번길 49'}/> */}
         </>
     )
 }
-function AddressItem ({ jibunAddr,roadAddr,siNm,zipNo}:Address){
+function AddressItem ({ jibunAddr,roadAddr,siNm,zipNo,onClick}:Address){
+
+    const test =(e : any)=>{
+        onClick(jibunAddr);
+    }
     return(
-        <ButtonBase className={styles['item']}>
+        <ButtonBase className={styles['item']} onClick={test}>
             <div className={styles['addr']}>
                     {jibunAddr}
             </div>

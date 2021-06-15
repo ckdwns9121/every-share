@@ -24,7 +24,6 @@ import {requestGetUser} from './api/auth';
 //store
 import {useDispatch} from 'react-redux';
 import {set_user} from './store/user';
-import {getList} from './store/realties';
 
 function App() {
 
@@ -45,10 +44,8 @@ function App() {
       console.log(e);
     }
   }
-
   useEffect(()=>{
     callApiUserInfo();
-    dispatch(getList({lat:0,lng:0,filter:[1,2,3,4]}));
   },[])
 
   return (

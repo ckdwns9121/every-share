@@ -6,7 +6,7 @@ import { RoutePaths } from "../../core/utils/path";
 import { MatchId } from "../../types/RouterParams";
 import styles from "./DetailContainer.module.scss";
 import Header from "../../components/header/Header";
-import {Button} from '@material-ui/core';
+import {Button,IconButton} from '@material-ui/core';
 
 //asset
 import GASSTOVE from '../../static/svg/options/gasstove.svg';
@@ -14,6 +14,7 @@ import ROAD_VIEW from '../../static/svg/view.svg';
 import PHONE from '../../static/svg/phone.svg';
 import MESSAGE from '../../static/svg/message.svg';
 import HOME from '../../static/image/test.png';
+import CONTRACT from '../../static/svg/contract.svg';
 
 //modal
 import RoadviewModal  from "../../components/modal/RoadviewModal";
@@ -55,11 +56,15 @@ function DetailContainer({ id,modal }: MatchId) {
   useEffect(()=>{
     let container = document.getElementById('detail-map');
     let options = {
-      center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+      center: new window.kakao.maps.LatLng(realty?.lat, realty?.lng),
       level: 3
     };
     let map = new window.kakao.maps.Map(container, options);
     kakao_map.current = map;
+},[realty])
+
+useEffect(()=>{
+  window.scrollTo(0,0);
 },[])
 
 useEffect(()=>{
@@ -97,8 +102,11 @@ useEffect(()=>{
               <div className={styles["value"]}> 월세에 포함 </div>
             </div>
             <div className={styles["realty-box"]}>
-              <div className={styles["column"]}>월세</div>
-              <div className={styles["value"]}>300/25</div>
+              <div className={styles["value"]}>
+                  <IconButton className={styles['contract']}>
+                    <img src={CONTRACT}/>
+                  </IconButton>
+              </div>
             </div>
           </div>
           <div className={styles["realty-info"]}>
@@ -151,7 +159,7 @@ useEffect(()=>{
            <span>문자로 문의</span>
          </Button>
       </div>
-      <RoadviewModal open={modal==='roadview'}></RoadviewModal>
+      <RoadviewModal open={modal==='roadview'} lat={realty?.lat} lng={realty?.lng}></RoadviewModal>
     </Fragment>
   );
 }

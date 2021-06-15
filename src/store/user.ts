@@ -28,5 +28,5 @@ const user = createReducer<State, Actions>(initState, {
     }
 });
 
-export type RooteState = ReturnType<typeof user>;
+export type RootState = ReturnType<typeof user>;
 export default user;

@@ -28,11 +28,13 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddressModal({open,addr,onChange,list} :{
+export default function AddressModal({open,addr,onChange,list,onClick} :{
   open:boolean, 
   addr:string ,
   list: Address[] | null,
   onChange:(e : React.ChangeEvent<HTMLInputElement>)=>void
+  onClick: (jibun : string) =>void;
+
 }) {
   const classes = useStyles();
   const history = useHistory();
@@ -56,7 +58,7 @@ export default function AddressModal({open,addr,onChange,list} :{
                 </IconButton>
             </div>
             <div className={styles['address-list']}> 
-              <AddressList list={list}/>
+              <AddressList list={list} onClick={onClick}/>
             </div>  
         </DialogContent>
       </Dialog>

@@ -2,7 +2,9 @@
 
 import {useCallback, useEffect,useRef,useState, useReducer,Fragment} from 'react';
 import styles from './MapContainer.module.scss';
+import cn from 'classnames/bind';
 import '../../styles/_Overlay.scss';
+import {Button} from '@material-ui/core';
 //lib
 import {RoutePaths} from '../../core/utils/path';
 
@@ -39,15 +41,19 @@ import MAKER from '../../statioc/image/maker.png';
 import AddressModal from '../../components/modal/AddressModal';
 
 //api
+import { searchAddress, requestGetAddressInfo } from '../../api/address';
 
 //lib
 import {getDistanceFromLatLonInKm} from '../../core/lib/distance';
 
-import { searchAddress,requestGetAddressInfo } from '../../api/address';
-
-
 //type
 import {Address} from '../../types/Address';
+
+//store
+import {getRealties} from '../../store/realties';
+import ZoneModal from '../../components/modal/ZoneModal';
+
+const cx = cn.bind(styles);
 
 declare global {
     interface Window {
@@ -77,6 +83,10 @@ function MapContainer({modal}:MatchModal){
     const [addr , setAddr] = useState<string>(''); //주소검색
     const [addrList,setAddrList] = useState<Address[] | null>(null);
 
+    const zone_view = useRef<boolean>(false); // 매물 버튼 오픈 여부
+
+    const [zone_list ,setZoneList] = useState<any>([]);
+    const [zoneButtonOpen ,setZoneButtonOpen] = useState<boolean>(false);
 
     // 지도를 렌더하는 함수
     const mapRender = useCallback(() => {
@@ -85,10 +95,10 @@ function MapContainer({modal}:MatchModal){
         let lng : number= map_position.current.lng;
         let options :object = {
             center: new window.kakao.maps.LatLng(lat, lng),
-            level: level !== 0 ? level : map_level.current,
+            level: map_level.current,
         };
         const map = new window.kakao.maps.Map(container, options);
-        map.setMaxLevel(8);
+        map.setMaxLevel(10);
         kakao_map.current = map;
     }, []);
 
@@ -98,6 +108,7 @@ function MapContainer({modal}:MatchModal){
         let level = kakao_map.current.getLevel();
         level = type === 'in' ? level - 1 : level + 1;
         kakao_map.current.setLevel(level, {animate: {duration: 300}});
+        localStorage.setItem('level', level);
         dispatch(setLevel(level));
         
     },[dispatch]);
@@ -153,6 +164,12 @@ function MapContainer({modal}:MatchModal){
             // const new_position = { lat, lng };
             const new_position = { lat, lng };
             localStorage.setItem('position', JSON.stringify(new_position));
+            localStorage.setItem('level', level);
+            setZoneButtonOpen(false);
+            // setTimeout(()=>{
+            //     setZoneList([]);
+            // },200)
+            zone_view.current =false;
         });
 
 
@@ -168,12 +185,6 @@ function MapContainer({modal}:MatchModal){
         // const storage_position = JSON.parse(sessionStorage.getItem('user_position'));
         if (true) {
             const data = realties.map((el : any) => {
-                // const distance = getDistanceFromLatLonInKm(
-                //     el.lat,
-                //     el.lng,
-                //     storage_position.lat,
-                //     storage_position.lng,
-                // );
                 const content = `<div onclick="onClickOverlay(${
                     el.realty_id
                 })" class="custom-overlay" title=${JSON.stringify(
@@ -190,7 +201,6 @@ function MapContainer({modal}:MatchModal){
                 customOverlay.setMap(map);
                 return customOverlay;
             });
-            console.log('클러스터 생성');
             cluster_marker.current.addMarkers(data);
 
             /*
@@ -203,7 +213,6 @@ function MapContainer({modal}:MatchModal){
                 'clusterclick',
                 (cluster : any ) => {
                     const overlays = cluster.getMarkers();
-                    console.log('클러스터 클릭');
                     if (overlays.length > 10) {
                         var level = map.getLevel() - 1;
                         map.setLevel(level, {
@@ -211,8 +220,7 @@ function MapContainer({modal}:MatchModal){
                             animate: 300,
                         });
                     } else {
-                        // slide_view.current = !slide_view.current;
-
+                        zone_view.current = !zone_view.current;
                         const slides = overlays.map((overlay:any) => {
                             const data = overlay.getContent();
                             const t_index = data.indexOf('title=');
@@ -223,9 +231,8 @@ function MapContainer({modal}:MatchModal){
                             );
                             return JSON.parse(str);
                         });
-                        console.log(slides);
-                        // setSlideList(slides);
-                        // setOnSlide(slide_view.current);
+                        setZoneList(slides);
+                        setZoneButtonOpen(zone_view.current)
                     }
                 },
             );
@@ -236,7 +243,6 @@ function MapContainer({modal}:MatchModal){
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [area, dispatch, history, realties]);
-
 
     //주소 검색 API
     const onSearchAddr = useCallback(async()=>{
@@ -255,24 +261,73 @@ function MapContainer({modal}:MatchModal){
         }
     },[addr])
 
-    useEffect(()=>{
-        let container = document.getElementById('map');
-        let options = {
-          center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-          level: 3
-        };
-        let map = new window.kakao.maps.Map(container, options);
-        kakao_map.current = map;
+    
+    // 주소 클릭시 메인화면으로 이동
+    const onClickAddr = useCallback(async (jibun:string)=>{
+        try{
+            const res = await requestGetAddressInfo(jibun);
+            if(res.data.documents){
+                const{x,y} = res.data.documents[0];
+                setCoordinates(y,x);
+                history.replace(RoutePaths.main.index);
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
     },[])
 
+    // 마지막 위치 기준으로 get_area 함수 호출하여 해당지역 주차장 받아오기
+    useEffect(() => {
+        let storage  =localStorage.getItem('position');
+        if(storage){
+            let item = JSON.parse(storage);
+            map_position.current.lat= item.lat;
+            map_position.current.lng= item.lng;
+        }
+        let lv = localStorage.getItem('level');
+        if(lv){
+           map_level.current= parseInt(lv);
+        }
+        // if (storage_position && storage_position.lat && storage_position.lng) {
+        //     map_position.current = storage_position;
+        //     const { lat, lng } = map_position.current;
+        //     dispatch(get_area({ lat, lng }));
+        // } else {
+        //     const init_position = {
+        //         lat: 35.8360328674316,
+        //         lng: 128.5743408203125,
+        //     };
+        //     map_position.current = init_position;
+        //     const { lat, lng } = init_position;
+        //     localStorage.setItem('position', JSON.stringify(init_position));
+        //     dispatch(get_area({ lat, lng }));
+        // }
+    }, []);
+
+
+    useEffect(()=>{
+        dispatch(getRealties({lat:0,lng:0,filter:[1,2,3,4]}));
+    },[dispatch])
+
+    // 지도 렌더
+    useEffect(()=>{
+        mapRender();
+    },[])
+
+    // 매물 마커 생성
     useEffect(()=>{
         createParkingMarker();
     },[realties])
 
+
+    // 주소 모달 검색
     useEffect(()=>{
         onSearchAddr();
     },[onSearchAddr])
 
+
+    // 모달이 꺼졌을 시 초기화
     useEffect(()=>{
         setAddr('');
     },[modal])
@@ -304,9 +359,11 @@ function MapContainer({modal}:MatchModal){
                 <CircleButton src={LOCATION}/>
             </div>
             <SlideMenu open={menuOpen} handleClose={()=>handleOpen(false)}/>
+            <Button className={cx('zone-button',{open:zoneButtonOpen})} onClick={()=>history.push(RoutePaths.main.index+'/zone')}>이지역 매물 {`${zone_list.length}`}개 보기</Button>
             <div id="map" style={{ width: '100%', height: '100vh', zIndex: 1 }}/>
         </div>
-        <AddressModal open={modal==='address'} addr={addr}  onChange={(e)=> setAddr(e.target.value)} list={addrList}/>
+        <AddressModal open={modal==='address'} addr={addr}  onChange={(e)=> setAddr(e.target.value)} list={addrList} onClick={onClickAddr}/>
+        <ZoneModal open={modal==='zone'} realties={zone_list}/>
         <BottomModal open ={filterOpen} handleClose={()=>handleFilterOpen(false)}/>
         </Fragment>
 

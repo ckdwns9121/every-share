@@ -11,13 +11,13 @@ const GET_LIST_SUCCESS ='realties/GET_LIST_SUCCESS' as const;
 const GET_LIST_ERROR ='realties/GET_LIST_ERROR' as const;
 
 
-export const getList = createAction(GET_LIST)<any>();
+export const getRealties = createAction(GET_LIST)<any>();
 export const getListSuccess = createAction(GET_LIST_SUCCESS)<any>();
 export const getListError = createAction(GET_LIST_ERROR)<any>();
 
 
 
-const actions={getList,getListSuccess,getListError}
+const actions={getRealties,getListSuccess,getListError}
 
 type Actions = ActionType<typeof actions>;
 
@@ -59,7 +59,7 @@ function *getRealtiesSaga(action: any) : Generator{
 }
 
 export function* realtiesSaga(){
-    yield takeLatest(getList, getRealtiesSaga);
+    yield takeLatest(getRealties, getRealtiesSaga);
 }
 
 
