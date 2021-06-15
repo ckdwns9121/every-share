@@ -244,7 +244,7 @@
                 }
                  .RegisteredImage-box {
                      display: flex;
-                     justify-content: space-between;
+                     flex-wrap: wrap;
                      margin-top: 15px;
                      width: 100%;
                      height: 65px;

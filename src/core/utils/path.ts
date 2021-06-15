@@ -53,7 +53,7 @@ export const RouteTitle  ={
             contact :'문의한 매물',
             write :'매물 등록',
             modify :'매물 수정',
-            enrollment:'등록한 매물',
+            enrollment:'내가 등록한 매물',
             like: '내가 찜한 매물'
 
         },

@@ -4,7 +4,7 @@
 
 import {createAction, ActionType, createReducer, createAsyncAction} from 'typesafe-actions';
 import { takeEvery, call, put, delay,takeLatest } from 'redux-saga/effects';
-import {requestGetRealty} from '../api/realty';
+import {requestGetRealties} from '../api/realty';
 
 const GET_LIST ='realties/GET_LIST' as const;
 const GET_LIST_SUCCESS ='realties/GET_LIST_SUCCESS' as const;
@@ -43,7 +43,7 @@ const initState : State ={
 function *getRealtiesSaga(action: any) : Generator{
     try{   
         const {lat,lng,filter} = action.payload
-        const res :any = yield requestGetRealty(lat,lng,filter);
+        const res :any = yield requestGetRealties(lat,lng,filter);
         console.log(res);
         if(res?.data?.message==='success'){
             yield put({

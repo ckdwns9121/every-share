@@ -6,49 +6,53 @@ import {Link} from 'react-router-dom';
 import TEST_IMAGE from '../../static/image/test.png';
 import { RoutePaths } from '../../core/utils/path';
 
-interface Props{
-    background? : string,
-    realty_name?: string,
-    deposit?:number | string,
-    monthly_rent?:number | string,
-    oper_start_time : string,
-    oper_end_time : string,
-    like ? :boolean
-    contact? : boolean,
-    delete ?: boolean,
+//type
+import {Realty} from '../../types/Realty';
+
+import {dateToYYYYMMDD} from '../../core/lib/formatChecker';
+
+
+interface Relties{
+    realties? : Realty[];
 }
 
-function RealtyItemList (){
+interface Props extends Realty{
+    like ? :boolean,
+    enrollment?:boolean,
+    contact?:boolean,
+}
+
+function RealtyItemList ({realties} : Relties){
+
+    const list = realties?.map((item)=> <RealtyItem {...item} key={item.realty_id}/>)
+    console.log(list);
     return(
         <>  
-        <RealtyItem/>
-        <RealtyItem/>
-        <RealtyItem/>
-        <RealtyItem/>
+        {list}
         </>
     )
 }
 
-function RealtyItem (){
+function RealtyItem (props: Props){
 
     return(
-        <Link to ={`${RoutePaths.main.detail}/1`}>
+        <Link to ={`${RoutePaths.main.detail}/${props.realty_id}`}>
             <div className={styles['realty-item']}>
             <div className={styles['realty-img']}>
                     <img src ={TEST_IMAGE}/>
             </div>
             <div className={styles['realty-info']}>
                 <div className={styles['realty-price']}>
-                    월세 300/24
+                    월세 {`${props.deposit}/${props.monthly_rent}`}
                 </div>
                 <div className={styles['realty-name']}>
-                    하단 에덴빌라
+                    {props.realty_name}
                 </div>
                 <div className={styles['realty-date']}>
-                   2021-06-02 ~ 2021-08-02까지
+                {`${dateToYYYYMMDD(new Date(props.oper_start_time))}`} ~   {`${dateToYYYYMMDD(new Date(props.oper_end_time))}`}까지
                 </div>
                 <div className={styles['realty-comment']}>
-                   방학때 본가에 가게 됐어요 ....😂
+                   {props.realty_comment}
                 </div>
             </div>
         </div>

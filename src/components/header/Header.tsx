@@ -10,7 +10,7 @@ import {IconButton} from '@material-ui/core';
 const cx = cn.bind(styles);
 
 interface Props{
-    title:string
+    title?:string
 }
 
 function Header({title}:Props){

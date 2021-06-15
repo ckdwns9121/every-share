@@ -2,7 +2,7 @@
 
 import {useCallback, useEffect,useRef,useState, useReducer,Fragment} from 'react';
 import styles from './MapContainer.module.scss';
-
+import '../../styles/_Overlay.scss';
 //lib
 import {RoutePaths} from '../../core/utils/path';
 
@@ -33,6 +33,7 @@ import FILTER from '../../static/svg/filter.svg';
 import LOCATION from '../../static/svg/location.svg';
 import SEARCH from '../../static/svg/search-light.svg';
 import MENU from '../../static/svg/menu.svg';
+import MAKER from '../../statioc/image/maker.png';
 
 //modal
 import AddressModal from '../../components/modal/AddressModal';
@@ -51,6 +52,7 @@ import {Address} from '../../types/Address';
 declare global {
     interface Window {
       kakao: any;
+      onClickOverlay : (realty_id : string)=>void
     }
 }
 
@@ -173,10 +175,10 @@ function MapContainer({modal}:MatchModal){
                 //     storage_position.lng,
                 // );
                 const content = `<div onclick="onClickOverlay(${
-                    el.place_id
+                    el.realty_id
                 })" class="custom-overlay" title=${JSON.stringify(
                     el,
-                )} ><span>ㅎㅇKm</span></div>`;
+                )} ></div>`;
                 var customOverlay = new window.kakao.maps.CustomOverlay({
                     map: map,
                     position: new window.kakao.maps.LatLng(el.lat, el.lng),
@@ -228,11 +230,10 @@ function MapContainer({modal}:MatchModal){
                 },
             );
         }
-        // // 윈도우 클릭이벤트 넘겨야 하는 주차장 마커 클릭함수
-        // window.onClickOverlay = (place_id) => {
-        //     history.push(Paths.main.detail + '?place_id=' + place_id);
-        // };
-        // offLoading('parking/GET_LIST');
+        // 윈도우 클릭이벤트 넘겨야 하는 주차장 마커 클릭함수
+        window.onClickOverlay = (realty_id:string|number) => {
+            history.push(RoutePaths.main.detail + '/' + realty_id);
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [area, dispatch, history, realties]);
 
@@ -241,8 +242,12 @@ function MapContainer({modal}:MatchModal){
     const onSearchAddr = useCallback(async()=>{
         try{
             const res = await searchAddress(addr);
+            console.log(res);
             if(res){
                 setAddrList(res);
+            }
+            else{
+                setAddrList([]);
             }
         }  
         catch(e){

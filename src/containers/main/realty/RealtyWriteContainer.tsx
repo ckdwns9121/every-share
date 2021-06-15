@@ -1,5 +1,5 @@
 import styles from "./RealtyWriteContainer.module.scss";
-import { useState } from "react";
+import { useState,useCallback, useEffect } from "react";
 import {Button} from '@material-ui/core';
 
 import plusIcon from "../../../static/svg/plug.svg";
@@ -9,9 +9,25 @@ import realty2 from "../../../static/image/realty/rinda2.jpg";
 import contract1 from "../../../static/image/realty/contract1.gif";
 import defaultImage from "../../../static/image/realty/default.jpg";
 
+//api
+import {requestPostRealty} from '../../../api/realty';
+import {requestGetAddressInfo} from '../../../api/address';
+
+//hooks
+import {useToken} from '../../../hooks/useStore';
+
+
 type TitleComponentProps = {
   text: string;
 };
+
+
+declare global {
+  interface Window {
+    daum: any;
+  }
+}
+
 
 const TitleComponent: React.FC<TitleComponentProps> = ({ text }) => {
   return (
@@ -22,13 +38,148 @@ const TitleComponent: React.FC<TitleComponentProps> = ({ text }) => {
 };
 
 function RealtyWriteContainer() {
-  return (
+
+
+  const access_token = useToken();
+  const [realty_images , setImages] = useState<object[]>([]);
+  const [contract_image , setContractImage] = useState<string>('');
+  const [realty_srcs , setSrcs] = useState<string[]>([]);
+  const [contract_src , setContractSrc] = useState<string>('');
+
+  const [open ,setOpen] = useState<boolean>(false);
+
+  const [realty_name , setReatlyName] = useState<string>(''); //이름
+  const [addr, setAddr ] = useState<string>(''); //주소
+  const [addr_detail,setAddrDetail] = useState<string>('');
+
+  const [start_date , setStartDate] = useState<string|null>(null);
+  const [end_date , setEndDate] = useState<string|null>(null);
+  const [comment,setComment] = useState<string>('');
+  const [sub_comment,setSubComment] = useState<string>('');
+  const [deposit ,setDeposit] = useState<string>('500'); //보증금
+  const [monthly_rent ,setMonthRent] = useState<string>('30'); //월세
+
+  const [position ,setPosition] = useState({lat:0,lng:0});
+
+  const onChangeName =(e: React.ChangeEvent<HTMLInputElement>) => setReatlyName(e.target.value);
+  const onChangeComment =(e: React.ChangeEvent<HTMLTextAreaElement>) => setComment(e.target.value);
+  const onChangeSubComment =(e: React.ChangeEvent<HTMLTextAreaElement>) => setSubComment(e.target.value);
+  const onChangeDeposit = (e: React.ChangeEvent<HTMLInputElement>) =>setDeposit(e.target.value);
+  const onChangeMonthRent = (e: React.ChangeEvent<HTMLInputElement>) =>setMonthRent(e.target.value);
+  
+
+
+  // 매물 등록
+  const onClickEnrollment = async()=>{
+    try{
+      console.log(access_token);
+      if(access_token){
+        const res = await requestPostRealty(
+          access_token, //JWT_TOKEN
+          realty_name,
+          1, // TYPE
+          1, //KIND
+          10, // ALL_FLOORS
+          5, // MY_FLOORS
+          parseInt(deposit), //보증금
+          parseInt(monthly_rent), // 월세
+          0, // 관리비
+          comment, //코멘트
+          addr, //주소
+          addr_detail, //  상세주소
+          '',//임시주소
+          '0',
+          position.lat,
+          position.lng,
+          sub_comment,
+          '{gas:1}',
+          realty_images,
+          '2021-05-15',
+          '2021-07-15',
+          '1',
+          contract_image,
+          )
+          console.log(res);
+      }
+    }
+    catch(e){
+      console.log(e);
+    }
+  }
+
+  // 매물 사진 업로드
+  const onUploadFile = useCallback(async (e) => {
+    let file = e.target.files[0];
+    let fileReader = new FileReader();
+    try{
+        if(file){
+          console.log(file);
+           setImages(realty_images.concat(file));
+            fileReader.onload =(e : any) =>{
+              setSrcs(realty_srcs.concat(e.target.result));
+            }
+        }
+        fileReader.readAsDataURL(file)
+    }   
+    catch(e){
+      console.log(e);
+    }
+}, [realty_images,realty_srcs]);
+
+
+// 매물 임시 계약서 업로드
+const onUploadContract = useCallback(async (e) => {
+  let file = e.target.files[0];
+  let fileReader = new FileReader();
+  try{
+      if(file){
+          setContractImage(file);
+          fileReader.onload =(e : any) =>{
+            setContractSrc(e.target.result);
+          }
+      }
+      fileReader.readAsDataURL(file)
+  }   
+  catch(e){
+    console.log(e);
+  }
+}, []);
+
+
+//주소창 모달 오픈
+useEffect(() => {
+  if(open){
+    new window.daum.Postcode({
+      oncomplete: async function (data: any) {
+        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+  
+        // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+        var roadAddr = data.roadAddress; // 도로명 주소 변수
+        var extraRoadAddr = ""; // 참고 항목 변수
+        console.log(roadAddr);
+        setAddr(roadAddr);
+        const res = await requestGetAddressInfo(roadAddr);
+        console.log(res);
+        if(res?.data?.documents){
+          setPosition({lat: res.data.documents[0].y , lng : res.data.documents[0].x});
+        }
+      },
+    onclose: function(state : string) {
+      setOpen(false);
+    }
+    }).open();
+  }
+}, [open]);
+
+
+return (
     <div className={styles["container"]}>
       <div className={styles["content"]}>
         <TitleComponent text="매물 기본 정보" />
 
         <div className={styles["info-box"]}>
-          <input type="text" placeholder="린다포레스트" />
+          <input type="text"  name='name' placeholder="매물 이름을 입력하세요" value={realty_name} onChange={onChangeName}/>
 
           <select>
             <option>오피스텔</option>
@@ -53,8 +204,10 @@ function RealtyWriteContainer() {
               <p>보증금</p>
               <input
                 type="text"
+                onChange={onChangeDeposit}
+                value={deposit}
                 className={styles["costInput"]}
-                placeholder="3000"
+                placeholder="보증금"
               />
               <p>만원</p>
             </div>
@@ -62,8 +215,10 @@ function RealtyWriteContainer() {
               <p>월세</p>
               <input
                 type="text"
+                value={monthly_rent}
+                onChange={onChangeMonthRent}
                 className={styles["costInput"]}
-                placeholder="30"
+                placeholder="월세 (만원단위)"
               />
               <p>만원</p>
             </div>
@@ -74,15 +229,17 @@ function RealtyWriteContainer() {
             <p className={styles["subTitle"]}>매물 설명</p>
             <textarea
               className={styles["description"]}
+              onChange={onChangeComment}
+              value={comment}
               placeholder="방학때 본가에 가게 됐어요 😂 3개월만 사실분 구합니다!"
             ></textarea>
           </div>
         </div>
         <TitleComponent text="위치 정보" />
         <div className={styles["locationInfo-box"]}>
-          <Button className={styles['address-search']}>주소찾기</Button>
-          <input type="text" placeholder="부산광역시 사하구 하단동 492-46" />
-          <input type="text" placeholder="1동 202호" />
+          <Button className={styles['address-search']} onClick={()=>setOpen(true)}>주소찾기</Button>
+          <input type="text" placeholder="주소" value={addr} readOnly/>
+          <input type="text" placeholder="상세 주소" />
         </div>
 
         <TitleComponent text="대여 기간" />
@@ -116,14 +273,10 @@ function RealtyWriteContainer() {
             <p className={styles["notice"]}>실 사진을 등록해주세요</p>
             <div className={styles["fileInput-box"]}>
               <label htmlFor="realty-picture">매물 사진 등록</label>
-              <input type="file" id="realty-picture" />
+              <input type="file" id="realty-picture"  onChange={onUploadFile} accept="image/gif, image/jpeg, image/png, image/svg"  />
             </div>
             <div className={styles["RegisteredImage-box"]}>
-              <img src={realty1} alt="realty1" />
-              <img src={realty2} alt="realty2" />
-              <img src={defaultImage} alt="defaultImage" />
-              <img src={defaultImage} alt="defaultImage" />
-              <img src={defaultImage} alt="defaultImage" />
+              {realty_srcs.map((item)=> <img src={item} key={item}/> )}
             </div>
           </div>
 
@@ -134,14 +287,11 @@ function RealtyWriteContainer() {
             </p>
             <div className={styles["fileInput-box"]}>
               <label htmlFor="contract">임시 계약서 등록</label>
-              <input type="file" id="contract" />
+              <input type="file" id="contract"  onChange={onUploadContract} accept="image/gif, image/jpeg, image/png, image/svg"  />
             </div>
             <div className={styles["RegisteredImage-box"]}>
-              <img src={contract1} alt="contract1" />
-              <img src={defaultImage} alt="defaultImage" />
-              <img src={defaultImage} alt="defaultImage" />
-              <img src={defaultImage} alt="defaultImage" />
-              <img src={defaultImage} alt="defaultImage" />
+              {contract_src && <img src={contract_src} />}
+
             </div>
           </div>
 
@@ -150,10 +300,12 @@ function RealtyWriteContainer() {
             <textarea
               className={styles["description"]}
               placeholder="최근에 헬스장도 생겨서 월 3만원에 이용이 가능합니다~!"
+              onChange={onChangeSubComment}
+              value={sub_comment}
             ></textarea>
           </div>
 
-          <Button className={styles["registerButton"]}>매물등록</Button>
+          <Button className={styles["registerButton"]} onClick={onClickEnrollment}>매물등록</Button>
         </div>
       </div>
     </div>
