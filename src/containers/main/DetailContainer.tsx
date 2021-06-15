@@ -28,7 +28,7 @@ import {Realty} from '../../types/Realty';
 
 //lib
 
-import {dateToRelative} from '../../core/lib/formatChecker';
+import {dateToRelative,imageFormat,DBImageFormat} from '../../core/lib/formatChecker';
 
 function DetailContainer({ id,modal }: MatchId) {
   
@@ -38,7 +38,7 @@ function DetailContainer({ id,modal }: MatchId) {
 
   const [realty , setRealty] = useState<Realty | null>(null);
   const [likes ,setLikes] = useState([]);
-
+  const [test,setUrl] = useState<any>('');
   const callGetApiRealty = async()=>{
     try{
       const res= await requestGetRealty(id);
@@ -71,12 +71,28 @@ useEffect(()=>{
   callGetApiRealty();
 },[id])
 
+useEffect(()=>{
+  console.log('이미지');
+  const r = imageFormat(realty?.realty_images[0]);
+  console.log(typeof r);
+  setUrl(r);
+},[realty])
+
+useEffect(()=>{
+  console.log(test);
+},[test])
   return (
     <Fragment>
       <Header title={realty?.realty_name} />
       <div className={styles["container"]}>
         <div className={styles["content"]}>
-          <div className={styles["realty-img"]}>
+          <div className={styles["realty-img"]}
+                  //    style={{
+                  //     backgroundImage: `url(${DBImageFormat(
+                  //         realty?.realty_images[0]
+                  //     )})`,
+                  // }}
+          >
             <img src={HOME} alt='home'/>
           </div>
           <div className={styles["realty-main"]}>

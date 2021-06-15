@@ -2,13 +2,26 @@
 
 import styles from './MypageContainer.module.scss';
 
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store';
 import {Button} from '@material-ui/core';
+import { useHistory } from 'react-router';
+import { RoutePaths } from '../../../core/utils/path';
+
+
+import {logout} from '../../../store/user';
+
 
 function MyPageContainer(){
 
     const {user} = useSelector((state:RootState) => state.user);
+    const history= useHistory();
+    const dispatch = useDispatch();
+    const onClickLogout=()=>{
+        localStorage.removeItem('access_token');
+        dispatch(logout());
+        history.replace(RoutePaths.main.index);
+    }
     return(
         <div className={styles['container']}>
             <div className={styles['content']}>
@@ -28,7 +41,9 @@ function MyPageContainer(){
                 <Button className={styles['box']}>
                     {user?.phone_number}
                 </Button>
-        
+            </div>
+            <div className={styles['logout']}>
+                <Button className={styles['logout-btn']} onClick={onClickLogout}>로그아웃</Button>
             </div>
         </div>
     )

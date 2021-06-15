@@ -3,10 +3,12 @@ import {createAction, ActionType, createReducer} from 'typesafe-actions';
 import {User} from '../types/User';
 
 const SET_USER  = 'user/SET_USER';
+const LOGOUT = 'user/LOGOUT';
 
 export const set_user = createAction(SET_USER)<any>();
+export const logout = createAction(LOGOUT)();
 
-const actions ={set_user};
+const actions ={set_user,logout};
 
 type Actions = ActionType<typeof actions>
 
@@ -24,6 +26,12 @@ const user = createReducer<State, Actions>(initState, {
         return {
             ...state,
             user : action.payload
+        }
+    },
+    [LOGOUT] : (state,action) =>{
+        return{
+            ...state,
+            user:null
         }
     }
 });

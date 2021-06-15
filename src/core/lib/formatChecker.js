@@ -1,3 +1,4 @@
+
 export function stringNumberToInt(strNumber) {
     // 구분자가 들어간 수치 데이터를 숫자로 변경
     if (strNumber !== undefined && strNumber !== null) {
@@ -125,22 +126,36 @@ export const stringToTel = (str) =>
 export const telToString = (tel) => tel.replace('-', '');
 // 전화번호 표현을 string으로 변경
 
-const STORAGE_URL = 'http://devapi.ajoonamu.com/storage/';
-export const DBImageFormat = (url) => {
-    if (typeof url === 'string') {
-        const URL_FORMAT = url
-            .replace(/\\/g, '')
-            .replace(/\[/g, '')
-            .replace(/\]/g, '')
-            .replace(/"/g, '')
-            .replace(/ /g, '');
-        const IMAGES = URL_FORMAT.split(',');
-        return IMAGES.map((IMAGE) => STORAGE_URL + IMAGE);
-    }
-    return '';
-};
 
 export const hideEmail = (email) => {
     const s = email.indexOf('@');
     return email.substr(0, s - 2) + '**';
+};
+
+
+const STORAGE_URL = 'http://localhost:4000/';
+
+export const DBImageFormat = (image) => {
+    if (!image) {
+        return null
+    } else if (image.indexOf('http://') !== -1 || image.indexOf('https://') !== -1) {
+        return image;
+    } else {
+        return STORAGE_URL+ image.replace('uploads/', '');
+    }
+}
+
+export const imageFormat = (image) => {
+
+    if(image){
+        if (Array.isArray(image)) {
+            const imgUrl = image.map(
+                (img) => `${STORAGE_URL}${img.replace('uploads/', '')}`,
+            );
+            return imgUrl;
+        }
+        // console.log(`${image.replace('uploads/', '')}`);
+        console.log(`${STORAGE_URL}${image.replace('uploads\\', 'uploads/')}`)
+        return `${STORAGE_URL}${image.replace('uploads/', '')}`;
+    }
 };
