@@ -9,7 +9,7 @@ import { RoutePaths } from '../../core/utils/path';
 //type
 import {Realty} from '../../types/Realty';
 
-import {dateToYYYYMMDD} from '../../core/lib/formatChecker';
+import {dateToYYYYMMDD,imageFormat} from '../../core/lib/formatChecker';
 
 
 interface Relties{
@@ -35,11 +35,22 @@ function RealtyItemList ({realties} : Relties){
 
 function RealtyItem (props: Props){
 
+    const sumbnail = JSON.parse(props.realty_images)
+
     return(
         <Link to ={`${RoutePaths.main.detail}/${props.realty_id}`}>
             <div className={styles['realty-item']}>
-            <div className={styles['realty-img']}>
-                    <img src ={TEST_IMAGE}/>
+            <div className={styles['realty-img']}
+            
+            style={{
+                backgroundImage: `url(${imageFormat(
+                    sumbnail[0]
+                )})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }}
+            >
+                    {/* <img src ={TEST_IMAGE}/> */}
             </div>
             <div className={styles['realty-info']}>
                 <div className={styles['realty-price']}>

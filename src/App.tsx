@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import RenderHeader from './components/header/RenderHeader';
+import Loading from './components/asset/Loading';
 import "./App.scss";
 
 //page
@@ -58,6 +59,7 @@ function App() {
           <Route component={ErrorPage} />
         </Switch>
       </Router>
+      <Loading></Loading>
     </div>
   );
 }

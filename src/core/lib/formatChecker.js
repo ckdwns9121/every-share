@@ -133,7 +133,7 @@ export const hideEmail = (email) => {
 };
 
 
-const STORAGE_URL = 'http://localhost:4000/';
+const STORAGE_URL = 'http://3.36.97.2:4000/';
 
 export const DBImageFormat = (image) => {
     if (!image) {
@@ -148,14 +148,15 @@ export const DBImageFormat = (image) => {
 export const imageFormat = (image) => {
 
     if(image){
+        console.log(image);
         if (Array.isArray(image)) {
             const imgUrl = image.map(
-                (img) => `${STORAGE_URL}${img.replace('uploads/', '')}`,
+                (img) => `${STORAGE_URL}${img.replace('uploads/', 'uploads/')}`,
             );
             return imgUrl;
         }
         // console.log(`${image.replace('uploads/', '')}`);
         console.log(`${STORAGE_URL}${image.replace('uploads\\', 'uploads/')}`)
-        return `${STORAGE_URL}${image.replace('uploads/', '')}`;
+        return `${STORAGE_URL}${image.replace('uploads/', 'uploads/')}`;
     }
 };

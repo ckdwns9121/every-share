@@ -10,6 +10,10 @@ import {Button,IconButton} from '@material-ui/core';
 
 //asset
 import GASSTOVE from '../../static/svg/options/gasstove.svg';
+import BED from '../../static/svg/options/bed.svg';
+import MICROWAVE from '../../static/svg/options/microwave.svg';
+import WASHER from '../../static/svg/options/washer.svg';
+
 import ROAD_VIEW from '../../static/svg/view.svg';
 import PHONE from '../../static/svg/phone.svg';
 import MESSAGE from '../../static/svg/message.svg';
@@ -18,7 +22,7 @@ import CONTRACT from '../../static/svg/contract.svg';
 
 //modal
 import RoadviewModal  from "../../components/modal/RoadviewModal";
-
+import ContractModal from '../../components/modal/ContractModal';
 
 //api
 import {requestGetRealty} from '../../api/realty';
@@ -30,26 +34,39 @@ import {Realty} from '../../types/Realty';
 
 import {dateToRelative,imageFormat,DBImageFormat} from '../../core/lib/formatChecker';
 
+//hooks
+import useLoading from '../../hooks/useLoading';
+
 function DetailContainer({ id,modal }: MatchId) {
   
   const history = useHistory();
+  const {handleLoading} = useLoading();
 
   const kakao_map = useRef<any>(null); //카카오 맵
 
   const [realty , setRealty] = useState<Realty | null>(null);
+  const [realty_images ,setImages] = useState<any>([]);
+  const [contract_image ,setContractImage] = useState<any>([]);
+
   const [likes ,setLikes] = useState([]);
   const [test,setUrl] = useState<any>('');
   const callGetApiRealty = async()=>{
     try{
+      handleLoading(true);
       const res= await requestGetRealty(id);
       console.log(res);
       if(res?.data?.message==='success'){
         setRealty(res.data.realty);
         setLikes(res.data.likes);
+        setImages(JSON.parse(res.data.realty.realty_images));
+        setContractImage(JSON.parse(res.data.realty.realty_contract_images));
       }
+      handleLoading(false);
+
     }
     catch(e){
       console.log(e);
+      handleLoading(false);
     }
   }
 
@@ -79,21 +96,22 @@ useEffect(()=>{
 },[realty])
 
 useEffect(()=>{
-  console.log(test);
-},[test])
+  console.log(realty_images);
+},[realty_images])
   return (
     <Fragment>
       <Header title={realty?.realty_name} />
       <div className={styles["container"]}>
         <div className={styles["content"]}>
           <div className={styles["realty-img"]}
-                  //    style={{
-                  //     backgroundImage: `url(${DBImageFormat(
-                  //         realty?.realty_images[0]
-                  //     )})`,
-                  // }}
+                     style={{
+                      backgroundImage: `url(${imageFormat(
+                        realty_images[0]
+                      )})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                  }}
           >
-            <img src={HOME} alt='home'/>
           </div>
           <div className={styles["realty-main"]}>
             <div className={styles["realty-title"]}>{realty?.realty_name}</div>
@@ -119,7 +137,7 @@ useEffect(()=>{
             </div>
             <div className={styles["realty-box"]}>
               <div className={styles["value"]}>
-                  <IconButton className={styles['contract']}>
+                  <IconButton className={styles['contract']} onClick={()=>history.push(`${RoutePaths.main.detail}/contract/${id}`)}>
                     <img src={CONTRACT}/>
                   </IconButton>
               </div>
@@ -136,14 +154,9 @@ useEffect(()=>{
             <div className={styles["title"]}>옵션</div>
             <ul className={styles['options']}>
               <RealtyOptionItem src={GASSTOVE} name={"가스레인지"}/>
-              <RealtyOptionItem src={GASSTOVE} name={"가스레인지"}/>
-              <RealtyOptionItem src={GASSTOVE} name={"가스레인지"}/>
-              <RealtyOptionItem src={GASSTOVE} name={"가스레인지"}/>
-              <RealtyOptionItem src={GASSTOVE} name={"가스레인지"}/>
-              <RealtyOptionItem src={GASSTOVE} name={"가스레인지"}/>
-              <RealtyOptionItem src={GASSTOVE} name={"가스레인지"}/>
-              <RealtyOptionItem src={GASSTOVE} name={"가스레인지"}/>
-              <RealtyOptionItem src={GASSTOVE} name={"가스레인지"}/>
+              <RealtyOptionItem src={BED} name={"침대"}/>
+              <RealtyOptionItem src={WASHER} name={"세탁기"}/>
+              <RealtyOptionItem src={MICROWAVE} name={"전자레인지"}/>
             </ul>
           </div>
 
@@ -176,6 +189,7 @@ useEffect(()=>{
          </Button>
       </div>
       <RoadviewModal open={modal==='roadview'} lat={realty?.lat} lng={realty?.lng}></RoadviewModal>
+      <ContractModal open ={modal==='contract'} url={`${imageFormat(contract_image)}`}/>
     </Fragment>
   );
 }

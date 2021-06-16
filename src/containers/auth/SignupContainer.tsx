@@ -15,6 +15,7 @@ import Checkbox from '../../components/checkbox/Checkbox';
 //hooks
 import {useHistory} from 'react-router-dom';
 import { RoutePaths } from '../../core/utils/path';
+import useLoading from '../../hooks/useLoading';
 
 //api
 import {requsetPostSignup} from '../../api/auth';
@@ -30,6 +31,8 @@ interface Props{
 }
 
 function SignupContainer(){
+
+  const {handleLoading} = useLoading();
 
     const [form,setForm] = useState<any>({
         email:'',
@@ -107,6 +110,7 @@ function SignupContainer(){
     // 유저 회원가입
     const onClickSignup = async ()=>{
         try{
+            handleLoading(true);
             const res = await requsetPostSignup(email,null,password,phone_number,sms,false,null);
             console.log(res);
             if(res?.data?.message==='success'){
@@ -115,9 +119,13 @@ function SignupContainer(){
             else{
                 alert(res.data.message);
             }
+            handleLoading(false);
+
         }
         catch(e){
             console.log('에러');
+            handleLoading(false);
+
         }
     }
     const onClickNext = () => {

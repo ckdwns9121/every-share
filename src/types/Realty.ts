@@ -16,7 +16,7 @@ realty_all_floors?: string|number|null,
 realty_comment: string|null
 realty_contract_images: string|null
 realty_id: number
-realty_images: string[],
+realty_images: string,
 realty_kind: number|null
 realty_my_floors: number|null|string,
 realty_name: string,

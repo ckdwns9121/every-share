@@ -39,3 +39,18 @@ export const useStyles = makeStyles((theme : Theme ) => ({
         zIndex: 2100,
     },
   }));
+
+  export const useStylesDark = makeStyles((theme : Theme ) => ({
+
+    content: {
+        minHeight: '100vh',
+        zIndex: 9999,
+        padding: 0,
+        paddingTop: 48,
+        paddingLeft: 24,
+        paddingRight: 24,
+        paddingBottom: 60,
+        flex: '0 0 auto',
+        backgroundColor: 'black',
+    }
+  }));

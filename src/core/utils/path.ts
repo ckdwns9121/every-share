@@ -86,3 +86,4 @@ export const RouteTitle  ={
         },
     },
 }
+export const API_PATH = 'http://3.36.97.2:4000';

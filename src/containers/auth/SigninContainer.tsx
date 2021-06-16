@@ -22,8 +22,11 @@ import cn from 'classnames/bind';
 import {requestPostSignin,requestGetUser} from '../../api/auth';
 
 //store
-
 import {set_user} from '../../store/user';
+
+//hook
+import useLoading from '../../hooks/useLoading';
+
 
 const cx= cn.bind(styles);
 
@@ -31,6 +34,7 @@ function SigninContainer(){
 
     const history = useHistory();
     const dispatch = useDispatch();
+    const {handleLoading} = useLoading();
 
 
     const [form,setForm] = useState<{email:string , password:string}>({email:'', password :''});
@@ -47,6 +51,7 @@ function SigninContainer(){
     }
     const onClickLogin = async ()=>{
         try{
+        handleLoading(true);
             const res= await requestPostSignin(email,password);
             console.log(res);
             if(res?.data.message==='success'){
@@ -60,8 +65,11 @@ function SigninContainer(){
             else{
                 alert(res?.data.message);
             }
+      handleLoading(false);
+
         }
         catch(e){
+            handleLoading(false);
 
         }
     }
