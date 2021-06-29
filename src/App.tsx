@@ -26,6 +26,9 @@ import {requestGetUser} from './api/auth';
 import {useDispatch} from 'react-redux';
 import {set_user} from './store/user';
 
+//asset
+import SnackBar from "./components/asset/Snackbar";
+
 function App() {
 
   const access_token = useToken();
@@ -60,6 +63,7 @@ function App() {
         </Switch>
       </Router>
       <Loading></Loading>
+      {/* <SnackBar/> */}
     </div>
   );
 }

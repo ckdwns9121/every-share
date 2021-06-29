@@ -246,7 +246,7 @@ return (
         <div className={styles["locationInfo-box"]}>
           <Button className={styles['address-search']} onClick={()=>setOpen(true)}>주소찾기</Button>
           <input type="text" placeholder="주소" value={addr} readOnly/>
-          <input type="text" placeholder="상세 주소" />
+          <input type="text" placeholder="상세 주소"  value={addr_detail} onChange={(e)=>setAddrDetail(e.target.value)}/>
         </div>
 
         <TitleComponent text="대여 기간" />

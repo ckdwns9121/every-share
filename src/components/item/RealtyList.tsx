@@ -25,7 +25,6 @@ interface Props extends Realty{
 function RealtyItemList ({realties} : Relties){
 
     const list = realties?.map((item)=> <RealtyItem {...item} key={item.realty_id}/>)
-    console.log(list);
     return(
         <>  
         {list}
@@ -35,22 +34,23 @@ function RealtyItemList ({realties} : Relties){
 
 function RealtyItem (props: Props){
 
-    const sumbnail = JSON.parse(props.realty_images)
-
+    console.log(props.realty_images);
+    // const sumbnail = JSON.parse(props.realty_images)
+    // console.log(sumbnail);
     return(
         <Link to ={`${RoutePaths.main.detail}/${props.realty_id}`}>
             <div className={styles['realty-item']}>
             <div className={styles['realty-img']}
             
-            style={{
-                backgroundImage: `url(${imageFormat(
-                    sumbnail[0]
-                )})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-            }}
+            // style={{
+            //     backgroundImage: `url(${imageFormat(
+            //         sumbnail[0]
+            //     )})`,
+            //     backgroundSize: 'cover',
+            //     backgroundPosition: 'center',
+            // }}
             >
-                    {/* <img src ={TEST_IMAGE}/> */}
+                    <img src ={TEST_IMAGE}/>
             </div>
             <div className={styles['realty-info']}>
                 <div className={styles['realty-price']}>
