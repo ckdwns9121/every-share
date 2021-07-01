@@ -102,7 +102,7 @@ function MapContainer({modal}:MatchModal){
         kakao_map.current = map;
     }, []);
 
-
+ 
     //지도 레벨을 조정하는 함수
     const zoomMap = useCallback((type : Zoom) => {
         let level = kakao_map.current.getLevel();
