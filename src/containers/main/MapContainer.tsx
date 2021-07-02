@@ -269,6 +269,9 @@ function MapContainer({modal}:MatchModal){
             if(res.data.documents){
                 const{x,y} = res.data.documents[0];
                 setCoordinates(y,x);
+                kakao_map.current.setLevel(3, {animate: {duration: 300}});
+                localStorage.setItem('level', '3');
+                dispatch(setLevel(3));
                 history.replace(RoutePaths.main.index);
             }
         }
