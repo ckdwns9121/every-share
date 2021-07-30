@@ -14,6 +14,7 @@ import {MatchModal} from '../../types/RouterParams';
 //hooks
 import {useSelector , useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import {useToken} from '../../hooks/useStore';
 
 //store
 import {RootState} from '../../store';
@@ -67,6 +68,8 @@ type Zoom = 'in' | 'out';
 
 function MapContainer({modal}:MatchModal){
 
+
+    const access_token = useToken();
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
     const [filterOpen ,setFilterOpen] = useState<boolean>(false);
     const handleOpen =(type:boolean)=> setMenuOpen(type);
@@ -310,7 +313,7 @@ function MapContainer({modal}:MatchModal){
 
 
     useEffect(()=>{
-        dispatch(getRealties({lat:0,lng:0,filter:[1,2,3,4]}));
+        dispatch(getRealties({lat:0,lng:0,filter:[1,2,3,4],access_token}));
     },[dispatch])
 
     // 지도 렌더

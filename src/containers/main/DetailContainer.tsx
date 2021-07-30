@@ -6,6 +6,7 @@ import { RoutePaths } from "../../core/utils/path";
 import { MatchId } from "../../types/RouterParams";
 import styles from "./DetailContainer.module.scss";
 import Header from "../../components/header/Header";
+import Like from '../../components/asset/Like';
 import {Button,IconButton} from '@material-ui/core';
 
 //asset
@@ -100,7 +101,7 @@ useEffect(()=>{
 },[realty_images])
   return (
     <Fragment>
-      <Header title={realty?.realty_name} />
+      <Header title={realty?.realty_name} ><Like on={true}/></Header>
       <div className={styles["container"]}>
         <div className={styles["content"]}>
           <div className={styles["realty-img"]}

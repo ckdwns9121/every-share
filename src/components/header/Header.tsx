@@ -11,9 +11,10 @@ const cx = cn.bind(styles);
 
 interface Props{
     title?:string
+    children?: JSX.Element
 }
 
-function Header({title}:Props){
+function Header({title,children}:Props){
     
     const history = useHistory();
     const headerRef = useRef<HTMLDivElement | null>(null);
@@ -38,6 +39,7 @@ function Header({title}:Props){
             >
                 <Arrow />
             </IconButton>
+            {children}
             <div className={styles['title']}>{title}</div>
         </div>
     </div>

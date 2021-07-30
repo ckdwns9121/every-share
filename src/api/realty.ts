@@ -1,22 +1,27 @@
 import axios from 'axios';
 import makeFormData from '../core/lib/makeFormData';
+import { customAxiosInstance ,cancleToken} from './init';
+const instance = customAxiosInstance();
 
 
-export const requestGetRealties = async(lat:number , lng :number , filter :Array<number>)=>{
+export const requestGetRealties = async(lat:number , lng :number , filter :Array<number> ,JWT_TOKEN?:string | null)=>{
     const URL = '/api/realty';
 
     const config={
         headers:{
             'Content-Type' : 'application/json',
+            // Authorization: `Bearer ${JWT_TOKEN}`,
+        },
+        params:{
+            lat,
+            lng,
+            filter
         }
     }
-    const params = {
-        lat,
-        lng,
-        filter
-    };
-    const res = await axios.get(URL, { params });
+
+    const res = await axios.get(URL,config);
     return res;
+
 }
 
 export const requestGetRealty= async(realty_id :string | number)=>{

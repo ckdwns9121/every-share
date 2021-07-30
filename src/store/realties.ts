@@ -42,8 +42,9 @@ const initState : State ={
 
 function *getRealtiesSaga(action: any) : Generator{
     try{   
-        const {lat,lng,filter} = action.payload
-        const res :any = yield requestGetRealties(lat,lng,filter);
+        console.log(action.payload);
+        const {lat,lng,filter,access_token} = action.payload
+        const res :any = yield requestGetRealties(lat,lng,filter,access_token);
         console.log(res);
         if(res?.data?.message==='success'){
             yield put({
@@ -54,7 +55,7 @@ function *getRealtiesSaga(action: any) : Generator{
 
     }
     catch(e){
-
+        console.log(e.response);
     }
 }
 
