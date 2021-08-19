@@ -2,13 +2,13 @@
 
 import styles from './LikeContainer.module.scss';
 import RealtyList from '../../components/item/RealtyList';
+import Layout from '../../components/layout/Layout';
+
 function LikeContainer(){
     return(
-        <div className={styles['container']}>
-            <div className={styles['content']}>
+        <Layout>
                 <RealtyList/>
-            </div>
-        </div>
+        </Layout>
     )
 }
 

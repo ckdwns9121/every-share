@@ -1,0 +1,17 @@
+@import '../../styles/_Root.scss';
+@import '../../styles/_Value.scss';
+
+.container{
+    @include container;
+    background-color: #ECECEC;
+    .content{
+        background-color: #fff;
+        padding: $padding-side;
+        padding-top:20px;
+        padding-bottom:20px;
+        &.none{
+            padding:0;
+        }
+ 
+    }
+}

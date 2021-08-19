@@ -10,7 +10,7 @@ export const requestGetRealties = async(lat:number , lng :number , filter :Array
     const config={
         headers:{
             'Content-Type' : 'application/json',
-            // Authorization: `Bearer ${JWT_TOKEN}`,
+            Authorization: `Bearer ${JWT_TOKEN}`,
         },
         params:{
             lat,
@@ -18,18 +18,19 @@ export const requestGetRealties = async(lat:number , lng :number , filter :Array
             filter
         }
     }
-
     const res = await axios.get(URL,config);
+    console.log(res);
     return res;
 
 }
 
-export const requestGetRealty= async(realty_id :string | number)=>{
+export const requestGetRealty= async(realty_id :string | number, token? : string |null)=>{
+    console.log(token);
     const URL = '/api/realty/'+realty_id;
-
     const config={
         headers:{
             'Content-Type' : 'application/json',
+            'Authorization': `Bearer ${token}`,
         }
     }
     const res = await axios.get(URL, config);
