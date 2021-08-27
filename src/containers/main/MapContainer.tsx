@@ -52,7 +52,9 @@ import {Address} from '../../types/Address';
 
 //store
 import {getRealties} from '../../store/realties';
+import {setZone} from '../../store/zone';
 import ZoneModal from '../../components/modal/ZoneModal';
+
 
 const cx = cn.bind(styles);
 
@@ -78,6 +80,8 @@ function MapContainer({modal}:MatchModal){
     const dispatch = useDispatch();
     const {position,level,area,address} = useSelector((state:RootState) =>state.map);
     const {realties} = useSelector((state:RootState) =>state.realties);
+    const {zone_list} = useSelector((state:RootState) =>state.zone);
+
     const kakao_map = useRef<any>(null); //카카오 맵
     const map_position = useRef<any>({lat:33.450701, lng: 126.570667}); //지도 첫렌더시 좌표
     const map_level = useRef<number>(5); // 디폴트 레벨 -> //4 : 100m 6: 500m 7:1km
@@ -88,7 +92,7 @@ function MapContainer({modal}:MatchModal){
 
     const zone_view = useRef<boolean>(false); // 매물 버튼 오픈 여부
 
-    const [zone_list ,setZoneList] = useState<any>([]);
+    // const [zone_list ,setZoneList] = useState<any>([]);
     const [zoneButtonOpen ,setZoneButtonOpen] = useState<boolean>(false);
 
     // 지도를 렌더하는 함수
@@ -224,7 +228,7 @@ function MapContainer({modal}:MatchModal){
                         });
                     } else {
                         zone_view.current = !zone_view.current;
-                        const slides = overlays.map((overlay:any) => {
+                        const zoneList = overlays.map((overlay:any) => {
                             const data = overlay.getContent();
                             const t_index = data.indexOf('title=');
                             const close_index = data.indexOf('>');
@@ -234,7 +238,8 @@ function MapContainer({modal}:MatchModal){
                             );
                             return JSON.parse(str);
                         });
-                        setZoneList(slides);
+
+                        dispatch(setZone(zoneList));
                         setZoneButtonOpen(zone_view.current)
                     }
                 },
@@ -283,7 +288,7 @@ function MapContainer({modal}:MatchModal){
         }
     },[])
 
-    // 마지막 위치 기준으로 get_area 함수 호출하여 해당지역 주차장 받아오기
+    // 마지막 위치 기준으로 get_area 함수 호출하여 해당지역 받아오기
     useEffect(() => {
         let storage  =localStorage.getItem('position');
         if(storage){

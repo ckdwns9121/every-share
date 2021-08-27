@@ -16,10 +16,17 @@ import Checkbox from '../../components/checkbox/Checkbox';
 import {useHistory} from 'react-router-dom';
 import { RoutePaths } from '../../core/utils/path';
 import useLoading from '../../hooks/useLoading';
+import useSnackbar from '../../hooks/useSnackbar';
 
 //api
 import {requsetPostSignup} from '../../api/auth';
+
+//lib
+
+import {isEmailForm,isCellPhoneForm} from '../../core/lib/formater';
+
 const cx = cn.bind(styles);
+
 
 interface Props{
     step: number,
@@ -33,6 +40,7 @@ interface Props{
 function SignupContainer(){
 
   const {handleLoading} = useLoading();
+  const [handleOpen, handleClose] = useSnackbar();
 
     const [form,setForm] = useState<any>({
         email:'',
@@ -117,13 +125,12 @@ function SignupContainer(){
                 history.push(RoutePaths.auth.sign_complete);
             }
             else{
-                alert(res.data.message);
+                handleOpen(res.data.message,true,false,'success');
             }
             handleLoading(false);
 
         }
         catch(e){
-            console.log('에러');
             handleLoading(false);
 
         }
@@ -131,28 +138,32 @@ function SignupContainer(){
     const onClickNext = () => {
       switch (step) {
         case 1:
-         email.length === 0 ? alert("이메일을 입력해주세요") : setStep((prev) => prev + 1)
-          break;
+            if(email.length===0 || !isEmailForm(email)){
+                handleOpen('이메일 형식이 맞지않습니다.',true,false,'error');
+            }
+            else{
+                setStep((prev) => prev + 1)
+            }
+            break;
         case 2:
-          password.length === 0 ? alert("비밀번호를 입력해주세요") : setStep((prev) => prev + 1)
+          password.length === 0 ?  handleOpen('비밀번호를 입력해주세요.',true,false,'error') : setStep((prev) => prev + 1)
           break;
         case 3:
-          password_confirm.length === 0 && alert("비밀번호를 입력해주세요");
-          if(password_confirm !==password){
-              alert('비밀번호가 일치하지 않습니다.');
+          if(password_confirm !==password || password_confirm.length === 0 ){
+            handleOpen('비밀번호가 일치하지 않습니다.',true,false,'error') ;
           }
           else{
             setStep((prev) => prev + 1)
           }
           break;
         case 4:
-          phone_number.length === 0 ? alert("휴대폰번호를 입력해주세요") : setStep((prev) => prev + 1)
+          phone_number.length === 0 ?  handleOpen('휴대폰 번호를 입력해주세요.',true,false,'error') : setStep((prev) => prev + 1)
           break;
         case 5:
             onClickSignup();
           break;
         default:
-        console.log('hello');
+             console.log('hello');
           break;
       }
 

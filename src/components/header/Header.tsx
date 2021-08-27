@@ -35,7 +35,10 @@ function Header({title,children}:Props){
         <div className={cx('content', { shadow })}>
             <IconButton
                 className={styles['back-btn']}
-                onClick={() =>history.goBack()}
+                onClick={() =>{
+                    console.log('back');
+                    history.goBack()
+                }}
             >
                 <Arrow />
             </IconButton>

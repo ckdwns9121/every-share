@@ -1,5 +1,17 @@
 @import '../../styles/_Root';
 @import '../../styles/_Modal';
+.swiper{
+    width: 80px;
+    height: 2px;
+    border:2px solid #F5F5F5;
+    position: absolute;
+    top:-1px;
+    left:0;
+    right:0;
+    margin : 0 auto;
+    border-radius: 15px;
+    
+}
 
 .bottom-modal {
     display: block;

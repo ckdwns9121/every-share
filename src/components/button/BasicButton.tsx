@@ -21,7 +21,7 @@ interface Props{
 
 const BasicButton =({name ,disable, onClick,color} : Props)=>{
     return(
-        <ButtonBase className={cx('basic-button',{disable},color)}  disableRipple={disable} onClick={onClick} >
+        <ButtonBase className={cx('basic-button',{disable},color)}  disableRipple={disable} onClick={!disable ? onClick : ()=>{}} >
             {name}
         </ButtonBase>
     )

@@ -63,7 +63,7 @@ function App() {
         </Switch>
       </Router>
       <Loading></Loading>
-      {/* <SnackBar/> */}
+      <SnackBar/>
     </div>
   );
 }

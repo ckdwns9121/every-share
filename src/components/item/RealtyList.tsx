@@ -34,7 +34,7 @@ function RealtyItemList ({realties} : Relties){
 
 function RealtyItem (props: Props){
 
-    console.log(props.realty_images);
+    // console.log(props.realty_images);
     // const sumbnail = JSON.parse(props.realty_images)
     // console.log(sumbnail);
     return(

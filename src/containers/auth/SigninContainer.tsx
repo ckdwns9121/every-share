@@ -27,6 +27,8 @@ import {set_user} from '../../store/user';
 //hook
 import useLoading from '../../hooks/useLoading';
 
+import useSnackbar from '../../hooks/useSnackbar';
+
 
 const cx= cn.bind(styles);
 
@@ -35,6 +37,7 @@ function SigninContainer(){
     const history = useHistory();
     const dispatch = useDispatch();
     const {handleLoading} = useLoading();
+    const [handleOpen, handleClose] = useSnackbar();
 
 
     const [form,setForm] = useState<{email:string , password:string}>({email:'', password :''});
@@ -63,7 +66,8 @@ function SigninContainer(){
                 history.push(RoutePaths.main.index);
             }
             else{
-                alert(res?.data.message);
+                handleOpen('test',true,false,'error');
+                // alert(res?.data.message);
             }
       handleLoading(false);
 
@@ -94,9 +98,8 @@ function SigninContainer(){
                         </div>
                     </div>
                     <div className={styles['button-box']}>
-                        <BasicButton name={"로그인"} disable={false} onClick={onClickLogin}/>
+                        <BasicButton name={"로그인"} disable={ !(email.length!==0 && password.length!==0)}  onClick={onClickLogin}/>
                         <BasicButton name={"회원가입"} disable={false} color={'gray'} onClick={()=>history.push(RoutePaths.auth.signup)}/>
-
                     </div>
                     <div className={styles['sns-box']}>
                         <div className={styles['sns-text']}>

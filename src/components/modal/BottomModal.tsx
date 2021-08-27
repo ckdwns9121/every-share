@@ -25,6 +25,7 @@ const BottomModal = ({ open, handleClose }:Props) => {
     return (
         <>
             <div className={cn('bottom-modal', { on: open })}>
+            <div className={styles['swiper']}/>
                 <div className={styles['box']}>
                     <div className={styles['modal-title']}>
                         조건설정

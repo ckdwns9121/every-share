@@ -59,8 +59,8 @@ function DetailContainer({ id,modal }: MatchId) {
       if(res?.data?.message==='success'){
         setRealty(res.data.realty);
         setLikes(res.data.likes);
-        setImages(JSON.parse(res.data.realty.realty_images));
-        setContractImage(JSON.parse(res.data.realty.realty_contract_images));
+        // setImages(JSON.parse(res.data.realty.realty_images));
+        // setContractImage(JSON.parse(res.data.realty.realty_contract_images));
       }
       handleLoading(false);
 
@@ -90,14 +90,14 @@ useEffect(()=>{
 },[id])
 
 useEffect(()=>{
-  console.log('이미지');
+  // console.log('이미지');
   const r = imageFormat(realty?.realty_images[0]);
-  console.log(typeof r);
+  // console.log(typeof r);
   setUrl(r);
 },[realty])
 
 useEffect(()=>{
-  console.log(realty_images);
+  // console.log(realty_images);
 },[realty_images])
   return (
     <Fragment>
@@ -129,7 +129,9 @@ useEffect(()=>{
             <div className={styles["realty-box"]}>
               <div className={styles["column"]}>월세</div>
               <div className={styles["value"]}>
-                {realty?. deposit} / {realty?.monthly_rent}
+                {realty &&
+                  realty?.deposit +"/"+ realty?.monthly_rent
+                }
               </div>
             </div>
             <div className={styles["realty-box"]}>
