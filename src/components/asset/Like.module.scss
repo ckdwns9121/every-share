@@ -1,9 +1,16 @@
 
-.like{
-    width:20px;
-    height: 20px;
-    position: absolute;
-    right: 12px;
-    top:12px;
-    transition: 0.3s all ease-in-out;
+html{
+    body{
+        .like{
+            width:20px;
+            height: 20px;
+        }
+        .like-button{
+            position: absolute;
+            right: 0px;
+            top:2px;
+            box-sizing: border-box;
+        }
+    }
 }
+

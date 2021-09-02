@@ -1,137 +1,162 @@
 /* 매물 상세보기 페이지 */
 
-import { Fragment ,useState,useEffect,useCallback,useRef, useReducer} from "react";
+import {
+  Fragment,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useReducer,
+} from "react";
 import { useHistory } from "react-router-dom";
 import { RoutePaths } from "../../core/utils/path";
 import { MatchId } from "../../types/RouterParams";
 import styles from "./DetailContainer.module.scss";
 import Header from "../../components/header/Header";
-import Like from '../../components/asset/Like';
-import {Button,IconButton} from '@material-ui/core';
+import Like from "../../components/asset/Like";
+import { Button, IconButton } from "@material-ui/core";
 
 //asset
-import GASSTOVE from '../../static/svg/options/gasstove.svg';
-import BED from '../../static/svg/options/bed.svg';
-import MICROWAVE from '../../static/svg/options/microwave.svg';
-import WASHER from '../../static/svg/options/washer.svg';
+import GASSTOVE from "../../static/svg/options/gasstove.svg";
+import BED from "../../static/svg/options/bed.svg";
+import MICROWAVE from "../../static/svg/options/microwave.svg";
+import WASHER from "../../static/svg/options/washer.svg";
 
-import ROAD_VIEW from '../../static/svg/view.svg';
-import PHONE from '../../static/svg/phone.svg';
-import MESSAGE from '../../static/svg/message.svg';
-import HOME from '../../static/image/test.png';
-import CONTRACT from '../../static/svg/contract.svg';
+import ROAD_VIEW from "../../static/svg/view.svg";
+import PHONE from "../../static/svg/phone.svg";
+import MESSAGE from "../../static/svg/message.svg";
+import HOME from "../../static/image/test.png";
+import CONTRACT from "../../static/svg/contract.svg";
 
 //modal
-import RoadviewModal  from "../../components/modal/RoadviewModal";
-import ContractModal from '../../components/modal/ContractModal';
+import RoadviewModal from "../../components/modal/RoadviewModal";
+import ContractModal from "../../components/modal/ContractModal";
 
 //api
-import {requestGetRealty} from '../../api/realty';
+import { requestGetRealty } from "../../api/realty";
+import {requestLike} from '../../api/like';
 
 //type
-import {Realty} from '../../types/Realty';
+import { Realty } from "../../types/Realty";
 
 //lib
 
-import {dateToRelative,imageFormat,DBImageFormat} from '../../core/lib/formatChecker';
+import {
+  dateToRelative,
+  imageFormat,
+  DBImageFormat,
+} from "../../core/lib/formatChecker";
 
 //hooks
-import useLoading from '../../hooks/useLoading';
+import useLoading from "../../hooks/useLoading";
+import { useToken } from "../../hooks/useStore";
 
-function DetailContainer({ id,modal }: MatchId) {
-  
+function DetailContainer({ id, modal }: MatchId) {
   const history = useHistory();
-  const {handleLoading} = useLoading();
+  const access_token = useToken();
+  const { handleLoading } = useLoading();
 
   const kakao_map = useRef<any>(null); //카카오 맵
 
-  const [realty , setRealty] = useState<Realty | null>(null);
-  const [realty_images ,setImages] = useState<any>([]);
-  const [contract_image ,setContractImage] = useState<any>([]);
+  const [realty, setRealty] = useState<Realty | null>(null);
+  const [realty_images, setImages] = useState<any>([]);
+  const [contract_image, setContractImage] = useState<any>([]);
 
-  const [likes ,setLikes] = useState([]);
-  const [test,setUrl] = useState<any>('');
-  const callGetApiRealty = async()=>{
-    try{
+  const [likes, setLikes] = useState([]);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [test, setUrl] = useState<any>("");
+
+  //상세정보 들고오기
+  const callGetApiRealty = async () => {
+    try {
       handleLoading(true);
-      const res= await requestGetRealty(id);
+      const res = await requestGetRealty(id, access_token);
       console.log(res);
-      if(res?.data?.message==='success'){
+      if (res?.data?.message === "success") {
         setRealty(res.data.realty);
         setLikes(res.data.likes);
+        setIsLiked(res.data.isLiked);
         // setImages(JSON.parse(res.data.realty.realty_images));
         // setContractImage(JSON.parse(res.data.realty.realty_contract_images));
       }
       handleLoading(false);
-
-    }
-    catch(e){
+    } catch (e) {
       console.log(e);
       handleLoading(false);
     }
-  }
+  };
+  
+  const onClickLike = async ()=>{
+    try{
+      if(access_token && realty){
+        const res = await requestLike(realty?.realty_id,access_token);
+        console.log(res);
+        if(res.status===200){
+            setIsLiked(res.data.isLiked);
+        }
+      }
+    }
+    catch(e){
 
-  useEffect(()=>{
-    let container = document.getElementById('detail-map');
+    }
+  }
+  useEffect(() => {
+    let container = document.getElementById("detail-map");
     let options = {
       center: new window.kakao.maps.LatLng(realty?.lat, realty?.lng),
-      level: 3
+      level: 3,
     };
     let map = new window.kakao.maps.Map(container, options);
     kakao_map.current = map;
-},[realty])
+  }, [realty]);
 
-useEffect(()=>{
-  window.scrollTo(0,0);
-},[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-useEffect(()=>{
-  callGetApiRealty();
-},[id])
+  useEffect(() => {
+    callGetApiRealty();
+  }, [id]);
 
-useEffect(()=>{
-  // console.log('이미지');
-  const r = imageFormat(realty?.realty_images[0]);
-  // console.log(typeof r);
-  setUrl(r);
-},[realty])
+  useEffect(() => {
+    // console.log('이미지');
+    const r = imageFormat(realty?.realty_images[0]);
+    // console.log(typeof r);
+    setUrl(r);
+  }, [realty]);
 
-useEffect(()=>{
-  // console.log(realty_images);
-},[realty_images])
+  useEffect(() => {
+    // console.log(realty_images);
+  }, [realty_images]);
   return (
     <Fragment>
-      <Header title={realty?.realty_name} ><Like on={true}/></Header>
+      <Header title={realty?.realty_name}>
+        <Like on={isLiked} onClick={onClickLike}/>
+      </Header>
       <div className={styles["container"]}>
         <div className={styles["content"]}>
-          <div className={styles["realty-img"]}
-                     style={{
-                      backgroundImage: `url(${imageFormat(
-                        realty_images[0]
-                      )})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                  }}
-          >
-          </div>
+          <div
+            className={styles["realty-img"]}
+            style={{
+              backgroundImage: `url(${imageFormat(realty_images[0])})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          ></div>
           <div className={styles["realty-main"]}>
             <div className={styles["realty-title"]}>{realty?.realty_name}</div>
             <div className={styles["realty-comment"]}>
               {realty?.realty_comment}
             </div>
             <div className={styles["realty-createdAt"]}>
-              {realty && 
-               `${dateToRelative(new Date(realty?.createdAt))}`
-              }
-             </div>
+              {realty && `${dateToRelative(new Date(realty?.createdAt))}`}
+            </div>
           </div>
           <div className={styles["realty-sub"]}>
             <div className={styles["realty-box"]}>
               <div className={styles["column"]}>월세</div>
               <div className={styles["value"]}>
-                {realty &&
-                  realty?.deposit +"/"+ realty?.monthly_rent
-                }
+                {realty && realty?.deposit + "/" + realty?.monthly_rent}
               </div>
             </div>
             <div className={styles["realty-box"]}>
@@ -140,64 +165,92 @@ useEffect(()=>{
             </div>
             <div className={styles["realty-box"]}>
               <div className={styles["value"]}>
-                  <IconButton className={styles['contract']} onClick={()=>history.push(`${RoutePaths.main.detail}/contract/${id}`)}>
-                    <img src={CONTRACT}/>
-                  </IconButton>
+                <IconButton
+                  className={styles["contract"]}
+                  onClick={() =>
+                    history.push(`${RoutePaths.main.detail}/contract/${id}`)
+                  }
+                >
+                  <img src={CONTRACT} />
+                </IconButton>
               </div>
             </div>
           </div>
           <div className={styles["realty-info"]}>
             <div className={styles["title"]}>상세정보</div>
-            <RealtyInfo text={"주소"} value={realty?.addr}/>
-            <RealtyInfo text={"상세주소"} value={realty?.addr_detail}/>
-            <RealtyInfo text={"층수"} value={`${realty?.realty_my_floors} /${realty?.realty_all_floors}층`}/>
-            <RealtyInfo text={"종류"} value={"복층 오피스텔"}/>
+            <RealtyInfo text={"주소"} value={realty?.addr} />
+            <RealtyInfo text={"상세주소"} value={realty?.addr_detail} />
+            <RealtyInfo
+              text={"층수"}
+              value={`${realty?.realty_my_floors} /${realty?.realty_all_floors}층`}
+            />
+            <RealtyInfo text={"종류"} value={"복층 오피스텔"} />
           </div>
           <div className={styles["realty-info"]}>
             <div className={styles["title"]}>옵션</div>
-            <ul className={styles['options']}>
-              <RealtyOptionItem src={GASSTOVE} name={"가스레인지"}/>
-              <RealtyOptionItem src={BED} name={"침대"}/>
-              <RealtyOptionItem src={WASHER} name={"세탁기"}/>
-              <RealtyOptionItem src={MICROWAVE} name={"전자레인지"}/>
+            <ul className={styles["options"]}>
+              <RealtyOptionItem src={GASSTOVE} name={"가스레인지"} />
+              <RealtyOptionItem src={BED} name={"침대"} />
+              <RealtyOptionItem src={WASHER} name={"세탁기"} />
+              <RealtyOptionItem src={MICROWAVE} name={"전자레인지"} />
             </ul>
           </div>
 
           <div className={styles["realty-info"]}>
             <div className={styles["title"]}>위치</div>
-            <div className={styles['road-view']}>
-            <Button className={styles['road-view-button']} onClick={()=>history.push(`${RoutePaths.main.detail}/roadview/${id}`)} >
+            <div className={styles["road-view"]}>
+              <Button
+                className={styles["road-view-button"]}
+                onClick={() =>
+                  history.push(`${RoutePaths.main.detail}/roadview/${id}`)
+                }
+              >
                 <img src={ROAD_VIEW} alt="road-view"></img>
                 <span>로드뷰 보기</span>
               </Button>
             </div>
-            <div id="detail-map" style={{ marginTop:'15px', width: '100%', height: '200px', zIndex: 1 }}/>
+            <div
+              id="detail-map"
+              style={{
+                marginTop: "15px",
+                width: "100%",
+                height: "200px",
+                zIndex: 1,
+              }}
+            />
           </div>
           <div className={styles["realty-info"]}>
             <div className={styles["title"]}>추가 설명</div>
-              <div className={styles['sub-comment']}>
+            <div className={styles["sub-comment"]}>
               {realty?.realty_subcomment}
-              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className={styles['contact']}>
-         <Button className={styles['button']}>
-           <img src ={PHONE} alt="PHONE"></img>
-           <span>전화로 문의</span>
-         </Button>
-         <Button className={styles['button']}>
-           <img src ={MESSAGE} alt="MESSAGE"></img>
-           <span>문자로 문의</span>
-         </Button>
+      <div className={styles["contact"]}>
+        <Button className={styles["button"]}>
+          <img src={PHONE} alt="PHONE"></img>
+          <span>전화로 문의</span>
+        </Button>
+        <Button className={styles["button"]}>
+          <img src={MESSAGE} alt="MESSAGE"></img>
+          <span>문자로 문의</span>
+        </Button>
       </div>
-      <RoadviewModal open={modal==='roadview'} lat={realty?.lat} lng={realty?.lng}></RoadviewModal>
-      <ContractModal open ={modal==='contract'} url={`${imageFormat(contract_image)}`}/>
+      <RoadviewModal
+        open={modal === "roadview"}
+        lat={realty?.lat}
+        lng={realty?.lng}
+      ></RoadviewModal>
+      <ContractModal
+        open={modal === "contract"}
+        url={`${imageFormat(contract_image)}`}
+      />
     </Fragment>
   );
 }
 
-function RealtyOptionItem({src,name}:{src:string,name:string}) {
+function RealtyOptionItem({ src, name }: { src: string; name: string }) {
   return (
     <li className={styles["option-item"]}>
       <div className={styles["option-img"]}>

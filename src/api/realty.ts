@@ -122,3 +122,5 @@ export const requsetMyRealtyList = async(JWT_TOKEN:string)=>{
     }
     return await axios.get(URL,config).then((res)=> res) .catch((e)=> e);
 } 
+
+
