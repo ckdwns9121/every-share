@@ -50,11 +50,13 @@ import {
 //hooks
 import useLoading from "../../hooks/useLoading";
 import { useToken } from "../../hooks/useStore";
+import useSnackbar  from "../../hooks/useSnackbar";
 
 function DetailContainer({ id, modal }: MatchId) {
   const history = useHistory();
   const access_token = useToken();
   const { handleLoading } = useLoading();
+  const [handleOpen, handleClose] = useSnackbar();
 
   const kakao_map = useRef<any>(null); //카카오 맵
 
@@ -93,6 +95,8 @@ function DetailContainer({ id, modal }: MatchId) {
         console.log(res);
         if(res.status===200){
             setIsLiked(res.data.isLiked);
+            // handleOpen('좋아요',true,false,'success');
+
         }
       }
     }

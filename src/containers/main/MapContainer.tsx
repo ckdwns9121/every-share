@@ -225,7 +225,7 @@ function MapContainer({modal}:MatchModal){
                             animate: 300,
                         });
                     } else {
-                        zone_view.current = !zone_view.current;
+                        zone_view.current=true;
                         const zoneList = overlays.map((overlay:any) => {
                             const data = overlay.getContent();
                             const t_index = data.indexOf('title=');
