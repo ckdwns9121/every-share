@@ -1,13 +1,53 @@
 /* 찜한 매물 페이지 */
-
+import { useState,useEffect } from 'react';
 import styles from './LikeContainer.module.scss';
 import RealtyList from '../../components/item/RealtyList';
 import Layout from '../../components/layout/Layout';
 
+//api
+import {requestLikeList} from '../../api/like';
+
+//hook
+import {useToken} from '../../hooks/useStore';
+import useLoading from '../../hooks/useLoading';
+
+//type
+import {Realty} from '../../types/Realty';
+
+
 function LikeContainer(){
+
+    const access_token = useToken();
+    const {loading,handleLoading} = useLoading();
+    const [likes, setLikes] = useState<Realty[] | null | any >(null);
+
+    const callGetApiLikeList =async()=>{
+        try{
+            handleLoading(true);
+            if(access_token){
+                const res = await requestLikeList(access_token);
+                if(res.status===200){
+                    const data = res.data.likes;
+                    let newState :any = [] ;
+                    data.forEach( (item : any) => {
+                            newState.push(item.realty);
+                    });
+                    setLikes(newState);
+                }
+            }
+            handleLoading(false);
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    useEffect(()=>{
+        callGetApiLikeList();
+    },[])
     return(
         <Layout>
-                <RealtyList/>
+            {likes && <RealtyList realties={likes} like={false}/>}
         </Layout>
     )
 }

@@ -9,6 +9,7 @@
         padding: $padding-side;
         padding-top:20px;
         padding-bottom:20px;
+        min-height: 100vh;
         &.none{
             padding:0;
         }

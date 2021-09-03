@@ -21,7 +21,6 @@ const initState : State = {
 const user = createReducer<State, Actions>(initState, {
     [SET_USER]: (state, action) =>
     {
-        console.log(action);
         const {type,value} = action.payload;
         return {
             ...state,

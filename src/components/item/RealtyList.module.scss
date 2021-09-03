@@ -11,14 +11,25 @@
     width: 100%;
     display: flex;
     height: 100px;
+    position: relative;
 
     .realty-img{
         width: 100px;
         height: 100px;
+        position: relative;
         img{
             width:  100px;
             height: 100px;
             object-fit: cover;
+        }
+        .like{
+            position: absolute;
+            right:0;
+            bottom:0;
+            button{
+                position: relative !important;
+                padding:5px;
+            }
         }
     }
     .realty-info{
@@ -45,4 +56,14 @@
         }
     }
 
+}
+
+html{
+    body{
+        .icon{
+            position: absolute;
+            right: 0;
+            // bottom:px;
+        }
+    }
 }

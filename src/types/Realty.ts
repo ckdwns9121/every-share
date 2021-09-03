@@ -7,6 +7,7 @@ deposit: number|string,
 hit: number,
 lat: number,
 lng: number,
+isLiked?:boolean
 maintenance_charge: number,
 monthly_rent: number,
 oper_end_time: string,

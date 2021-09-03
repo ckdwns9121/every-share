@@ -13,3 +13,15 @@ export const requestLike =async(realty_id:number | string, token:string)=>{
     const res = await axios.post(URL,{}, config);
     return res;
 }
+
+export const requestLikeList = async(token : string)=>{
+    const URL = '/api/like';
+    const config={
+        headers:{
+            'Content-Type' : 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    }
+    const res = await axios.get(URL,config);
+    return res;
+}

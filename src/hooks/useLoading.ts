@@ -6,7 +6,6 @@ const useLoading =()=>{
     const {loading} = useSelector((state:RootState) =>state.loading);
     const dispatch = useDispatch();
     const handleLoading =(type:boolean)=>{
-        console.log(type);
         dispatch(onLoading(type));
     }
     return{loading,handleLoading}

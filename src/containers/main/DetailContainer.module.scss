@@ -173,6 +173,14 @@ html{
             display: flex;
             justify-content: center;
             align-items: center;
+            .link{
+                display:flex;
+                
+            }
+            a{
+               width: 100%;
+               margin: 0 15px;
+            }
 
             .button{
                 border:1px solid #fff;
@@ -201,6 +209,13 @@ html{
                 width: 25px;
                 height: 25px;
             }
+        }
+        .update-button{
+            font-size: 17px;
+            font-weight: bold;
+            color:#fff;
+            width: 100%;
+            padding:0;
         }
     }
     

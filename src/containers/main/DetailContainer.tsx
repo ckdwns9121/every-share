@@ -9,6 +9,7 @@ import {
   useReducer,
 } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { RoutePaths } from "../../core/utils/path";
 import { MatchId } from "../../types/RouterParams";
 import styles from "./DetailContainer.module.scss";
@@ -51,13 +52,20 @@ import {
 import useLoading from "../../hooks/useLoading";
 import { useToken } from "../../hooks/useStore";
 import useSnackbar  from "../../hooks/useSnackbar";
+import {useSelector} from 'react-redux';
+
+//store
+import {RootState} from '../../store';
+import {setLike} from '../../store/zone';
 
 function DetailContainer({ id, modal }: MatchId) {
+ 
   const history = useHistory();
+  const dispatch = useDispatch();
+  const {user} = useSelector((state:RootState)=>state.user);
   const access_token = useToken();
-  const { handleLoading } = useLoading();
+  const {loading,handleLoading } = useLoading();
   const [handleOpen, handleClose] = useSnackbar();
-
   const kakao_map = useRef<any>(null); //카카오 맵
 
   const [realty, setRealty] = useState<Realty | null>(null);
@@ -95,8 +103,8 @@ function DetailContainer({ id, modal }: MatchId) {
         console.log(res);
         if(res.status===200){
             setIsLiked(res.data.isLiked);
+            dispatch(setLike({like:res.data.isLiked , realty_id: realty.realty_id}));
             // handleOpen('좋아요',true,false,'success');
-
         }
       }
     }
@@ -132,6 +140,7 @@ function DetailContainer({ id, modal }: MatchId) {
   useEffect(() => {
     // console.log(realty_images);
   }, [realty_images]);
+
   return (
     <Fragment>
       <Header title={realty?.realty_name}>
@@ -165,7 +174,7 @@ function DetailContainer({ id, modal }: MatchId) {
             </div>
             <div className={styles["realty-box"]}>
               <div className={styles["column"]}>관리비</div>
-              <div className={styles["value"]}> 월세에 포함 </div>
+              <div className={styles["value"]}> {realty && '월세에 포함'}</div>
             </div>
             <div className={styles["realty-box"]}>
               <div className={styles["value"]}>
@@ -186,7 +195,7 @@ function DetailContainer({ id, modal }: MatchId) {
             <RealtyInfo text={"상세주소"} value={realty?.addr_detail} />
             <RealtyInfo
               text={"층수"}
-              value={`${realty?.realty_my_floors} /${realty?.realty_all_floors}층`}
+              value={ realty!==null ? `${realty?.realty_my_floors} /${realty?.realty_all_floors}층` : ''}
             />
             <RealtyInfo text={"종류"} value={"복층 오피스텔"} />
           </div>
@@ -231,20 +240,34 @@ function DetailContainer({ id, modal }: MatchId) {
           </div>
         </div>
       </div>
+            
       <div className={styles["contact"]}>
-        <Button className={styles["button"]}>
-          <img src={PHONE} alt="PHONE"></img>
-          <span>전화로 문의</span>
-        </Button>
+        { (!loading && realty) && 
+        (user?.user_id === realty?.user_id) ?
+          <Button className={styles['update-button']}>
+            수정하기
+          </Button>
+          :
+          <div className={styles['link']}>
+          <a href="tel:010-4788-8227" >
+            <Button className={styles["button"]}>
+            <img src={PHONE} alt="PHONE"></img>
+            <span>전화로 문의</span>
+          </Button>
+          </a>
+          <a href="sms:010-4788-8227&body=매물 문의합니다.">
         <Button className={styles["button"]}>
           <img src={MESSAGE} alt="MESSAGE"></img>
           <span>문자로 문의</span>
         </Button>
-      </div>
+        </a>
+          </div>
+        }
+     </div>
       <RoadviewModal
         open={modal === "roadview"}
-        lat={realty?.lat}
-        lng={realty?.lng}
+        lat={realty && realty?.lat }
+        lng={realty && realty?.lng}
       ></RoadviewModal>
       <ContractModal
         open={modal === "contract"}

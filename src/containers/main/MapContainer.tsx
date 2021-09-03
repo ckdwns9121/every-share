@@ -10,6 +10,7 @@ import {RoutePaths} from '../../core/utils/path';
 
 //types
 import {MatchModal} from '../../types/RouterParams';
+import {Address} from '../../types/Address';
 
 //hooks
 import {useSelector , useDispatch} from 'react-redux';
@@ -48,8 +49,6 @@ import ZoneModal from '../../components/modal/ZoneModal';
 //lib
 import {getDistanceFromLatLonInKm} from '../../core/lib/distance';
 
-//type
-import {Address} from '../../types/Address';
 
 
 
@@ -335,11 +334,11 @@ function MapContainer({modal}:MatchModal){
         onSearchAddr();
     },[onSearchAddr])
 
-
     // 모달이 꺼졌을 시 초기화
     useEffect(()=>{
         setAddr('');
     },[modal])
+
 
     return(
         <Fragment>

@@ -42,7 +42,7 @@ export default function ZoneModal({open,realties} :{
         <DialogContent className={classes.content} style={{padding:'0 20px'}}>
             <Header title="이지역 매물 보기"></Header>
             <div className={styles['list']}> 
-                    <RealtyItemList  realties={realties}></RealtyItemList>
+                    <RealtyItemList  realties={realties} like ={true}></RealtyItemList>
             </div>  
         </DialogContent>
       </Dialog>

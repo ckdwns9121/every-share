@@ -13,18 +13,23 @@ import styles from './RoadviewModal.module.scss';
 const cx = cn.bind(styles);
 
 
+type Props={
+    open : boolean,
+    lat : number| null,
+    lng : number| null,
+}
 
-function RoadviewModal (props : any) {
+function RoadviewModal ({open,lat,lng} : Props) {
 
     useEffect(() => {
-        const {lat,lng} = props;
-        if(lat!==0 && lng!==0){
+        if(lat && lng){
             roadView(lat,lng);
         }
     // // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props]);
+    }, [lat,lng]);
 
     const roadView = (lat:number , lng:number) => {
+      
         var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
         var roadview = new window.kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
         var roadviewClient = new window.kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
@@ -37,7 +42,7 @@ function RoadviewModal (props : any) {
         });
     };
     return (
-        <div className={cx('modal', { open: props.open })}>
+        <div className={cx('modal', { open: open })}>
             <div className={styles['container']}>
                 <div
                     id="roadview"

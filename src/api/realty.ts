@@ -25,7 +25,6 @@ export const requestGetRealties = async(lat:number , lng :number , filter :Array
 }
 
 export const requestGetRealty= async(realty_id :string | number, token? : string |null)=>{
-    console.log(token);
     const URL = '/api/realty/'+realty_id;
     const config={
         headers:{

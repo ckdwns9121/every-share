@@ -148,7 +148,7 @@ export const DBImageFormat = (image) => {
 export const imageFormat = (image) => {
 
     if(image){
-        console.log(image);
+        // console.log(image);
         if (Array.isArray(image)) {
             const imgUrl = image.map(
                 (img) => `${STORAGE_URL}${img.replace('uploads/', 'uploads/')}`,
@@ -156,7 +156,7 @@ export const imageFormat = (image) => {
             return imgUrl;
         }
         // console.log(`${image.replace('uploads/', '')}`);
-        console.log(`${STORAGE_URL}${image.replace('uploads\\', 'uploads/')}`)
+        // console.log(`${STORAGE_URL}${image.replace('uploads\\', 'uploads/')}`)
         return `${STORAGE_URL}${image.replace('uploads/', 'uploads/')}`;
     }
 };

@@ -1,10 +1,11 @@
 import styles from './RealtyList.module.scss';
-import {ButtonBase} from '@material-ui/core';
+import {ButtonBase, IconButton} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 
 //asset
 import TEST_IMAGE from '../../static/image/test.png';
 import { RoutePaths } from '../../core/utils/path';
+import Like from '../../components/asset/Like';
 
 //type
 import {Realty} from '../../types/Realty';
@@ -14,6 +15,9 @@ import {dateToYYYYMMDD,imageFormat} from '../../core/lib/formatChecker';
 
 interface Relties{
     realties? : Realty[];
+    like ? :boolean,
+    enrollment?:boolean,
+    contact?:boolean,
 }
 
 interface Props extends Realty{
@@ -22,9 +26,9 @@ interface Props extends Realty{
     contact?:boolean,
 }
 
-function RealtyItemList ({realties} : Relties){
+function RealtyItemList ({realties,like} : Relties){
 
-    const list = realties?.map((item)=> <RealtyItem {...item} key={item.realty_id}/>)
+    const list = realties?.map((item)=> <RealtyItem {...item} key={item.realty_id} like={like}/>)
     return(
         <>  
         {list}
@@ -44,13 +48,19 @@ function RealtyItem (props: Props){
             
             // style={{
             //     backgroundImage: `url(${imageFormat(
-            //         sumbnail[0]
+            //         // sumbnail[0]
             //     )})`,
             //     backgroundSize: 'cover',
             //     backgroundPosition: 'center',
             // }}
             >
-                    <img src ={TEST_IMAGE}/>
+            <img src ={TEST_IMAGE} style={{'position':'relative'}}/>
+            
+            { (props.isLiked && props.like) &&
+            <div className={styles['like']}>
+                 <Like on={true} onClick={()=>{}}/>
+            </div>
+             }
             </div>
             <div className={styles['realty-info']}>
                 <div className={styles['realty-price']}>
@@ -66,6 +76,7 @@ function RealtyItem (props: Props){
                    {props.realty_comment}
                 </div>
             </div>
+        
         </div>
     </Link>
 
