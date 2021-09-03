@@ -31,6 +31,10 @@ declare global {
   }
 }
 
+type Props={
+  id?: string
+}
+
 
 const TitleComponent: React.FC<TitleComponentProps> = ({ text }) => {
   return (
@@ -40,7 +44,7 @@ const TitleComponent: React.FC<TitleComponentProps> = ({ text }) => {
   );
 };
 
-function RealtyWriteContainer() {
+function RealtyWriteContainer({id}:Props) {
 
 
   const history = useHistory();

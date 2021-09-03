@@ -1,11 +1,14 @@
 import RealtyWriteContainer from '../../../containers/main/realty/RealtyWriteContainer';
 import {RouteComponentProps} from 'react-router-dom';
-import {MatchModal} from '../../../types/RouterParams';
+import {MatchId} from '../../../types/RouterParams';
 
-function RealtyWritePage({match} : RouteComponentProps<MatchModal>){
+function RealtyWritePage({match} : RouteComponentProps<MatchId>){
 
+    const {id,modal} = match.params;
+
+    console.log(match);
     return(
-        <RealtyWriteContainer/>
+        <RealtyWriteContainer id={id}/>
     )
 }
 

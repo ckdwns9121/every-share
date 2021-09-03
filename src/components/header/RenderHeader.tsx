@@ -33,7 +33,6 @@ const RenderHeader = () => {
   else if (pathname === RoutePaths.auth.find.password_complete) {
     return <Header title={RouteTitle.auth.find.password_complete} />;
   }
-
   // 내가 등록한 매물
   else if (pathname === RoutePaths.main.realty.enrollment) {
     return <Header title={RouteTitle.main.realty.enrollment} />;
@@ -42,10 +41,13 @@ const RenderHeader = () => {
   else if (pathname === RoutePaths.main.realty.contact) {
     return <Header title={RouteTitle.main.realty.contact} />;
   }
-    // 내가 찜한 매물
-    else if (pathname === RoutePaths.main.realty.like) {
+  // 내가 찜한 매물
+  else if (pathname === RoutePaths.main.realty.like) {
       return <Header title={RouteTitle.main.realty.like} />;
-    }
+  }
+  else if(pathname.indexOf(RoutePaths.main.realty.write+'/')!==-1){
+    return <Header title={RouteTitle.main.realty.modify} />;
+  }
   // 매물 등록
   else if (pathname === RoutePaths.main.realty.write) {
     return <Header title={RouteTitle.main.realty.write} />;

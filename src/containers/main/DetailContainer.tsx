@@ -8,7 +8,7 @@ import {
   useRef,
   useReducer,
 } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { RoutePaths } from "../../core/utils/path";
 import { MatchId } from "../../types/RouterParams";
@@ -58,6 +58,8 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../store';
 import {setLike} from '../../store/zone';
 
+//aseet
+import MARKER from '../../static/svg/map-marker.svg';
 function DetailContainer({ id, modal }: MatchId) {
  
   const history = useHistory();
@@ -119,7 +121,19 @@ function DetailContainer({ id, modal }: MatchId) {
       level: 3,
     };
     let map = new window.kakao.maps.Map(container, options);
+
+    var imageSrc= MARKER,
+      imageSize = new window.kakao.maps.Size(40,40),
+      imageOption = {offset:new window.kakao.maps.Point(20, 40)}
+      var markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+        markerPosition = new window.kakao.maps.LatLng(realty?.lat, realty?.lng);
+    
+     var marker = new window.kakao.maps.Marker({
+      position:markerPosition,
+      image:markerImage
+    })
     kakao_map.current = map;
+    marker.setMap(kakao_map.current);
   }, [realty]);
 
   useEffect(() => {
@@ -242,11 +256,11 @@ function DetailContainer({ id, modal }: MatchId) {
       </div>
             
       <div className={styles["contact"]}>
-        { (!loading && realty) && 
+        { (loading && !realty ) ? <> </> : 
         (user?.user_id === realty?.user_id) ?
-          <Button className={styles['update-button']}>
+          <Link to={`${RoutePaths.main.realty.write}/${realty?.realty_id}`} className={styles['update-button']}>
             수정하기
-          </Button>
+          </Link>
           :
           <div className={styles['link']}>
           <a href="tel:010-4788-8227" >
