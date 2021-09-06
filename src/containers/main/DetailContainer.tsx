@@ -123,14 +123,14 @@ function DetailContainer({ id, modal }: MatchId) {
     let map = new window.kakao.maps.Map(container, options);
 
     var imageSrc= MARKER,
-      imageSize = new window.kakao.maps.Size(40,40),
-      imageOption = {offset:new window.kakao.maps.Point(20, 40)}
-      var markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+        imageSize = new window.kakao.maps.Size(40,40),
+        imageOption = {offset:new window.kakao.maps.Point(20, 40)}
+    var markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
         markerPosition = new window.kakao.maps.LatLng(realty?.lat, realty?.lng);
     
-     var marker = new window.kakao.maps.Marker({
-      position:markerPosition,
-      image:markerImage
+    var marker = new window.kakao.maps.Marker({
+        position:markerPosition,
+        image:markerImage
     })
     kakao_map.current = map;
     marker.setMap(kakao_map.current);
@@ -143,7 +143,6 @@ function DetailContainer({ id, modal }: MatchId) {
   useEffect(() => {
     callGetApiRealty();
   }, [id]);
-
   useEffect(() => {
     // console.log('이미지');
     const r = imageFormat(realty?.realty_images[0]);
@@ -154,7 +153,6 @@ function DetailContainer({ id, modal }: MatchId) {
   useEffect(() => {
     // console.log(realty_images);
   }, [realty_images]);
-
   return (
     <Fragment>
       <Header title={realty?.realty_name}>
@@ -254,7 +252,6 @@ function DetailContainer({ id, modal }: MatchId) {
           </div>
         </div>
       </div>
-            
       <div className={styles["contact"]}>
         { (loading && !realty ) ? <> </> : 
         (user?.user_id === realty?.user_id) ?
