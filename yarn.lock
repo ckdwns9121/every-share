@@ -6193,6 +6193,11 @@ globule@^1.0.0:
     lodash "~4.17.10"
     minimatch "~3.0.2"
 
+goober@^2.0.37:
+  version "2.0.41"
+  resolved "https://registry.yarnpkg.com/goober/-/goober-2.0.41.tgz#0a3d786ff9917bcf2a096eef703bf717838cbec9"
+  integrity sha512-kwjegMT5018zWydhOQlQneCgCtrKJaPsru7TaBWmTYV0nsMeUrM6L6O8JmNYb9UbPMgWcmtf+9p4Y3oJabIH1A==
+
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.3.tgz#4a12ff1b60376ef09862c2093edd908328be8423"
@@ -10381,6 +10386,16 @@ raw-body@2.4.0:
     http-errors "1.7.2"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
+
+react-animated-heart@^0.0.7-alpha.1:
+  version "0.0.7-alpha.1"
+  resolved "https://registry.yarnpkg.com/react-animated-heart/-/react-animated-heart-0.0.7-alpha.1.tgz#6d9e8e4b5e712fddbeeb0d2d3df6f8e087a437e7"
+  integrity sha512-xcy5oWOF3rc7dt8K+g7mdMLcyRIlYWleHSI8LLqlKRD2UVFUvhcl+qNS+X36qulMS0b9Nv0+wDgkLFQWjGB7cA==
+  dependencies:
+    goober "^2.0.37"
+    react "^17.0.2"
+    react-dom "^17.0.2"
+    react-scripts "4.0.3"
 
 react-app-polyfill@^2.0.0:
   version "2.0.0"

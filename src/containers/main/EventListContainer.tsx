@@ -1,10 +1,11 @@
 /* 이벤트 리스트 페이지 */
 import Layout from '../../components/layout/Layout';
+import Like from '../../components/asset/Like';
 
 function EventListContainer(){
     return(
         <Layout>
-           이벤트 리스트
+                   <Like on={true} onClick={()=>{}}/>
         </Layout>
     )
 }

@@ -12,11 +12,14 @@ function Like({on,onClick}:Props) {
 
   return (
     <IconButton className={styles['like-button']} onClick={onClick}>
-      <svg
+      <div className={styles['stage']}>
+        <div className={cx('heart',{on})}/>
+      </div>
+      {/* <svg
         width="17.257"
         height="16.145"
         viewBox="0 0 17.257 16.145"
-        className={styles['like']}
+       className={styles['like']}
       >
         <path
           id="iconmonstr-favorite-3"
@@ -26,7 +29,7 @@ function Like({on,onClick}:Props) {
           stroke={on? 'none' : '#4b4d54'}
           strokeWidth="1"
         />
-      </svg>
+      </svg> */}
     </IconButton>
 
   );
