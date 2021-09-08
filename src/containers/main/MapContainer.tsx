@@ -49,10 +49,6 @@ import ZoneModal from '../../components/modal/ZoneModal';
 //lib
 import {getDistanceFromLatLonInKm} from '../../core/lib/distance';
 
-
-
-
-
 const cx = cn.bind(styles);
 
 declare global {
@@ -67,7 +63,6 @@ type Zoom = 'in' | 'out';
 
 function MapContainer({modal}:MatchModal){
 
-
     const access_token = useToken();
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
     const [filterOpen ,setFilterOpen] = useState<boolean>(false);
@@ -78,21 +73,16 @@ function MapContainer({modal}:MatchModal){
     const {position,level,area,address} = useSelector((state:RootState) =>state.map);
     const {realties} = useSelector((state:RootState) =>state.realties);
     const {zone_list} = useSelector((state:RootState) =>state.zone);
-
     const kakao_map = useRef<any>(null); //카카오 맵
     const map_position = useRef<any>({lat:33.450701, lng: 126.570667}); //지도 첫렌더시 좌표
     const map_level = useRef<number>(5); // 디폴트 레벨 -> //4 : 100m 6: 500m 7:1km
     const cluster_marker = useRef<any>(null);
-
     const [addr , setAddr] = useState<string>(''); //주소검색
     const [addrList,setAddrList] = useState<Address[] | null>(null);
-
     const zone_view = useRef<boolean>(false); // 매물 버튼 오픈 여부
-
-    // const [zone_list ,setZoneList] = useState<any>([]);
     const [zoneButtonOpen ,setZoneButtonOpen] = useState<boolean>(false);
 
-    // 지도를 렌더하는 함수
+    /* 지도를 렌더하는 함수 */
     const mapRender = useCallback(() => {
         let container = document.getElementById('map');
         let lat : number = map_position.current.lat;
@@ -102,12 +92,11 @@ function MapContainer({modal}:MatchModal){
             level: map_level.current,
         };
         const map = new window.kakao.maps.Map(container, options);
-        map.setMaxLevel(10);
+        // map.setMaxLevel(10);
         kakao_map.current = map;
     }, []);
-
  
-    //지도 레벨을 조정하는 함수
+    /* 지도 레벨을 조정하는 함수 */
     const zoomMap = useCallback((type : Zoom) => {
         let level = kakao_map.current.getLevel();
         level = type === 'in' ? level - 1 : level + 1;
@@ -117,14 +106,13 @@ function MapContainer({modal}:MatchModal){
         
     },[dispatch]);
 
-    // 맵 중심좌표를 설정하는 함수
+    /* 맵 중심좌표를 설정하는 함수 */
     const setCoordinates = useCallback((lat:number, lng : number) => {
         const moveLatLon = new window.kakao.maps.LatLng(lat, lng);
         kakao_map.current.setCenter(moveLatLon);
     }, []);
 
-
-    //매물 마커를 생성하는 함수
+    /* 매물 마커를 생성하는 함수 */
     const createParkingMarker = useCallback(() => {
         // onLoading('parking/GET_LIST');
         if (cluster_marker.current !== null) {
@@ -155,7 +143,7 @@ function MapContainer({modal}:MatchModal){
             ],
         });
 
-        //맵의 중심좌표가 변경되었을 시 이벤트
+        /* 맵의 중심좌표가 변경되었을 시 이벤트 */
         window.kakao.maps.event.addListener(map, 'center_changed', () => {
             const level = map.getLevel();
             const latlng = map.getCenter();
@@ -175,7 +163,6 @@ function MapContainer({modal}:MatchModal){
             // },200)
             zone_view.current =false;
         });
-
 
         // const markdata = realties.filter((item) => {
         //     return (
@@ -242,14 +229,14 @@ function MapContainer({modal}:MatchModal){
                 },
             );
         }
-        // 윈도우 클릭이벤트 넘겨야 하는 주차장 마커 클릭함수
+        /* 윈도우 클릭이벤트 넘겨야 하는 주차장 마커 클릭함수 */
         window.onClickOverlay = (realty_id:string|number) => {
             history.push(RoutePaths.main.detail + '/' + realty_id);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [area, dispatch, history, realties]);
 
-    //주소 검색 API
+    /* 주소 검색 함수 */
     const onSearchAddr = useCallback(async()=>{
         try{
             const res = await searchAddress(addr);
@@ -266,8 +253,7 @@ function MapContainer({modal}:MatchModal){
         }
     },[addr])
 
-    
-    // 주소 클릭시 메인화면으로 이동
+    /* 주소 클릭시 주소 좌표로 맵 좌표 설정 */
     const onClickAddr = useCallback(async (jibun:string)=>{
         try{
             const res = await requestGetAddressInfo(jibun);
@@ -285,7 +271,7 @@ function MapContainer({modal}:MatchModal){
         }
     },[])
 
-    // 마지막 위치 기준으로 get_area 함수 호출하여 해당지역 받아오기
+    /* 마지막 위치 기준으로 get_area 함수 호출하여 해당지역 받아오기 */
     useEffect(() => {
         let storage  =localStorage.getItem('position');
         if(storage){
@@ -313,28 +299,26 @@ function MapContainer({modal}:MatchModal){
         // }
     }, []);
 
-
     useEffect(()=>{
         dispatch(getRealties({lat:0,lng:0,filter:[1,2,3,4],access_token}));
     },[dispatch])
 
-    // 지도 렌더
+    /* 지도 렌더 */
     useEffect(()=>{
         mapRender();
     },[])
-
-    // 매물 마커 생성
+ 
+    /* 매물 마커 생성 */
     useEffect(()=>{
         createParkingMarker();
     },[realties])
-
-
-    // 주소 모달 검색
+ 
+    /* 주소 모달 검색 */
     useEffect(()=>{
         onSearchAddr();
     },[onSearchAddr])
 
-    // 모달이 꺼졌을 시 초기화
+    /* 모달이 꺼졌을 시 초기화 */
     useEffect(()=>{
         setAddr('');
     },[modal])

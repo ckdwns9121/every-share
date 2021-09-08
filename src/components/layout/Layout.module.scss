@@ -9,7 +9,8 @@
         padding: $padding-side;
         padding-top:20px;
         padding-bottom:20px;
-        min-height: 100vh;
+        min-height :94vh;
+        box-sizing: border-box;
         &.none{
             padding:0;
         }

@@ -33,6 +33,7 @@ export default function ContractModal({open,url} :{
       fullScreen 
       open={open} 
       TransitionComponent={Transition}
+      className={styles['dialog']}
       >
         <DialogContent className={classes.content} style={{padding:'0 20px'}}>
             <div className={styles['container']}> 
