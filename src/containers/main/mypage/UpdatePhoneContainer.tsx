@@ -1,10 +1,11 @@
 /* 핸드폰 번호 업데이트 페이지 */
+import Layout from '../../../components/layout/Layout';
 
 function UpdatePhoneContainer(){
     return(
-        <div>
+        <Layout>
             폰 업데이트
-        </div>
+        </Layout>
     )
 }
 

@@ -1,10 +1,11 @@
 /* 비번 업데이트 페이지 */
+import Layout from '../../../components/layout/Layout';
 
 function UpdatePasswordContainer(){
     return(
-        <div>
+        <Layout>
             비번 업데이트
-        </div>
+        </Layout>
     )
 }
 

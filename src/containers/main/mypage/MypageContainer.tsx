@@ -1,6 +1,7 @@
 /* 마이 페이지 */
 
 import styles from './MypageContainer.module.scss';
+import Layout from '../../../components/layout/Layout';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store';
@@ -23,9 +24,8 @@ function MyPageContainer(){
         history.replace(RoutePaths.main.index);
     }
     return(
-        <div className={styles['container']}>
-            <div className={styles['content']}>
-                <p>이메일</p>
+        <Layout>
+             <p>이메일</p>
                 <Button className={styles['box']}>
                     {user?.email}
                 </Button>
@@ -40,12 +40,11 @@ function MyPageContainer(){
                 <p>휴대폰 번호</p>
                 <Button className={styles['box']} onClick={()=>history.push(RoutePaths.main.mypage.update.phone_number)}>
                     {user?.phone_number}
-                </Button>
-            </div>
-            <div className={styles['logout']}>
+                </Button> 
+                <div className={styles['logout']}>
                 <Button className={styles['logout-btn']} onClick={onClickLogout}>로그아웃</Button>
             </div>
-        </div>
+        </Layout>
     )
 }
 

@@ -1,9 +1,10 @@
+import Layout from "../../../components/layout/Layout";
 
 function RealtyContactContainer(){
     return(
-        <div>
+        <Layout>
             내가 문의한 매물
-        </div>
+        </Layout>
     )
 }
 
