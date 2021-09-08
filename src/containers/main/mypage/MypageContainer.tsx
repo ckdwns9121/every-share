@@ -30,15 +30,15 @@ function MyPageContainer(){
                     {user?.email}
                 </Button>
                 <p>이름</p>
-                <Button className={styles['box']}>
+                <Button className={styles['box']} onClick={()=>history.push(RoutePaths.main.mypage.update.name)}>
                     {user?.name}
                 </Button>
                 <p>비밀번호</p>
-                <Button className={styles['box']}>
+                <Button className={styles['box']}  onClick={()=>history.push(RoutePaths.main.mypage.update.password)}>
                     <input type='password' value={user?.password.substring(0,8)} readOnly/>
                 </Button>
                 <p>휴대폰 번호</p>
-                <Button className={styles['box']}>
+                <Button className={styles['box']} onClick={()=>history.push(RoutePaths.main.mypage.update.phone_number)}>
                     {user?.phone_number}
                 </Button>
             </div>
