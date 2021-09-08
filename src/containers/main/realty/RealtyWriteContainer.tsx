@@ -114,7 +114,7 @@ function RealtyWriteContainer({id}:Props) {
       }
     }
     catch(e){
-      console.log(e);
+      console.log(e.response);
     }
   }
 
