@@ -123,7 +123,7 @@ function MapContainer({modal}:MatchModal){
         cluster_marker.current = new window.kakao.maps.MarkerClusterer({
             map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
             averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-            minLevel: 10, // 클러스터 할 최소 지도 레벨
+            minLevel: 1, // 클러스터 할 최소 지도 레벨
             disableClickZoom: true, // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
             styles: [
                 {
@@ -143,6 +143,9 @@ function MapContainer({modal}:MatchModal){
             ],
         });
 
+        /* 클러스터링 최소 하나 */
+        cluster_marker.current.setMinClusterSize(1);
+
         /* 맵의 중심좌표가 변경되었을 시 이벤트 */
         window.kakao.maps.event.addListener(map, 'center_changed', () => {
             const level = map.getLevel();
@@ -158,9 +161,6 @@ function MapContainer({modal}:MatchModal){
             localStorage.setItem('position', JSON.stringify(new_position));
             localStorage.setItem('level', level);
             setZoneButtonOpen(false);
-            // setTimeout(()=>{
-            //     setZoneList([]);
-            // },200)
             zone_view.current =false;
         });
 
