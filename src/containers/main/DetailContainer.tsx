@@ -149,11 +149,12 @@ function DetailContainer({ id, modal }: MatchId) {
       const images = JSON.parse(realty?.realty_images);
       console.log('json');
       console.log(images);
+      const r = imageFormat(images[0]);
+      // console.log(typeof r);
+      console.log(r);
+      setUrl(r);
     }
-    const r = imageFormat(realty?.realty_images[0]);
-    // console.log(typeof r);
-    console.log(r);
-    setUrl(r);
+  
   }, [realty]);
 
   useEffect(() => {
