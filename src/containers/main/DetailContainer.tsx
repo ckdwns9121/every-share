@@ -144,9 +144,10 @@ function DetailContainer({ id, modal }: MatchId) {
     callGetApiRealty();
   }, [id]);
   useEffect(() => {
-    // console.log('이미지');
+    console.log('이미지');
     const r = imageFormat(realty?.realty_images[0]);
     // console.log(typeof r);
+    console.log(r);
     setUrl(r);
   }, [realty]);
 
