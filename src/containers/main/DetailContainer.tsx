@@ -145,6 +145,11 @@ function DetailContainer({ id, modal }: MatchId) {
   }, [id]);
   useEffect(() => {
     console.log('이미지');
+    if(realty){
+      const images = JSON.parse(realty?.realty_images);
+      console.log('json');
+      console.log(images);
+    }
     const r = imageFormat(realty?.realty_images[0]);
     // console.log(typeof r);
     console.log(r);
