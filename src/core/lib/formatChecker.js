@@ -133,7 +133,7 @@ export const hideEmail = (email) => {
 };
 
 
-const STORAGE_URL = 'http://3.36.97.2:4000/';
+const STORAGE_URL = 'http://3.36.109.145:4000/';
 
 export const DBImageFormat = (image) => {
     if (!image) {
