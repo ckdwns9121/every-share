@@ -151,7 +151,7 @@ function DetailContainer({ id, modal }: MatchId) {
   }, [realty]);
 
   useEffect(() => {
-    // console.log(realty_images);
+    console.log(realty_images);
   }, [realty_images]);
   return (
     <Fragment>
