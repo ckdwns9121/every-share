@@ -30,6 +30,7 @@
 
 .snackbar {
     :global(.MuiPaper-root) {
+        z-index: 9999 !important;
         // transition: all .225s ease-in-out !important;
         font-size: 1.333rem;
     }

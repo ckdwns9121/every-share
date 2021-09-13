@@ -88,8 +88,8 @@ function DetailContainer({ id, modal }: MatchId) {
         setRealty(res.data.realty);
         setLikes(res.data.likes);
         setIsLiked(res.data.isLiked);
-        // setImages(JSON.parse(res.data.realty.realty_images));
-        // setContractImage(JSON.parse(res.data.realty.realty_contract_images));
+        setImages(JSON.parse(res.data.realty.realty_images));
+        setContractImage(JSON.parse(res.data.realty.realty_contract_images));
       }
       handleLoading(false);
     } catch (e) {
@@ -106,12 +106,17 @@ function DetailContainer({ id, modal }: MatchId) {
         if(res.status===200){
             setIsLiked(res.data.isLiked);
             dispatch(setLike({like:res.data.isLiked , realty_id: realty.realty_id}));
-            // handleOpen('좋아요',true,false,'success');
+            handleOpen('좋아요',true,false,'success');
         }
       }
+      else{
+          handleOpen('로그인이 필요한 서비스입니다.',true,false,'warning');
+      }
+
     }
     catch(e){
-
+      handleOpen('서버에 오류가 발생했습니다..',true,false,'error');
+      console.log(e.response);
     }
   }
   useEffect(() => {
@@ -143,23 +148,9 @@ function DetailContainer({ id, modal }: MatchId) {
   useEffect(() => {
     callGetApiRealty();
   }, [id]);
-  useEffect(() => {
-    console.log('이미지');
-    if(realty){
-      const images = JSON.parse(realty?.realty_images);
-      console.log('json');
-      console.log(images);
-      const r = imageFormat(images[0]);
-      // console.log(typeof r);
-      console.log(r);
-      setUrl(r);
-    }
-  
-  }, [realty]);
 
-  useEffect(() => {
-    console.log(realty_images);
-  }, [realty_images]);
+
+
   return (
     <Fragment>
       <Header title={realty?.realty_name}>
