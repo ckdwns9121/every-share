@@ -5,7 +5,8 @@ import {Link} from 'react-router-dom';
 //asset
 import TEST_IMAGE from '../../static/image/test.png';
 import { RoutePaths } from '../../core/utils/path';
-import Like from '../../components/asset/Like';
+import Like from '../asset/Like';
+import Empty from '../asset/Empty';
 
 //type
 import {Realty} from '../../types/Realty';
@@ -31,7 +32,7 @@ function RealtyItemList ({realties,like} : Relties){
     const list = realties?.map((item)=> <RealtyItem {...item} key={item.realty_id} like={like}/>)
     return(
         <>  
-        {list}
+        {list?.length!==0 ? list : <Empty></Empty>}
         </>
     )
 }
