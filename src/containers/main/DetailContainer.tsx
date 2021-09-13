@@ -106,7 +106,8 @@ function DetailContainer({ id, modal }: MatchId) {
         if(res.status===200){
             setIsLiked(res.data.isLiked);
             dispatch(setLike({like:res.data.isLiked , realty_id: realty.realty_id}));
-            handleOpen('좋아요',true,false,'success');
+            const msg = res.data.isLiked ? '찜목록에 추가되었습니다' : '찜목록에서 삭제하였습니다.';
+            handleOpen(msg,true,false,'success');
         }
       }
       else{
@@ -114,7 +115,7 @@ function DetailContainer({ id, modal }: MatchId) {
       }
 
     }
-    catch(e){
+    catch(e :any){
       handleOpen('서버에 오류가 발생했습니다..',true,false,'error');
       console.log(e.response);
     }

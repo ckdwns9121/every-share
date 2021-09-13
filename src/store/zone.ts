@@ -19,7 +19,9 @@ const zoneSlice = createSlice({
         setLike:(state,action:PayloadAction<any>)=>{
             const {like, realty_id} = action.payload;
             const index= state.zone_list.findIndex((item : Realty)=>item.realty_id===realty_id);
-            state.zone_list[index].isLiked = like;
+            if(index!==-1){
+                state.zone_list[index].isLiked = like;
+            }
             console.log('like' ,like);
             // console.log(index);
             // console.log(state.zone_list[0].isLiked);

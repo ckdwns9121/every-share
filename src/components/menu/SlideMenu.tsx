@@ -56,7 +56,7 @@ function SlideMenu ({open,handleClose} : Props){
             onClick :  ()=> onClick(RoutePaths.main.index),
         },
         {
-            text:'좋아요한 매물',
+            text:'내가 찜한 매물',
             icon : LIKE,
             onClick :  ()=> onClick(RoutePaths.main.realty.like),
         },

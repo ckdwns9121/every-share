@@ -167,7 +167,8 @@ html{
             background-color: $main-color;
             position: fixed;
             bottom: 0;
-            z-index: $level1;
+            z-index: 1000;
+            // z-index: $level1;
             border-radius: 0;
             color:#fff;
             display: flex;

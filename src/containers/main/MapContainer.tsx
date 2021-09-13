@@ -92,7 +92,7 @@ function MapContainer({modal}:MatchModal){
             level: map_level.current,
         };
         const map = new window.kakao.maps.Map(container, options);
-        // map.setMaxLevel(10);
+        map.setMaxLevel(13);
         kakao_map.current = map;
     }, []);
  

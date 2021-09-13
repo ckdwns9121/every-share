@@ -50,7 +50,7 @@ export const RouteTitle  ={
         detail:'',
         realty :{
             index :'/realty',
-            contact :'문의한 매물',
+            contact :'내가 문의한 매물',
             write :'매물 등록',
             modify :'매물 수정',
             enrollment:'내가 등록한 매물',
@@ -78,10 +78,10 @@ export const RouteTitle  ={
         signup: '회원가입',
         sign_complete: '회원가입 완료',
         find: {
-            index: '이메일/비밀번호 찾기',
-            email: '이메일 찾기',
+            index: '아이디/비밀번호 찾기',
+            email: '아이디 찾기',
             password: '비밀번호 찾기',
-            email_complete: '이메일 찾기 완료',
+            email_complete: '아이디 찾기 완료',
             password_complete: '비밀번호 찾기 완료',
         },
     },
