@@ -28,6 +28,7 @@ import {set_user} from './store/user';
 
 //asset
 import SnackBar from "./components/asset/Snackbar";
+import SnackbarPortal from "./SnackbarPortal";
 
 function App() {
 
@@ -62,8 +63,10 @@ function App() {
           <Route component={ErrorPage} />
         </Switch>
       </Router>
-      <Loading></Loading>
+      <Loading/>
+      <SnackbarPortal>
       <SnackBar/>
+      </SnackbarPortal>
     </div>
   );
 }
