@@ -14,15 +14,17 @@ interface Payload {
     type : string,
     value : boolean
 }
-interface State {
+export interface State {
     oneroom: boolean,
-    double : boolean,
-    officetel : boolean,
+    tworoom:boolean,
+    op : boolean,
+    duplex : boolean,
 }
 const initState : State= {
     oneroom : true,
-    double : true,
-    officetel  : true,
+    tworoom : true,
+    op  : true,
+    duplex:true,
 };
 
 const filters = createReducer<State, Actions>(initState, {

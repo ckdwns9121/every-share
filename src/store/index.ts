@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import map,{mapSaga} from './map';
+import filters from './filter';
 import realties, {realtiesSaga} from './realties';
 import zone from './zone';
 import snackbar from './snackbar';
@@ -7,7 +8,7 @@ import loading from './loading';
 import user from './user';
 import { all } from 'redux-saga/effects';
 
-const rootReducer = combineReducers({map,user,realties,loading,zone,snackbar});
+const rootReducer = combineReducers({map,filters,user,realties,loading,zone,snackbar});
 
 export function *rootSaga(){
     yield all([mapSaga(),realtiesSaga()]);

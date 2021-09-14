@@ -13,3 +13,14 @@ export interface User{
         native_token? :string | null,
     } | null
 }
+
+export interface Filter{
+    oneroom: boolean,
+    tworoom:boolean,
+    op : boolean,
+    duplex : boolean,
+}
+
+export function isCheck(obj: any): obj is Filter {
+    return obj.oneroom!==undefined;
+}

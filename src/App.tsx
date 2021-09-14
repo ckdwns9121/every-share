@@ -25,11 +25,14 @@ import {requestGetUser} from './api/auth';
 //store
 import {useDispatch} from 'react-redux';
 import {set_user} from './store/user';
+import { set_filters } from "./store/filter";
 
 //asset
 import SnackBar from "./components/asset/Snackbar";
 import SnackbarPortal from "./SnackbarPortal";
 
+import {isCheck} from './types/User';
+//type
 function App() {
 
   const access_token = useToken();
@@ -51,6 +54,17 @@ function App() {
   }
   useEffect(()=>{
     callApiUserInfo();
+  },[])
+
+  useEffect(()=>{
+    let storageFilter : string| null| any  = localStorage.getItem('filter');
+    if(storageFilter){
+      storageFilter = JSON.parse(storageFilter);
+      dispatch(set_filters({type:'oneroom',value:storageFilter.oneroom}))
+      dispatch(set_filters({type:'tworoom',value:storageFilter.tworoom}))
+      dispatch(set_filters({type:'op',value:storageFilter.op}))
+      dispatch(set_filters({type:'duplex',value:storageFilter.duplex}))
+    }
   },[])
 
   return (

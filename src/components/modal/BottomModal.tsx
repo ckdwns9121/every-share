@@ -4,12 +4,14 @@ import styles from './BottomModal.module.scss';
 import classnames from 'classnames/bind';
 import BasicButton from '../button/BasicButton';
 import { Backdrop/*, ButtonBase*/ } from '@material-ui/core';
+import { RootState } from '../../store';
+import {set_filters} from '../../store/filter';
 
 //action
 
 interface Props{
     open : boolean,
-    handleClose? : ()=>void
+    handleClose : ()=>void
 }
 
 interface AgreeToggleProps{
@@ -22,6 +24,37 @@ const cn = classnames.bind(styles);
 const BottomModal = ({ open, handleClose }:Props) => {
 
 
+    const {oneroom,tworoom,op,duplex} = useSelector((state:RootState)=>state.filters)
+    const dispatch = useDispatch();
+    const [state,setState] = useState<any>({
+        type1:true,type2:true,type3:true,type4:true,
+    })
+
+    const {type1,type2,type3,type4} = state;
+
+    const handleSetting=()=>{
+        dispatch(set_filters({type:'oneroom',value:type1}));
+        dispatch(set_filters({type:'tworoom',value:type2}));
+        dispatch(set_filters({type:'op',value:type3}));
+        dispatch(set_filters({type:'duplex',value:type4}));
+        const storageFilter ={
+            oneroom:type1,tworoom:type2,op:type3,duplex:type4
+        }
+
+        localStorage.setItem('filter',JSON.stringify(storageFilter));
+        handleClose();
+    }
+
+    useEffect(()=>{
+        setState({
+            type1:oneroom,
+            type2:tworoom,
+            type3:op,
+            type4:duplex
+        })
+    },[open])
+
+
     return (
         <>
             <div className={cn('bottom-modal', { on: open })}>
@@ -29,11 +62,11 @@ const BottomModal = ({ open, handleClose }:Props) => {
                 <div className={styles['box']}>
                     <div className={styles['modal-title']}>
                         조건설정
-                        <AgreeToggle name={"원룸"} checked={true}  />
-                        <AgreeToggle name={"투룸"} checked={true} />
-                        <AgreeToggle name={"오피스텔"} checked={true}  />
-                        <AgreeToggle name={"복층"} checked={true}  />
-                        <BasicButton name={"조건 설정하기"} disable={false} onClick={()=>{}} />
+                        <AgreeToggle name={"원룸"} checked={type1}  onToggle={()=>{setState({...state,type1:!type1})}}/>
+                        <AgreeToggle name={"투룸"} checked={type2} onToggle={()=>{setState({...state,type2:!type2})}}/>
+                        <AgreeToggle name={"오피스텔"} checked={type3}  onToggle={()=>{setState({...state,type3:!type3})}}/>
+                        <AgreeToggle name={"복층"} checked={type4}  onToggle={()=>{setState({...state,type4:!type4})}}/>
+                        <BasicButton name={"조건 설정하기"} disable={false} onClick={handleSetting} />
                     </div>
                 </div>
             </div>
