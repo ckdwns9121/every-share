@@ -15,7 +15,7 @@ import { MatchId } from "../../types/RouterParams";
 import styles from "./DetailContainer.module.scss";
 import Header from "../../components/header/Header";
 import Like from "../../components/asset/Like";
-import { Button, IconButton } from "@material-ui/core";
+import { Button, IconButton ,ButtonBase} from "@material-ui/core";
 
 //asset
 import GASSTOVE from "../../static/svg/options/gasstove.svg";
@@ -259,19 +259,22 @@ function DetailContainer({ id, modal }: MatchId) {
           </Link>
           :
           <div className={styles['link']}>
-          <a href="tel:010-4788-8227" >
-            <Button className={styles["button"]}>
-            <img src={PHONE} alt="PHONE"></img>
-            <span>전화로 문의</span>
-          </Button>
-          </a>
-          <a href="sms:010-4788-8227&body=매물 문의합니다.">
-        <Button className={styles["button"]}>
-          <img src={MESSAGE} alt="MESSAGE"></img>
-          <span>문자로 문의</span>
-        </Button>
+            <Button className={styles['contact-button']}>
+              간편 문의
+            </Button>
+        <a href="tel:010-4788-8227" >
+            <ButtonBase className={styles["button"]}>
+              <img src={PHONE} alt="PHONE"></img>
+              전화문의
+           </ButtonBase>
         </a>
-          </div>
+        <a href="sms:010-4788-8227&body=매물 문의합니다.">
+        <ButtonBase className={styles["button"]}>
+          <img src={MESSAGE} alt="MESSAGE"></img>
+           문자 문의
+        </ButtonBase>
+        </a>
+        </div>
         }
      </div>
       <RoadviewModal
