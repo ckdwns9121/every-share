@@ -16,7 +16,6 @@
         }
 
         select {
-            color: #707070;
             font-size: 12px;
             padding-left: 12px;
 
@@ -71,6 +70,13 @@
             margin-bottom: 40px;
             align-items: center;
             padding-top: 20px;
+            .floor{
+                position: absolute;
+                top:35%;
+                color:#707070;
+                right: 10px;
+                transform: translateY(-50%);
+            }
 
             .divide {
                 position: relative;
@@ -79,6 +85,9 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+                p{
+                    margin: 0;
+                }
 
                 .half-box {
                     display: flex;
@@ -100,7 +109,7 @@
                         margin: 0 auto;
                         text-align: center;
                         width: 60px;
-                        height: 20px;
+                        height: 34px;
                         border: none;
 
                         & ::placeholder {

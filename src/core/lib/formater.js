@@ -15,7 +15,8 @@ export const isPasswordForm = (asValue) => {
 };
 
 export const onlyNumber = value => {
-    return /[0-9]/.test(value) || value.length > 1;
+    return value = value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+    // return /[0-9]/.test(value) || value.length > 1;
 };
 export const onlyNumberListener = e => !onlyNumber(e.key) && e.preventDefault();
 

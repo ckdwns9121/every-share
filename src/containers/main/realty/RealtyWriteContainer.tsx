@@ -17,7 +17,11 @@ import {requestGetAddressInfo} from '../../../api/address';
 import {useToken} from '../../../hooks/useStore';
 import { useHistory } from "react-router";
 import { RoutePaths } from "../../../core/utils/path";
+import useLoading from '../../../hooks/useLoading';
 
+//lib
+import {numberFormat} from '../../../core/lib/formatChecker';
+import {onlyNumber} from '../../../core/lib/formater';
 
 
 type TitleComponentProps = {
@@ -55,10 +59,13 @@ function RealtyWriteContainer({id}:Props) {
   const [contract_src , setContractSrc] = useState<string>('');
 
   const [open ,setOpen] = useState<boolean>(false);
+  const {loading,handleLoading} = useLoading(); 
 
   const [realty_name , setReatlyName] = useState<string>(''); //이름
   const [addr, setAddr ] = useState<string>(''); //주소
   const [addr_detail,setAddrDetail] = useState<string>('');
+  const [all_floor,setAllFloor] = useState<number|string>("");
+  const [my_floor,setMyFloor] = useState<number|string>("");
 
   const [start_date , setStartDate] = useState<string|null>(null);
   const [end_date , setEndDate] = useState<string|null>(null);
@@ -74,21 +81,22 @@ function RealtyWriteContainer({id}:Props) {
   const onChangeSubComment =(e: React.ChangeEvent<HTMLTextAreaElement>) => setSubComment(e.target.value);
   const onChangeDeposit = (e: React.ChangeEvent<HTMLInputElement>) =>setDeposit(e.target.value);
   const onChangeMonthRent = (e: React.ChangeEvent<HTMLInputElement>) =>setMonthRent(e.target.value);
+  const onChangeAllFloor = (e: React.ChangeEvent<HTMLInputElement>) =>setAllFloor(onlyNumber(e.target.value))
+  const onChangeFloor = (e: React.ChangeEvent<HTMLInputElement>) =>setMyFloor(onlyNumber(e.target.value));
   
-
-
   // 매물 등록
   const onClickEnrollment = async()=>{
     try{
       console.log(access_token);
+      handleLoading(true);
       if(access_token){
         const res = await requestPostRealty(
           access_token, //JWT_TOKEN
           realty_name,
           1, // TYPE
           1, //KIND
-          10, // ALL_FLOORS
-          5, // MY_FLOORS
+          all_floor, // ALL_FLOORS
+          my_floor, // MY_FLOORS
           parseInt(deposit), //보증금
           parseInt(monthly_rent), // 월세
           0, // 관리비
@@ -112,8 +120,9 @@ function RealtyWriteContainer({id}:Props) {
             history.push(RoutePaths.main.detail +'/' + res.data.data.realty_id);
           }
       }
+     handleLoading(false);
     }
-    catch(e){
+    catch(e : any){
       console.log(e.response);
     }
   }
@@ -191,25 +200,25 @@ return (
 
         <div className={styles["info-box"]}>
           <input type="text"  name='name' placeholder="매물 이름을 입력하세요" value={realty_name} onChange={onChangeName}/>
-
           <select>
-            <option>오피스텔</option>
-            <option>건물 유형</option>
-            <option>원룸</option>
+            <option value="oneroom">원룸</option>
+            <option value="tworoom">투룸</option>
+            <option value="op">오피스텔</option>
+            <option value="duplex">복층</option>
           </select>
 
           <select>
-            <option>단기</option>
-            <option>거래 종류</option>
-            <option>장기</option>
+            <option value="short">단기</option>
+            <option value="long">장기</option>
           </select>
-
-          <select>
-            <option>10층</option>
-            <option>전체 층수</option>
-            <option>3층</option>
-          </select>
-
+          <div style={{position:'relative',width:"100%"}} >
+            <input type="text" placeholder="전체층수를 입력하세요" value={numberFormat(all_floor)} onChange={onChangeAllFloor}/>
+            <span className={styles['floor']}>층</span>
+          </div>
+          <div style={{position:'relative',width:"100%"}} >
+          <input style={{position:'relative'}} type="text" placeholder="해당층수를 입력하세요" value={my_floor} onChange={onChangeFloor}/>
+          <span className={styles['floor']}>층</span>
+          </div>
           <div className={styles["divide"]}>
             <div className={styles["half-box"]}>
               <p>보증금</p>
@@ -218,7 +227,6 @@ return (
                 onChange={onChangeDeposit}
                 value={deposit}
                 className={styles["costInput"]}
-                placeholder="보증금"
               />
               <p>만원</p>
             </div>
@@ -229,7 +237,6 @@ return (
                 value={monthly_rent}
                 onChange={onChangeMonthRent}
                 className={styles["costInput"]}
-                placeholder="월세 (만원단위)"
               />
               <p>만원</p>
             </div>
