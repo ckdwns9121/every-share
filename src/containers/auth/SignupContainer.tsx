@@ -116,16 +116,17 @@ function SignupContainer(){
 
 
     // 유저 회원가입
-    const onClickSignup = async ()=>{
+    const onSignUp = async ()=>{
         try{
             handleLoading(true);
             const res = await requsetPostSignup(email,null,password,phone_number,sms,false,null);
             console.log(res);
-            if(res?.data?.message==='success'){
+            if(res.status===200){
                 history.push(RoutePaths.auth.sign_complete);
+                handleOpen(res.data.message,true,false,'success');
             }
             else{
-                handleOpen(res.data.message,true,false,'success');
+                handleOpen(res.data.message,true,false,'warning');
             }
             handleLoading(false);
 
@@ -160,7 +161,12 @@ function SignupContainer(){
           phone_number.length === 0 ?  handleOpen('휴대폰 번호를 입력해주세요.',true,false,'error') : setStep((prev) => prev + 1)
           break;
         case 5:
-            onClickSignup();
+            if(privacy && service){
+                onSignUp();
+            }
+            else{
+             handleOpen('필수약관을 확인해주세요.',true,false,'error') ;
+            }
           break;
         default:
              console.log('hello');
@@ -194,9 +200,15 @@ function SignupContainer(){
                             <input type={SIGN_STEP[step-1].type} value={SIGN_STEP[step-1].value} onChange={onChange} name={SIGN_STEP[step-1].name}/>
                         </div> :
                         <div className={styles['check-box']}>
-                            <Checkbox id={'privacy'} text={'[필수] 개인정보 수집 이용에 동의합니다.'} check={agree.privacy} onChange={()=>{}}/>
-                            <Checkbox id={'service'} text={'[필수] 서비스 이용 약관에 동의합니다.'} check={agree.service} onChange={()=>{}}/>
-                            <Checkbox id={'marketing'} text={'[선택] 마케팅 수신에 동의합니다.'} check={agree.sms} onChange={()=>{}}/>
+                            <Checkbox id={'privacy'} text={'[필수] 개인정보 수집 이용에 동의합니다.'} check={agree.privacy} onChange={(e)=>{
+                                setAgree({...agree,privacy:e.target.checked})
+                            }}/>
+                            <Checkbox id={'service'} text={'[필수] 서비스 이용 약관에 동의합니다.'} check={agree.service} onChange={(e)=>{
+                                setAgree({...agree,service:e.target.checked})
+                            }}/>
+                            <Checkbox id={'marketing'} text={'[선택] 마케팅 수신에 동의합니다.'} check={agree.sms} onChange={(e)=>{
+                                setAgree({...agree,sms:e.target.checked})
+                            }}/>
                         </div>
                         }
                         <div className={styles['step-bar']}>

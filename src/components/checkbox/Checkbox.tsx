@@ -8,7 +8,7 @@ interface Props{
     id:string,
     text:string,
     check:boolean,
-    onChange:()=>void
+    onChange:(e:any)=>void
 }
 
 
