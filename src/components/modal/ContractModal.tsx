@@ -6,6 +6,8 @@ import Dialog from '@material-ui/core/Dialog';
 import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
 import DialogContent from '@material-ui/core/DialogContent';
+import Close from '../asset/Close';
+import { IconButton } from '@material-ui/core';
 
 
 //hooks
@@ -47,7 +49,11 @@ export default function ContractModal({open,url} :{
 
               </div>
             </div>  
+            <IconButton className={styles['close']} onClick={()=>{history.goBack()}}>
+            <Close/>
+          </IconButton>
         </DialogContent>
+    
       </Dialog>
  
   );
