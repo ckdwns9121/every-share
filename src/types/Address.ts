@@ -1,5 +1,5 @@
 
-export interface Address{
+export interface IAddress{
     jibunAddr: string,
     roadAddr: string,
     siNm?: string,

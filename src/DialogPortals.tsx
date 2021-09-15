@@ -3,9 +3,9 @@ type Props={
     children: React.ReactNode;
 }
 
-const SnackbarPortal=({children} :Props )=>{
-    const el : any = document.getElementById('snackbar');
+const DialogPortals=({children} :Props )=>{
+    const el : any = document.getElementById('dialog');
     return ReactDom.createPortal(children, el);
 }
 
-export default SnackbarPortal
+export default DialogPortals;

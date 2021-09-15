@@ -1,9 +1,9 @@
 import EventContainer from '../../containers/main/EventContainer';
 import {RouteComponentProps} from 'react-router-dom';
-import {MatchId} from '../../types/RouterParams';
+import {IMatchId} from '../../types/RouterParams';
 
 
-function EventPage({match} : RouteComponentProps<MatchId>){
+function EventPage({match} : RouteComponentProps<IMatchId>){
 
     const {id}= match.params;
     return(

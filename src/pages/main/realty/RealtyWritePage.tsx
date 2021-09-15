@@ -1,8 +1,8 @@
 import RealtyWriteContainer from '../../../containers/main/realty/RealtyWriteContainer';
 import {RouteComponentProps} from 'react-router-dom';
-import {MatchId} from '../../../types/RouterParams';
+import {IMatchId} from '../../../types/RouterParams';
 
-function RealtyWritePage({match} : RouteComponentProps<MatchId>){
+function RealtyWritePage({match} : RouteComponentProps<IMatchId>){
 
     const {id,modal} = match.params;
 

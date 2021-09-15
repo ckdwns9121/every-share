@@ -11,7 +11,7 @@ import {
 import { useHistory,Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { RoutePaths } from "../../core/utils/path";
-import { MatchId } from "../../types/RouterParams";
+import { IMatchId } from "../../types/RouterParams";
 import styles from "./DetailContainer.module.scss";
 import Header from "../../components/header/Header";
 import Like from "../../components/asset/Like";
@@ -26,7 +26,6 @@ import WASHER from "../../static/svg/options/washer.svg";
 import ROAD_VIEW from "../../static/svg/view.svg";
 import PHONE from "../../static/svg/phone.svg";
 import MESSAGE from "../../static/svg/message.svg";
-import HOME from "../../static/image/test.png";
 import CONTRACT from "../../static/svg/contract.svg";
 
 //modal
@@ -38,7 +37,7 @@ import { requestGetRealty } from "../../api/realty";
 import {requestLike} from '../../api/like';
 
 //type
-import { Realty } from "../../types/Realty";
+import { IRealty } from "../../types/Realty";
 
 //lib
 
@@ -49,9 +48,8 @@ import {
 } from "../../core/lib/formatChecker";
 
 //hooks
-import useLoading from "../../hooks/useLoading";
 import { useToken } from "../../hooks/useStore";
-import useSnackbar  from "../../hooks/useSnackbar";
+import {useSnackbar,useLoading,useDialog}  from "../../hooks/useAsset";
 import {useSelector} from 'react-redux';
 
 //store
@@ -60,7 +58,8 @@ import {setLike} from '../../store/zone';
 
 //aseet
 import MARKER from '../../static/svg/map-marker.svg';
-function DetailContainer({ id, modal }: MatchId) {
+
+function DetailContainer({ id, modal }: IMatchId) {
  
   const history = useHistory();
   const dispatch = useDispatch();
@@ -68,9 +67,10 @@ function DetailContainer({ id, modal }: MatchId) {
   const access_token = useToken();
   const {loading,handleLoading } = useLoading();
   const [handleOpen, handleClose] = useSnackbar();
+  const openDialog = useDialog();
   const kakao_map = useRef<any>(null); //카카오 맵
 
-  const [realty, setRealty] = useState<Realty | null>(null);
+  const [realty, setRealty] = useState<IRealty | null>(null);
   const [realty_images, setImages] = useState<any>([]);
   const [contract_image, setContractImage] = useState<any>([]);
 
@@ -119,6 +119,9 @@ function DetailContainer({ id, modal }: MatchId) {
       handleOpen('서버에 오류가 발생했습니다..',true,false,'error');
       console.log(e.response);
     }
+  }
+  const onClickContact =()=>{
+    openDialog('test','test2',true,()=>{},()=>{});
   }
   useEffect(() => {
     let container = document.getElementById("detail-map");
@@ -259,7 +262,7 @@ function DetailContainer({ id, modal }: MatchId) {
           </Link>
           :
           <div className={styles['link']}>
-            <Button className={styles['contact-button']}>
+            <Button className={styles['contact-button']} onClick={onClickContact}>
               간편 문의
             </Button>
         <a href="tel:010-4788-8227" >

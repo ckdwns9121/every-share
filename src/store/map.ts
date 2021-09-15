@@ -20,7 +20,7 @@ type Actions = ActionType<typeof actions>;
 interface Response {
     data : any
 }
-interface State{
+interface IState{
     level: number,
     position:{
         lat : number,
@@ -30,7 +30,7 @@ interface State{
     area: object,
 }
 
-const initState : State ={
+const initState : IState ={
     level : 5,
     position :{ lat:0,lng:0},
     address: null,
@@ -51,7 +51,7 @@ export function* mapSaga(){
 }
 
 
-const map = createReducer<State,Actions>(initState ,{
+const map = createReducer<IState,Actions>(initState ,{
     [SET_LEVEL]: (state, action) =>
     {
         return {

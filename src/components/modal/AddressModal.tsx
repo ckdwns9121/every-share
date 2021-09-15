@@ -18,7 +18,7 @@ import Arrow from '../asset/Arrow';
 import SEARCH from '../../static/svg/search-light.svg';
 import AddressList from '../../components/address/AddressList';
 //type
-import {Address} from '../../types/Address';
+import {IAddress} from '../../types/Address';
 
 
 const Transition = React.forwardRef(function Transition(
@@ -31,7 +31,7 @@ const Transition = React.forwardRef(function Transition(
 export default function AddressModal({open,addr,onChange,list,onClick} :{
   open:boolean, 
   addr:string ,
-  list: Address[] | null,
+  list: IAddress[] | null,
   onChange:(e : React.ChangeEvent<HTMLInputElement>)=>void
   onClick: (jibun : string) =>void;
 

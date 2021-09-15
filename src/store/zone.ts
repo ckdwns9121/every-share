@@ -1,5 +1,5 @@
 import { createSlice,PayloadAction} from "@reduxjs/toolkit";
-import { Realty } from "../types/Realty";
+import { IRealty } from "../types/Realty";
 
 export interface State{
     zone_list: any;
@@ -18,7 +18,7 @@ const zoneSlice = createSlice({
         },
         setLike:(state,action:PayloadAction<any>)=>{
             const {like, realty_id} = action.payload;
-            const index= state.zone_list.findIndex((item : Realty)=>item.realty_id===realty_id);
+            const index= state.zone_list.findIndex((item : IRealty)=>item.realty_id===realty_id);
             if(index!==-1){
                 state.zone_list[index].isLiked = like;
             }

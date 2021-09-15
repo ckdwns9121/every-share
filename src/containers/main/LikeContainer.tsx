@@ -9,17 +9,17 @@ import {requestLikeList} from '../../api/like';
 
 //hook
 import {useToken} from '../../hooks/useStore';
-import useLoading from '../../hooks/useLoading';
+import {useLoading} from '../../hooks/useAsset';
 
 //type
-import {Realty} from '../../types/Realty';
+import {IRealty} from '../../types/Realty';
 
 
 function LikeContainer(){
 
     const access_token = useToken();
     const {loading,handleLoading} = useLoading();
-    const [likes, setLikes] = useState<Realty[] | null | any >(null);
+    const [likes, setLikes] = useState<IRealty[] | null | any >(null);
 
     const callGetApiLikeList =async()=>{
         try{

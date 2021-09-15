@@ -1,6 +1,6 @@
 
 
-export interface User{
+export interface IUser{
     user :{
         user_id : number,
         email:string,

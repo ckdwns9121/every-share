@@ -1,9 +1,9 @@
 
-export interface MatchId{
+export interface IMatchId{
     id: string,
     modal?:string | undefined
 }
 
-export interface MatchModal{
+export interface IMatchModal{
     modal? : string
 }

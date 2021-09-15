@@ -1,4 +1,4 @@
-export interface Realty{
+export interface IRealty{
 addr: string,
 addr_detail:string,
 addr_extra: string|null

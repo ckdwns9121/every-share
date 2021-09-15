@@ -25,20 +25,17 @@ interface Response {
     data : object
 }
 
-interface State{
+interface IState{
     realties : any;
     success : boolean,
     error: boolean,
 }
 
-const initState : State ={
+const initState : IState ={
     realties : [],
     success : false,
     error: false,
 }
-
-
-
 
 function *getRealtiesSaga(action: any) : Generator{
     try{   
@@ -63,7 +60,7 @@ export function* realtiesSaga(){
 }
 
 
-const realties = createReducer<State,Actions>(initState ,{
+const realties = createReducer<IState,Actions>(initState ,{
     [GET_LIST]: (state, action) =>
     {
         return {

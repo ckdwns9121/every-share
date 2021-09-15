@@ -4,9 +4,9 @@ import {createAction, ActionType, createReducer} from 'typesafe-actions';
 
 const SET_FILTERS  = 'filter/SET_FILTERS';
 
-export const set_filters = createAction(SET_FILTERS)<Payload>();
+export const setFilter = createAction(SET_FILTERS)<Payload>();
 
-const actions ={set_filters};
+const actions ={setFilter};
 
 type Actions = ActionType<typeof actions>
 
@@ -14,20 +14,20 @@ interface Payload {
     type : string,
     value : boolean
 }
-export interface State {
+export interface IFilter {
     oneroom: boolean,
     tworoom:boolean,
     op : boolean,
     duplex : boolean,
 }
-const initState : State= {
+const initState : IFilter= {
     oneroom : true,
     tworoom : true,
     op  : true,
     duplex:true,
 };
 
-const filters = createReducer<State, Actions>(initState, {
+const filters = createReducer<IFilter, Actions>(initState, {
     [SET_FILTERS]: (state, action) =>
     {
         const {type,value} = action.payload;

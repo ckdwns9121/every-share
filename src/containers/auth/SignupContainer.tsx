@@ -15,8 +15,7 @@ import Checkbox from '../../components/checkbox/Checkbox';
 //hooks
 import {useHistory} from 'react-router-dom';
 import { RoutePaths } from '../../core/utils/path';
-import useLoading from '../../hooks/useLoading';
-import useSnackbar from '../../hooks/useSnackbar';
+import {useSnackbar,useLoading} from '../../hooks/useAsset';
 
 //api
 import {requsetPostSignup} from '../../api/auth';

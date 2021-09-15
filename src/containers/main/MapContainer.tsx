@@ -9,8 +9,8 @@ import {Button} from '@material-ui/core';
 import {RoutePaths} from '../../core/utils/path';
 
 //types
-import {MatchModal} from '../../types/RouterParams';
-import {Address} from '../../types/Address';
+import {IMatchModal} from '../../types/RouterParams';
+import {IAddress} from '../../types/Address';
 
 //hooks
 import {useSelector , useDispatch} from 'react-redux';
@@ -61,7 +61,7 @@ declare global {
 type Zoom = 'in' | 'out';
 
 
-function MapContainer({modal}:MatchModal){
+function MapContainer({modal}:IMatchModal){
 
     const access_token = useToken();
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -78,7 +78,7 @@ function MapContainer({modal}:MatchModal){
     const map_level = useRef<number>(5); // 디폴트 레벨 -> //4 : 100m 6: 500m 7:1km
     const cluster_marker = useRef<any>(null);
     const [addr , setAddr] = useState<string>(''); //주소검색
-    const [addrList,setAddrList] = useState<Address[] | null>(null);
+    const [addrList,setAddrList] = useState<IAddress[] | null>(null);
     const zone_view = useRef<boolean>(false); // 매물 버튼 오픈 여부
     const [zoneButtonOpen ,setZoneButtonOpen] = useState<boolean>(false);
 
@@ -273,7 +273,7 @@ function MapContainer({modal}:MatchModal){
 
     /* 마지막 위치 기준으로 get_area 함수 호출하여 해당지역 받아오기 */
     useEffect(() => {
-        let storage  =localStorage.getItem('position');
+        let storage  = localStorage.getItem('position');
         if(storage){
             let item = JSON.parse(storage);
             map_position.current.lat= item.lat;

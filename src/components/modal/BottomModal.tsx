@@ -5,7 +5,7 @@ import classnames from 'classnames/bind';
 import BasicButton from '../button/BasicButton';
 import { Backdrop/*, ButtonBase*/ } from '@material-ui/core';
 import { RootState } from '../../store';
-import {set_filters} from '../../store/filter';
+import {setFilter} from '../../store/filter';
 
 //action
 
@@ -33,10 +33,10 @@ const BottomModal = ({ open, handleClose }:Props) => {
     const {type1,type2,type3,type4} = state;
 
     const handleSetting=()=>{
-        dispatch(set_filters({type:'oneroom',value:type1}));
-        dispatch(set_filters({type:'tworoom',value:type2}));
-        dispatch(set_filters({type:'op',value:type3}));
-        dispatch(set_filters({type:'duplex',value:type4}));
+        dispatch(setFilter({type:'oneroom',value:type1}));
+        dispatch(setFilter({type:'tworoom',value:type2}));
+        dispatch(setFilter({type:'op',value:type3}));
+        dispatch(setFilter({type:'duplex',value:type4}));
         const storageFilter ={
             oneroom:type1,tworoom:type2,op:type3,duplex:type4
         }

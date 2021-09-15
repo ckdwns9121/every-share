@@ -8,19 +8,19 @@ import {useToken} from '../../../hooks/useStore';
 import { useEffect ,useState} from 'react';
 import {useHistory} from 'react-router-dom';
 
-import useLoading from '../../../hooks/useLoading';
+import {useLoading} from '../../../hooks/useAsset';
 
 //api
 import {requsetMyRealtyList} from '../../../api/realty';
 //type
-import {Realty} from '../../../types/Realty';
+import {IRealty} from '../../../types/Realty';
 
 
 function RealtyEnrollmentContainer(){
     
     const history = useHistory();
     const access_token = useToken();
-    const [realties, setRealties] = useState<Realty[]>([]);
+    const [realties, setRealties] = useState<IRealty[]>([]);
     const {handleLoading} = useLoading();
 
 

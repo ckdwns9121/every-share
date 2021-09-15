@@ -16,12 +16,12 @@ import {requestGetAddressInfo} from '../../../api/address';
 //hooks
 import {useToken} from '../../../hooks/useStore';
 import { useHistory } from "react-router";
-import { RoutePaths } from "../../../core/utils/path";
-import useLoading from '../../../hooks/useLoading';
+import {useLoading} from '../../../hooks/useAsset';
 
 //lib
 import {numberFormat} from '../../../core/lib/formatChecker';
 import {onlyNumber} from '../../../core/lib/formater';
+import { RoutePaths } from "../../../core/utils/path";
 
 
 type TitleComponentProps = {

@@ -15,7 +15,7 @@ import { useHistory } from 'react-router';
 //component
 import Header from '../../components/header/Header';
 //type
-import {Realty} from '../../types/Realty';
+import {IRealty} from '../../types/Realty';
 import RealtyItemList from '../item/RealtyList';
 
 
@@ -28,7 +28,7 @@ const Transition = React.forwardRef(function Transition(
 
 export default function ZoneModal({open,realties} :{
   open:boolean, 
-  realties:Realty[]
+  realties:IRealty[]
 }) {
   const classes = useStyles();
   const history = useHistory();

@@ -9,19 +9,19 @@ import Like from '../asset/Like';
 import Empty from '../asset/Empty';
 
 //type
-import {Realty} from '../../types/Realty';
+import {IRealty} from '../../types/Realty';
 
 import {dateToYYYYMMDD,imageFormat} from '../../core/lib/formatChecker';
 
 
 interface Relties{
-    realties? : Realty[];
+    realties? : IRealty[];
     like ? :boolean,
     enrollment?:boolean,
     contact?:boolean,
 }
 
-interface Props extends Realty{
+interface Props extends IRealty{
     like ? :boolean,
     enrollment?:boolean,
     contact?:boolean,

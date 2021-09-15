@@ -2,7 +2,15 @@
 import {Button, ButtonBase} from '@material-ui/core';
 import {useHistory} from 'react-router-dom';
 import styles from './AddressList.module.scss';
-import {Address} from '../../types/Address';
+
+
+export interface Address{
+    jibunAddr: string,
+    roadAddr: string,
+    siNm?: string,
+    zipNo?: string
+    onClick: (jibun : string) =>void | Promise<void>;
+}
 
 
 interface Props{

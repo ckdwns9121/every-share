@@ -1,6 +1,6 @@
 //유저 스토어
 import {createAction, ActionType, createReducer} from 'typesafe-actions';
-import {User} from '../types/User';
+import {IUser} from '../types/User';
 
 const SET_USER  = 'user/SET_USER';
 const LOGOUT = 'user/LOGOUT';
@@ -12,7 +12,7 @@ const actions ={set_user,logout};
 
 type Actions = ActionType<typeof actions>
 
-type State =  User;
+type State =  IUser;
 
 const initState : State = {
     user :null

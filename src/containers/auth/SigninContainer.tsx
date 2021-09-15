@@ -25,9 +25,7 @@ import {requestPostSignin,requestGetUser} from '../../api/auth';
 import {set_user} from '../../store/user';
 
 //hook
-import useLoading from '../../hooks/useLoading';
-
-import useSnackbar from '../../hooks/useSnackbar';
+import {useSnackbar,useLoading} from '../../hooks/useAsset';
 
 
 const cx= cn.bind(styles);
