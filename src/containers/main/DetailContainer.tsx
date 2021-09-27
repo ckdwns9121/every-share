@@ -34,6 +34,7 @@ import ContractModal from "../../components/modal/ContractModal";
 
 //api
 import { requestGetRealty } from "../../api/realty";
+import {requestContact} from '../../api/contact';
 import {requestLike} from '../../api/like';
 
 //type
@@ -121,7 +122,19 @@ function DetailContainer({ id, modal }: IMatchId) {
     }
   }
   const onClickContact =()=>{
-    openDialog('test','test2',true,()=>{},()=>{});
+    openDialog('해당 매물을 문의하시겠습니까?','빠른 시일내에 연락을 드립니다.',true,async()=>{
+      try{
+        console.log('문의');
+        if(access_token){
+          const res = await requestContact(access_token,id);
+          console.log(res);
+        }
+ 
+      }
+      catch(e  : any){
+        console.log(e.response);
+      }
+    },()=>{});
   }
   useEffect(() => {
     let container = document.getElementById("detail-map");

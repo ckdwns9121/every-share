@@ -27,7 +27,7 @@ function Dialog(){
   }
 
     return(
-        <Backdrop className={classes.backdrop} open={open}>
+        <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
         <div className={styles['dialog']}>
           <div className={styles['wrapper']}>
               <div className={styles['title']}>
