@@ -57,7 +57,7 @@ const BottomModal = ({ open, handleClose }:Props) => {
 
     return (
         <>
-            <div className={cn('bottom-modal', { on: open })}>
+            <nav className={cn('bottom-modal', { on: open })}>
             <div className={styles['swiper']}/>
                 <div className={styles['box']}>
                     <div className={styles['modal-title']}>
@@ -69,7 +69,7 @@ const BottomModal = ({ open, handleClose }:Props) => {
                         <BasicButton name={"조건 설정하기"} disable={false} onClick={handleSetting} />
                     </div>
                 </div>
-            </div>
+            </nav>
             <Backdrop open={open} className={styles['dim']}  onClick={handleClose}/>
         </>
     );
