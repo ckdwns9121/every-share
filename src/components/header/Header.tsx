@@ -31,7 +31,7 @@ function Header({title,children}:Props){
 
   
     return(
-        <div className={styles['header']} ref={headerRef}>
+        <header className={styles['header']} ref={headerRef}>
         <div className={cx('content', { shadow })}>
             <IconButton
                 className={styles['back-btn']}
@@ -45,7 +45,7 @@ function Header({title,children}:Props){
             {children}
             <div className={styles['title']}>{title}</div>
         </div>
-    </div>
+    </header>
     )
 }
 
