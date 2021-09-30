@@ -18,9 +18,7 @@ export const searchAddress = async (searchAddr: string) => {
     },
   };
 
-  console.log(searchAddr);
   const res = await axios.get(req, config);
-  console.log(res);
 
   return res.data.results.juso;
 };
