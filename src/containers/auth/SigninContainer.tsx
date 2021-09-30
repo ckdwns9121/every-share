@@ -36,7 +36,7 @@ function SigninContainer(){
     const ref = useRef<HTMLInputElement>(null);
     const dispatch = useDispatch();
     const {handleLoading} = useLoading();
-    const [handleOpen, handleClose] = useSnackbar();
+    const {handleOpen, handleClose}= useSnackbar();
 
 
     const [form,setForm] = useState<{email:string , password:string}>({email:'', password :''});

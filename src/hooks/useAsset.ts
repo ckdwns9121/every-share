@@ -1,4 +1,4 @@
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector,useDispatch} from "react-redux";
 import {RootState} from '../store';
 
 import { onLoading } from "../store/loading";
@@ -9,19 +9,22 @@ import { onDialog,offDialog} from '../store/dialog';
 /* 스낵바 훅*/
 export const useSnackbar =()=>{
     const dispatch = useDispatch();
-
-    const handleOpen =(message:string,open:boolean,up:boolean,variant:string )=>{
-        dispatch(onSnackbar({message,open,up,variant}));
-        setTimeout(()=>{
-            dispatch(offSnackbar());
-        },3000)
-    }
    
     const handleClose=()=>{
         dispatch(offSnackbar());
     }
-   
-    return [handleOpen,handleClose];
+
+    const handleOpen =(message2:string,open:boolean,up:boolean,variant:string )=>{
+        dispatch(onSnackbar({message:message2,open,up,variant}));
+        setTimeout(()=>{
+            dispatch(offSnackbar());
+        },3000)
+    }
+
+    const temp =(title:string) =>{
+        console.log(title);
+    }
+    return {handleOpen,handleClose,temp};
 }
 
 /* 로딩 훅*/

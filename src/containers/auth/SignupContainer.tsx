@@ -39,7 +39,7 @@ interface Props{
 function SignupContainer(){
 
   const {handleLoading} = useLoading();
-  const [handleOpen, handleClose] = useSnackbar();
+  const {handleOpen, handleClose} = useSnackbar();
   const ref = useRef<HTMLInputElement>(null);
 
     const [form,setForm] = useState<any>({

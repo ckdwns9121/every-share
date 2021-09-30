@@ -67,7 +67,7 @@ function DetailContainer({ id, modal }: IMatchId) {
   const {user} = useSelector((state:RootState)=>state.user);
   const access_token = useToken();
   const {loading,handleLoading } = useLoading();
-  const [handleOpen, handleClose] = useSnackbar();
+  const {temp,handleOpen, handleClose} = useSnackbar();
   const openDialog = useDialog();
   const kakao_map = useRef<any>(null); //카카오 맵
 
@@ -160,6 +160,9 @@ function DetailContainer({ id, modal }: IMatchId) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    return(()=>{
+      handleClose();
+    })
   }, []);
 
   useEffect(() => {
