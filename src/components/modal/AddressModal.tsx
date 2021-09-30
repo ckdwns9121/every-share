@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useRef,useEffect} from 'react';
 import styles from './AddressModal.module.scss';
 
 //material
@@ -19,6 +19,7 @@ import SEARCH from '../../static/svg/search-light.svg';
 import AddressList from '../../components/address/AddressList';
 //type
 import {IAddress} from '../../types/Address';
+import { readConfigFile } from 'typescript';
 
 
 const Transition = React.forwardRef(function Transition(
@@ -38,6 +39,14 @@ export default function AddressModal({open,addr,onChange,list,onClick} :{
 }) {
   const classes = useStyles();
   const history = useHistory();
+  const ref = useRef<HTMLInputElement>(null);
+
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      ref.current?.focus();
+    },0)
+  },[open])
 
   return (
       <Dialog  
@@ -51,7 +60,7 @@ export default function AddressModal({open,addr,onChange,list,onClick} :{
                       <Arrow/>
                 </IconButton>
                 <div className={styles['address-input']}>
-                  <input className={styles['input']}type ="text" value={addr} onChange={onChange}placeholder={'지역, 지하철역, 학교검색'}/>
+                  <input className={styles['input']}type ="text" value={addr} onChange={onChange}placeholder={'지역, 지하철역, 학교검색'}  ref={ref}/>
                 </div>
                 <IconButton className={styles['address-search']}>
                     <img src={SEARCH} alt="검색"/>

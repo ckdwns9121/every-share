@@ -1,5 +1,5 @@
 /* 이메일 로그인 페이지 */
-import {useState} from 'react';
+import {useState,useRef,useEffect} from 'react';
 import styles from './SigninContainer.module.scss';
 import LOGO from '../../static/svg/logo2.svg';
 import {ButtonBase,IconButton} from '@material-ui/core';
@@ -33,6 +33,7 @@ const cx= cn.bind(styles);
 function SigninContainer(){
 
     const history = useHistory();
+    const ref = useRef<HTMLInputElement>(null);
     const dispatch = useDispatch();
     const {handleLoading} = useLoading();
     const [handleOpen, handleClose] = useSnackbar();
@@ -75,6 +76,9 @@ function SigninContainer(){
 
         }
     }
+    useEffect(()=>{
+        ref?.current?.focus();
+    },[])
     return(
         <div className={styles['container']}>
             <div className={styles['content']}>
@@ -85,7 +89,7 @@ function SigninContainer(){
                 </div>
                 <div className={styles['wrapper']}>
                     <div className={styles['input-box']}>
-                        <input type='text' name="email" placeholder={"이메일을 입력해주세요"}  value ={email} onChange={handleChange}/>
+                        <input type='text' name="email" placeholder={"이메일을 입력해주세요"}  value ={email} onChange={handleChange} ref={ref}/>
                     </div>
                     <div className={styles['input-box']}>
                         <input type='password' name="password" placeholder={"비밀번호를 입력해주세요"}  value={password} onChange={handleChange}/>

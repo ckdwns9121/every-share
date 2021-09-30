@@ -1,6 +1,6 @@
 /* 회원가입 페이지 */
 
-import {useState,useCallback} from 'react';
+import {useState,useCallback,useRef,useEffect} from 'react';
 
 //styles
 import styles from './SignupContainer.module.scss';
@@ -40,6 +40,7 @@ function SignupContainer(){
 
   const {handleLoading} = useLoading();
   const [handleOpen, handleClose] = useSnackbar();
+  const ref = useRef<HTMLInputElement>(null);
 
     const [form,setForm] = useState<any>({
         email:'',
@@ -175,6 +176,12 @@ function SignupContainer(){
       // step <5 ? setStep(prev=>prev+1) :onClickSignup()
     };
 
+
+    useEffect(()=>{
+        console.log(ref);
+        ref?.current?.focus();
+    },[step])
+
     return(
         <>
         <div className={header_styles['header']}>
@@ -196,7 +203,7 @@ function SignupContainer(){
                         </div>
                         {step < 5 ? 
                         <div className={styles['input-box']}>
-                            <input type={SIGN_STEP[step-1].type} value={SIGN_STEP[step-1].value} onChange={onChange} name={SIGN_STEP[step-1].name}/>
+                            <input type={SIGN_STEP[step-1].type} value={SIGN_STEP[step-1].value} onChange={onChange} name={SIGN_STEP[step-1].name} ref={ref}/>
                         </div> :
                         <div className={styles['check-box']}>
                             <Checkbox id={'privacy'} text={'[필수] 개인정보 수집 이용에 동의합니다.'} check={agree.privacy} onChange={(e)=>{
@@ -225,31 +232,6 @@ function SignupContainer(){
     )
 }
 
-// function StepComponent({step,title, type,value,onChange,name} : PanelProp){
-
-//     const width : number = step === 0 ? step : (100 * step) /5;
-//     const result : string = width.toString();
-//     return(
-//         <div className={styles['wrapper']}>
-//             <div className={styles['title']}>
-//                 <p dangerouslySetInnerHTML={{__html:title}} style={{color:"#222", fontWeight:500,fontSize:"20px"}}/>
-//             </div>
-//             {step < 5 ? 
-//             <div className={styles['input-box']}>
-//                   <input type={type} value={value} onChange={onChange} name={name}/>
-//             </div> :
-//             <div className={styles['check-box']}>
-//                   <Checkbox id={'privacy'} text={'[필수] 개인정보 수집 이용에 동의합니다.'} check={true} onChange={()=>{}}/>
-//                   <Checkbox id={'service'} text={'[필수] 서비스 이용 약관에 동의합니다.'} check={true} onChange={()=>{}}/>
-//                   <Checkbox id={'marketing'} text={'[선택] 마케팅 수신에 동의합니다.'} check={true} onChange={()=>{}}/>
-//             </div>
-//             }
-//             <div className={styles['step-bar']}>
-//                 <div className={styles['step-success']} style={{width:`${result}%`}}/>
-//             </div>
-//         </div>
-//     )
-// }
 
 
 export default SignupContainer;
