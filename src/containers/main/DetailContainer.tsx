@@ -46,7 +46,9 @@ import {
   dateToRelative,
   imageFormat,
   DBImageFormat,
+  dateToMMDD
 } from "../../core/lib/formatChecker";
+import {getFormatDateString} from '../../core/lib/calculateDate';
 
 //hooks
 import { useToken } from "../../hooks/useStore";
@@ -122,19 +124,34 @@ function DetailContainer({ id, modal }: IMatchId) {
     }
   }
   const onClickContact =()=>{
+    if(access_token){
+
+    
     openDialog('해당 매물을 문의하시겠습니까?','빠른 시일내에 연락을 드립니다.',true,async()=>{
       try{
         console.log('문의');
         if(access_token){
           const res = await requestContact(access_token,id);
           console.log(res);
+          if(res.status===200){
+            handleOpen('매물 문의가 완료되었습니다.',true,false,'info');
+          }
+          else{
+            handleOpen(res.data.message,true,false,'error');
+          }
         }
  
       }
       catch(e  : any){
         console.log(e.response);
+        handleOpen(e.response.data.message,true,false,'error');
       }
-    },()=>{});
+    },()=>{})
+  }
+  else{
+    handleOpen('로그인이 필요한 서비스입니다.',true,false,'warning');
+  }
+    ;
   }
   useEffect(() => {
     let container = document.getElementById("detail-map");
@@ -228,6 +245,8 @@ function DetailContainer({ id, modal }: IMatchId) {
               value={ realty!==null ? `${realty?.realty_my_floors} /${realty?.realty_all_floors}층` : ''}
             />
             <RealtyInfo text={"종류"} value={"복층 오피스텔"} />
+            <RealtyInfo text={"양도 시작일"} value={getFormatDateString(realty?.oper_start_time)} />
+            <RealtyInfo text={"양도 마감일"} value={getFormatDateString(realty?.oper_end_time)} />
           </div>
           <div className={styles["realty-info"]}>
             <div className={styles["title"]}>옵션</div>

@@ -103,7 +103,6 @@ function MapContainer({modal}:IMatchModal){
         kakao_map.current.setLevel(level, {animate: {duration: 300}});
         localStorage.setItem('level', level);
         dispatch(setLevel(level));
-        
     },[dispatch]);
 
     /* 맵 중심좌표를 설정하는 함수 */
@@ -130,7 +129,8 @@ function MapContainer({modal}:IMatchModal){
                     // calculator 각 사이 값 마다 적용될 스타일을 지정한다
                     width: '40px',
                     height: '40px',
-                    background: 'rgba(34, 34, 34, .8)',
+                    // background: 'rgba(34, 34, 34, .8)',
+                    background: '#0066ff',
                     borderRadius: '30px',
                     color: '#fff',
                     border: '1px solid white',
@@ -148,9 +148,9 @@ function MapContainer({modal}:IMatchModal){
 
         /* 맵의 중심좌표가 변경되었을 시 이벤트 */
         window.kakao.maps.event.addListener(map, 'center_changed', () => {
-            const level = map.getLevel();
+            const lv = map.getLevel();
             const latlng = map.getCenter();
-            map_level.current = level;
+            map_level.current = lv;
       
             map_position.current.lat = latlng.getLat();
             map_position.current.lng = latlng.getLng();
@@ -159,7 +159,7 @@ function MapContainer({modal}:IMatchModal){
             // const new_position = { lat, lng };
             const new_position = { lat, lng };
             localStorage.setItem('position', JSON.stringify(new_position));
-            localStorage.setItem('level', level);
+            localStorage.setItem('level', lv);
             setZoneButtonOpen(false);
             zone_view.current =false;
         });
@@ -204,13 +204,15 @@ function MapContainer({modal}:IMatchModal){
                 'clusterclick',
                 (cluster : any ) => {
                     const overlays = cluster.getMarkers();
-                    if (overlays.length > 10) {
+               
+                    if (overlays.length > 10 ||map_level.current >11) {
                         var level = map.getLevel() - 1;
                         map.setLevel(level, {
                             anchor: cluster.getCenter(),
                             animate: 300,
                         });
-                    } else {
+                    } 
+                    else {
                         zone_view.current=true;
                         const zoneList = overlays.map((overlay:any) => {
                             const data = overlay.getContent();
@@ -230,7 +232,7 @@ function MapContainer({modal}:IMatchModal){
             );
         }
         /* 윈도우 클릭이벤트 넘겨야 하는 주차장 마커 클릭함수 */
-        window.onClickOverlay = (realty_id:string|number) => {
+        window.onClickOverlay = (realty_id:string) => {
             history.push(RoutePaths.main.detail + '/' + realty_id);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -283,20 +285,6 @@ function MapContainer({modal}:IMatchModal){
         if(lv){
            map_level.current= parseInt(lv);
         }
-        // if (storage_position && storage_position.lat && storage_position.lng) {
-        //     map_position.current = storage_position;
-        //     const { lat, lng } = map_position.current;
-        //     dispatch(get_area({ lat, lng }));
-        // } else {
-        //     const init_position = {
-        //         lat: 35.8360328674316,
-        //         lng: 128.5743408203125,
-        //     };
-        //     map_position.current = init_position;
-        //     const { lat, lng } = init_position;
-        //     localStorage.setItem('position', JSON.stringify(init_position));
-        //     dispatch(get_area({ lat, lng }));
-        // }
     }, []);
 
     useEffect(()=>{
