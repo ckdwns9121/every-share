@@ -1,0 +1,36 @@
+@import '../../../styles/Root';
+
+.wrapper{
+  width: 100%;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+    .input-container{
+      width: 100%;
+      
+      .input-box {
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        &:last-child{
+          margin-top: 15px;
+        }
+
+        input{
+            letter-spacing: $letter-spaceing;
+            font-size: 16px;
+            color:#222;
+            box-sizing: border-box;
+            border-radius: 5px;
+            background-color:#EFEFEF;
+            height: 48px;
+            padding-left:15px;
+            max-width: 224px;
+            margin-right:10px;
+        }
+      }
+      
+    } 
+}
