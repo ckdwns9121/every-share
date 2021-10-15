@@ -1,3 +1,9 @@
+.default {
+    :global(.MuiPaper-root) {
+        background-color: #333;
+    }
+}
+
 .success {
     :global(.MuiPaper-root) {
         background-color: #4caf50;

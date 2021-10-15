@@ -1,5 +1,18 @@
 const week = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
 
+export const calculateDate2 =(start_date,end_date) =>{
+    const start = new Date(start_date);
+    const end = new Date(end_date);
+
+    const elapsedMSec = end.getTime() - start.getTime(); // 172800000
+    const elapsedDay = elapsedMSec / 1000 / 60 / 60; // 2
+
+    console.log(elapsedDay > 0);
+    return elapsedDay > 0;
+
+
+}
+
 export const calculateDate = (start_date, end_date, start_time, end_time) => {
     const start = new Date(start_date + ' ' + start_time);
     const end = new Date(end_date + ' ' + end_time);
@@ -52,7 +65,7 @@ export const getFormatDate = (date) => {
     var day = date.getDate();
     month = month >= 10 ? month : '0' + month;
     day = day >= 10 ? day : '0' + day;
-    return year + '/' + month + '/' + day;
+    return year + '-' + month + '-' + day;
 };
 
 export const getFormatDay = (params) => {

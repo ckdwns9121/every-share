@@ -1,11 +1,12 @@
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
+import {Variant} from '../hooks/useAsset';
 
 
 export interface Snackbar{
     open: boolean,
     up: boolean,
     message : string,
-    variant: string,
+    variant: Variant,
 }
 const initialState={
     open:false,

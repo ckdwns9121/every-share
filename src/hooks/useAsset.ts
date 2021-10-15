@@ -5,7 +5,7 @@ import { onLoading } from "../store/loading";
 import { onSnackbar,offSnackbar } from "../store/snackbar";
 import { onDialog,offDialog} from '../store/dialog';
 
-
+export type Variant ='default' | 'success' | 'error' | 'warning' | 'info'
 /* 스낵바 훅*/
 export const useSnackbar =()=>{
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export const useSnackbar =()=>{
         dispatch(offSnackbar());
     }
 
-    const handleOpen =(message2:string,open:boolean,up:boolean,variant:string )=>{
+    const handleOpen =(message2:string,open:boolean,up:boolean,variant:Variant )=>{
         dispatch(onSnackbar({message:message2,open,up,variant}));
         setTimeout(()=>{
             dispatch(offSnackbar());

@@ -1,13 +1,7 @@
 import styles from "./RealtyWriteContainer.module.scss";
-import { useState,useCallback, useEffect } from "react";
-import {Button} from '@material-ui/core';
+import React, { useState,useCallback, useEffect } from "react";
+import {Button,ButtonBase} from '@material-ui/core';
 
-import plusIcon from "../../../static/svg/plug.svg";
-
-import realty1 from "../../../static/image/realty/rinda1.jpg";
-import realty2 from "../../../static/image/realty/rinda2.jpg";
-import contract1 from "../../../static/image/realty/contract1.gif";
-import defaultImage from "../../../static/image/realty/default.jpg";
 
 //api
 import {requestPostRealty} from '../../../api/realty';
@@ -16,18 +10,13 @@ import {requestGetAddressInfo} from '../../../api/address';
 //hooks
 import {useToken} from '../../../hooks/useStore';
 import { useHistory } from "react-router";
-import {useLoading} from '../../../hooks/useAsset';
+import {useLoading,useSnackbar} from '../../../hooks/useAsset';
 
 //lib
 import {numberFormat} from '../../../core/lib/formatChecker';
+import {getFormatDate,calculateDate2} from '../../../core/lib/calculateDate';
 import {onlyNumber} from '../../../core/lib/formater';
 import { RoutePaths } from "../../../core/utils/path";
-
-
-type TitleComponentProps = {
-  text: string;
-};
-
 
 declare global {
   interface Window {
@@ -35,12 +24,17 @@ declare global {
   }
 }
 
-type Props={
+let today: Date = new Date();
+
+interface TitleComponentProps {
+  text: string;
+};
+
+interface Props{
   id?: string
 }
 
-
-const TitleComponent: React.FC<TitleComponentProps> = ({ text }) => {
+const TitleBar: React.FC<TitleComponentProps> = ({ text }) => {
   return (
     <div className={styles["title-box"]}>
       <p className={styles["title"]}>{text}</p>
@@ -50,29 +44,27 @@ const TitleComponent: React.FC<TitleComponentProps> = ({ text }) => {
 
 function RealtyWriteContainer({id}:Props) {
 
-
   const history = useHistory();
   const access_token = useToken();
+  const {loading,handleLoading} = useLoading(); 
+  const {handleOpen, handleClose} = useSnackbar();
+
   const [realty_images , setImages] = useState<object[]>([]);
   const [contract_image , setContractImage] = useState<string>('');
   const [realty_srcs , setSrcs] = useState<string[]>([]);
   const [contract_src , setContractSrc] = useState<string>('');
 
   const [open ,setOpen] = useState<boolean>(false);
-  const {loading,handleLoading} = useLoading(); 
-
   const [realty_name , setReatlyName] = useState<string>(''); //이름
   const [addr, setAddr ] = useState<string>(''); //주소
   const [addr_detail,setAddrDetail] = useState<string>('');
   const [all_floor,setAllFloor] = useState<number|string>("");
   const [my_floor,setMyFloor] = useState<number|string>("");
-
-  const [start_date , setStartDate] = useState<string|null>(null);
-  const [end_date , setEndDate] = useState<string|null>(null);
+  const [date ,setDate] = useState<{start_date : string ,end_date: string }>({start_date:getFormatDate(today),end_date : getFormatDate(new Date(today.getFullYear(), today.getMonth(), today.getDate()+1))});
   const [comment,setComment] = useState<string>('');
   const [sub_comment,setSubComment] = useState<string>('');
-  const [deposit ,setDeposit] = useState<string>('500'); //보증금
-  const [monthly_rent ,setMonthRent] = useState<string>('30'); //월세
+  const [deposit ,setDeposit] = useState<string>(''); //보증금
+  const [monthly_rent ,setMonthRent] = useState<string>(''); //월세
 
   const [position ,setPosition] = useState({lat:0,lng:0});
 
@@ -83,6 +75,23 @@ function RealtyWriteContainer({id}:Props) {
   const onChangeMonthRent = (e: React.ChangeEvent<HTMLInputElement>) =>setMonthRent(e.target.value);
   const onChangeAllFloor = (e: React.ChangeEvent<HTMLInputElement>) =>setAllFloor(onlyNumber(e.target.value))
   const onChangeFloor = (e: React.ChangeEvent<HTMLInputElement>) =>setMyFloor(onlyNumber(e.target.value));
+
+  const onChangeDate =(e:React.ChangeEvent<HTMLInputElement>)=>{
+
+    const {name , value} = e.target;
+    const {start_date, end_date} = date;
+
+    if ( name==='start_date' ?  calculateDate2(value,end_date) : calculateDate2(start_date,value)) {
+      setDate({
+        ...date,
+        [name]: value,
+      });
+    }
+    else{
+      handleOpen('시작일이 종료일보다 많을 수 없습니다.',true,false,'default');
+
+    }
+  }
   
   // 매물 등록
   const onClickEnrollment = async()=>{
@@ -196,10 +205,10 @@ useEffect(() => {
 return (
     <div className={styles["container"]}>
       <div className={styles["content"]}>
-        <TitleComponent text="매물 기본 정보" />
+        <TitleBar text="매물 기본 정보" />
 
         <div className={styles["info-box"]}>
-          <input type="text"  name='name' placeholder="매물 이름을 입력하세요" value={realty_name} onChange={onChangeName}/>
+          <input type="text"  name='name' placeholder="매물 제목을 입력하세요 ex)○○대학교 앞 원룸 방 내놓습니다." value={realty_name} onChange={onChangeName}/>
           <select>
             <option value="oneroom">원룸</option>
             <option value="tworoom">투룸</option>
@@ -212,7 +221,7 @@ return (
             <option value="long">장기</option>
           </select>
           <div style={{position:'relative',width:"100%"}} >
-            <input type="text" placeholder="전체층수를 입력하세요" value={numberFormat(all_floor)} onChange={onChangeAllFloor}/>
+            <input type="text" placeholder="전체층수를 입력하세요" value={all_floor} onChange={onChangeAllFloor}/>
             <span className={styles['floor']}>층</span>
           </div>
           <div style={{position:'relative',width:"100%"}} >
@@ -225,7 +234,7 @@ return (
               <input
                 type="text"
                 onChange={onChangeDeposit}
-                value={deposit}
+                value={numberFormat(deposit)}
                 className={styles["costInput"]}
               />
               <p>만원</p>
@@ -234,7 +243,7 @@ return (
               <p>월세</p>
               <input
                 type="text"
-                value={monthly_rent}
+                value={numberFormat(monthly_rent)}
                 onChange={onChangeMonthRent}
                 className={styles["costInput"]}
               />
@@ -242,7 +251,6 @@ return (
             </div>
             <p className={styles["notice"]}>관리비 포함으로 작성.</p>
           </div>
-
           <div className={styles["description-box"]}>
             <p className={styles["subTitle"]}>매물 설명</p>
             <textarea
@@ -253,37 +261,37 @@ return (
             ></textarea>
           </div>
         </div>
-        <TitleComponent text="위치 정보" />
+        <TitleBar text="위치 정보" />
         <div className={styles["locationInfo-box"]}>
           <Button className={styles['address-search']} onClick={()=>setOpen(true)}>주소찾기</Button>
-          <input type="text" placeholder="주소" value={addr} readOnly/>
+          <input type="text" placeholder="주소" defaultValue={addr} readOnly/>
           <input type="text" placeholder="상세 주소"  value={addr_detail} onChange={(e)=>setAddrDetail(e.target.value)}/>
         </div>
 
-        <TitleComponent text="대여 기간" />
+        <TitleBar text="대여 기간" />
         <div className={styles["date-box"]}>
           <div className={styles["date"]}>
             <p className={styles["subTitle"]}>입주 시작 일자</p>
-            <input type="date" defaultValue="2021-06-21" />
+            <input type="date" value={(date.start_date)} min={getFormatDate(today)}  onChange={onChangeDate} name="start_date"/>
           </div>
 
           <div className={styles["date"]}>
             <p className={styles["subTitle"]}>입주 종료 일자</p>
-            <input type="date" defaultValue="2021-08-20" />
-          </div>
+            <input type="date" value={(date.end_date)} min={date.start_date} onChange={onChangeDate} name="end_date"/>
+          </div> 
         </div>
-        <TitleComponent text="추가 정보" />
+        <TitleBar text="추가 정보" />
         <div className={styles["additionalInfo-box"]}>
           <div className={styles["option-box"]}>
             <p className={styles["subTitle"]}>옵션 항목</p>
 
             <div className={styles["options"]}>
-              <button className={styles["option"]}>가스레인지</button>
-              <button className={styles["option"]}>전자레인지</button>
-              <button className={styles["option"]}>인덕션</button>
-              <button className={styles["option"]}>침대</button>
-              <button className={styles["option"]}>책상</button>
-              <button className={styles["option"]}>옷장</button>
+              <ButtonBase className={styles["option"]}>가스레인지</ButtonBase>
+              <ButtonBase className={styles["option"]}>전자레인지</ButtonBase>
+              <ButtonBase className={styles["option"]}>인덕션</ButtonBase>
+              <ButtonBase className={styles["option"]}>침대</ButtonBase>
+              <ButtonBase className={styles["option"]}>책상</ButtonBase>
+              <ButtonBase className={styles["option"]}>옷장</ButtonBase>
             </div>
           </div>
           <div className={styles["register-box"]}>

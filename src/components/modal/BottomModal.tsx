@@ -61,7 +61,7 @@ const BottomModal = ({ open, handleClose }:Props) => {
             <div className={styles['swiper']}/>
                 <div className={styles['box']}>
                     <div className={styles['modal-title']}>
-                        조건설정
+                        <span style={{letterSpacing:"-1.5px"}}>조건설정</span>
                         <AgreeToggle name={"원룸"} checked={type1}  onToggle={()=>{setState({...state,type1:!type1})}}/>
                         <AgreeToggle name={"투룸"} checked={type2} onToggle={()=>{setState({...state,type2:!type2})}}/>
                         <AgreeToggle name={"오피스텔"} checked={type3}  onToggle={()=>{setState({...state,type3:!type3})}}/>

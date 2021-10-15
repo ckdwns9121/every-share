@@ -28,3 +28,9 @@ realty_type: number| string | null
 updatedAt: string
 user_id: number
 }
+
+
+export interface IOption{
+    gas? :boolean | number,
+    bed? :boolean | number,
+}
