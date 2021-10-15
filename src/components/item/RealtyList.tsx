@@ -13,23 +13,21 @@ import {IRealty} from '../../types/Realty';
 
 import {dateToYYYYMMDD,imageFormat} from '../../core/lib/formatChecker';
 
+type Icon = 'like' | 'contact'| 'delete';
 
 interface Relties{
     realties? : IRealty[];
-    like ? :boolean,
-    enrollment?:boolean,
-    contact?:boolean,
+    icon ? :Icon
 }
 
-interface Props extends IRealty{
-    like ? :boolean,
-    enrollment?:boolean,
-    contact?:boolean,
+interface Props extends IRealty {
+    icon?: Icon
 }
 
-function RealtyItemList ({realties,like} : Relties){
 
-    const list = realties?.map((item)=> <RealtyItem {...item} key={item.realty_id} like={like}/>)
+function RealtyItemList ({realties,icon} : Relties){
+
+    const list = realties?.map((item)=> <RealtyItem {...item} key={item.realty_id} icon={icon}/>)
     return(
         <>  
         {list?.length!==0 ? list : <Empty></Empty>}
@@ -57,9 +55,9 @@ function RealtyItem (props: Props){
             >
             {/* <img src ={TEST_IMAGE} style={{'position':'relative'}}/> */}
             
-            { (props.isLiked && props.like) &&
+            { (props.icon==='like') &&
             <div className={styles['like']}>
-                 <Like on={true} onClick={()=>{}}/>
+                 <Like on={props.isLiked} onClick={()=>{}}/>
             </div>
              }
             </div>

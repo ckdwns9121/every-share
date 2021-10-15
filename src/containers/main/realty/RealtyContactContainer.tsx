@@ -49,7 +49,7 @@ function RealtyContactContainer(){
         <Layout>
                       <div className={styles['list']}>
                     {realties &&
-                    <RealtyList realties={realties} like={false}/>
+                    <RealtyList realties={realties} icon={'contact'}/>
                     }
                     </div>
         </Layout>

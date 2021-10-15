@@ -4,7 +4,7 @@ import {IconButton} from '@material-ui/core';
 
 const cx = cn.bind(styles);
 interface Props{
-    on : boolean
+    on? : boolean
     onClick: () => void | Promise<void>;
 }
 function Like({on,onClick}:Props) {
