@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import rootReducer,{rootSaga} from './store/index';
 import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from 'redux-devtools-extension';
+// import 'swiper/swiper.scss';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer,

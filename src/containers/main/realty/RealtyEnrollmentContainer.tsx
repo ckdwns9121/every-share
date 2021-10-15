@@ -59,7 +59,7 @@ function RealtyEnrollmentContainer(){
             <Button className={styles['enrollment-button']} onClick={()=>history.push(RoutePaths.main.realty.write)}>
                         매물 등록하기
             </Button>
-                    <div className={styles['list']}>
+                    <div className={styles['list']} style={{marginTop:'20px'}}>
                     {realties &&
                     <RealtyList realties={realties} msg={emptyMessage()}/>
                     }
