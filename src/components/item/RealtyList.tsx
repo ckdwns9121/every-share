@@ -13,7 +13,7 @@ import {IRealty} from '../../types/Realty';
 
 import {dateToYYYYMMDD,imageFormat} from '../../core/lib/formatChecker';
 
-type Icon = 'like' | 'contact'| 'delete';
+type Icon = 'like' | 'contact'| 'delete' | 'none';
 
 interface Relties{
     realties? : IRealty[];
@@ -37,9 +37,9 @@ function RealtyItemList ({realties,icon} : Relties){
 
 function RealtyItem (props: Props){
 
-    console.log(props.realty_images);
+    // console.log(props.realty_images);
     const sumbnail = JSON.parse(props.realty_images)
-    console.log(sumbnail);
+    // console.log(sumbnail);
     return(
         <Link to ={`${RoutePaths.main.detail}/${props.realty_id}`}>
             <div className={styles['realty-item']}>

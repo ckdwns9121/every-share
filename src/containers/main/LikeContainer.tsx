@@ -47,7 +47,7 @@ function LikeContainer(){
     },[])
     return(
         <Layout>
-            {likes && <RealtyList realties={likes} icon={'like'}/>}
+            {likes && <RealtyList realties={likes} icon={'none'}/>}
         </Layout>
     )
 }
