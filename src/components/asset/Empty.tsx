@@ -1,6 +1,11 @@
+import React from 'react';
 import styles from './Empty.module.scss';
 
-function Empty(){
+interface Props{
+  msg? : string
+}
+
+function Empty({msg} : Props){
     return(
         <div className={styles['empty']}>
        <svg width="80" height="80" viewBox="0 0 80 80">
@@ -23,8 +28,11 @@ function Empty(){
           </g>
         </g>
       </svg>
+      <div style={{display:'block',color:"#222", fontSize:"15px",  textAlign:'center', marginTop:'15px'}}>
+        {msg}
+        </div>
     </div>
- 
+  
       
     )
 }

@@ -30,3 +30,13 @@ $letter-spaceing : -1px;
 :global(.MuiDialog-root){
     z-index: $level1 !important;
 }
+
+@mixin animation($delay, $name) {
+    animation: $name 0.2s linear;
+}
+
+@mixin keyframe($name) {
+    @keyframes #{$name} {
+        @content;
+    }
+}

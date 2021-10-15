@@ -4,6 +4,7 @@
 .container{
     @include container;
     background-color: #ECECEC;
+
     .content{
         background-color: #fff;
         padding: $padding-side;
@@ -14,6 +15,7 @@
         &.none{
             padding:0;
         }
+        position: relative;
  
     }
 }

@@ -18,6 +18,7 @@ type Icon = 'like' | 'contact'| 'delete' | 'none';
 interface Relties{
     realties? : IRealty[];
     icon ? :Icon
+    msg ? : string
 }
 
 interface Props extends IRealty {
@@ -25,12 +26,12 @@ interface Props extends IRealty {
 }
 
 
-function RealtyItemList ({realties,icon} : Relties){
+function RealtyItemList ({realties,icon,msg} : Relties){
 
     const list = realties?.map((item)=> <RealtyItem {...item} key={item.realty_id} icon={icon}/>)
     return(
         <>  
-        {list?.length!==0 ? list : <Empty></Empty>}
+        {list?.length!==0 ? list : <Empty msg ={msg}/>}
         </>
     )
 }

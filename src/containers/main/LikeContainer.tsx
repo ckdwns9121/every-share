@@ -10,6 +10,7 @@ import {requestLikeList} from '../../api/like';
 //hook
 import {useToken} from '../../hooks/useStore';
 import {useLoading} from '../../hooks/useAsset';
+import useMessage from '../../hooks/useMessage';
 
 //type
 import {IRealty} from '../../types/Realty';
@@ -19,6 +20,7 @@ function LikeContainer(){
 
     const access_token = useToken();
     const {loading,handleLoading} = useLoading();
+    const emptyMessage = useMessage();
     const [likes, setLikes] = useState<IRealty[] | null | any >(null);
 
     const callGetApiLikeList =async()=>{
@@ -47,7 +49,7 @@ function LikeContainer(){
     },[])
     return(
         <Layout>
-            {likes && <RealtyList realties={likes} icon={'none'}/>}
+            {likes && <RealtyList realties={likes} icon={'none'} msg={emptyMessage()}/>}
         </Layout>
     )
 }

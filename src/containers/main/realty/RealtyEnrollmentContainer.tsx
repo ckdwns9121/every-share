@@ -9,6 +9,7 @@ import { useEffect ,useState} from 'react';
 import {useHistory} from 'react-router-dom';
 
 import {useLoading} from '../../../hooks/useAsset';
+import useMessage from '../../../hooks/useMessage';
 
 //api
 import {requsetMyRealtyList} from '../../../api/realty';
@@ -23,6 +24,7 @@ function RealtyEnrollmentContainer(){
     const [realties, setRealties] = useState<IRealty[]>([]);
     const {handleLoading} = useLoading();
 
+    const emptyMessage = useMessage();
 
     const callGetApiMyRealtyList = async()=>{
          try{
@@ -30,6 +32,7 @@ function RealtyEnrollmentContainer(){
                 handleLoading(true);
                 const res = await requsetMyRealtyList(access_token);
                 console.log(res);
+                console.log(emptyMessage());
                 if(res?.data?.message==='success'){
                     setRealties(res.data.my_realties);
                 }
@@ -58,7 +61,7 @@ function RealtyEnrollmentContainer(){
             </Button>
                     <div className={styles['list']}>
                     {realties &&
-                    <RealtyList realties={realties}/>
+                    <RealtyList realties={realties} msg={emptyMessage()}/>
                     }
                     </div>
         </Layout>

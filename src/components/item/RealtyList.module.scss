@@ -17,6 +17,8 @@
         width: 100px;
         height: 100px;
         position: relative;
+        @include animation(0.5s, fadeIn);
+
         img{
             width:  100px;
             height: 100px;
@@ -65,5 +67,14 @@ html{
             right: 0;
             // bottom:px;
         }
+    }
+}
+
+@include keyframe(fadeIn) {
+    from {
+        filter: blur(50px);
+    }
+    to {
+        filter: blur(0);
     }
 }
