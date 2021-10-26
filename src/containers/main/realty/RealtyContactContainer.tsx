@@ -27,6 +27,7 @@ function RealtyContactContainer(){
                 handleLoading(true);
                 const res= await requestContactList(access_token);
                 if(res?.status===200){
+                    console.log(res);
                     const data= res.data.contacts;
                     let newState : any =[];
                     data.forEach((item:any)=>{

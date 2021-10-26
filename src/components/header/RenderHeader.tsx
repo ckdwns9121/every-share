@@ -47,6 +47,10 @@ const RenderHeader = () => {
   else if (pathname === RoutePaths.main.realty.like) {
       return <Header title={RouteTitle.main.realty.like} />;
   }
+    // 내가 찜한 매물
+    else if (pathname === RoutePaths.main.realty.notice) {
+      return <Header title={RouteTitle.main.realty.notice} />;
+  }
   else if(pathname.indexOf(RoutePaths.main.realty.write+'/')!==-1){
     return <Header title={RouteTitle.main.realty.modify} />;
   }

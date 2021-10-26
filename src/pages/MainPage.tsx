@@ -13,6 +13,7 @@ import {
   UpdateName,
   UpdatePassword,
   UpdatePhone,
+  RealtyNotice,
 } from "./main";
 import ErrorPage from './ErrorPage';
 
@@ -39,6 +40,7 @@ function MainPage() {
                     <Route path = {`${RoutePaths.main.realty.write}/:id?`} component={RealtyWrite}/>
                     <Route path = {`${RoutePaths.main.realty.modify}/:id`} component={RealtyModify}/>
                     <Route path = {RoutePaths.main.realty.enrollment} component={RealtyEnrollment}/>
+                    <Route path = {RoutePaths.main.realty.notice} component={RealtyNotice}/>
                     <Route path = {RoutePaths.main.realty.like} component={Like}/>
                     <Route exact path={RoutePaths.main.realty.index} render = {()=> <Redirect to={RoutePaths.main.realty.contact}/>}/>
                     <Route component={ErrorPage}/>

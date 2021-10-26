@@ -9,6 +9,7 @@ export const RoutePaths={
             write :'/realty/write',
             modify :'/realty/modify',
             enrollment:'/realty/enrollment',
+            notice:'/realty/notice',
             like:'/realty/like'
         },
         mypage:{
@@ -54,7 +55,8 @@ export const RouteTitle  ={
             write :'매물 등록',
             modify :'매물 수정',
             enrollment:'내가 등록한 매물',
-            like: '내가 찜한 매물'
+            like: '내가 찜한 매물',
+            notice: '알림'
 
         },
         mypage:{

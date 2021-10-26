@@ -5,6 +5,7 @@ export {default as EventList} from './EventListPage';
 export {default as Like} from './LikePage';
 export {default as RealtyContact} from './realty/RealtyContactPage';
 export {default as RealtyWrite} from './realty/RealtyWritePage';
+export {default as RealtyNotice} from './realty/RealtyNoticePage';
 export {default as RealtyModify} from './realty/RealtyModifyPage';
 export {default as RealtyEnrollment} from './realty/RealtyEnrollmentPage';
 export {default as Mypage} from './mypage/MypagePage';
