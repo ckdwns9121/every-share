@@ -23,7 +23,6 @@ import { RoutePaths } from "../core/utils/path";
 function MainPage() {
 
   // const route = MainPageRoute.map((item : RouterServiceModel)=> <Route path={item.path} component={item.component} key={item.path}/>)
-
   return (
     <Switch>
       <Route path={RoutePaths.index}
@@ -37,7 +36,7 @@ function MainPage() {
                 render={()=>
                 <Switch> 
                     <Route path = {RoutePaths.main.realty.contact} component={RealtyContact}/>
-                    <Route path = {`${RoutePaths.main.realty.write}/:modal?`} component={RealtyWrite}/>
+                    <Route path = {`${RoutePaths.main.realty.write}/:id?`} component={RealtyWrite}/>
                     <Route path = {`${RoutePaths.main.realty.modify}/:id`} component={RealtyModify}/>
                     <Route path = {RoutePaths.main.realty.enrollment} component={RealtyEnrollment}/>
                     <Route path = {RoutePaths.main.realty.like} component={Like}/>

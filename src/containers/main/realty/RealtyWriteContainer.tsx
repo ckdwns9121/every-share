@@ -1,10 +1,10 @@
 import styles from "./RealtyWriteContainer.module.scss";
 import React, { useState,useCallback, useEffect } from "react";
 import {Button,ButtonBase} from '@material-ui/core';
-
+import Close from '../../../components/asset/Close';
 
 //api
-import {requestPostRealty} from '../../../api/realty';
+import {requestPostRealty,requestGetRealty} from '../../../api/realty';
 import {requestGetAddressInfo} from '../../../api/address';
 
 //hooks
@@ -17,6 +17,7 @@ import {numberFormat} from '../../../core/lib/formatChecker';
 import {getFormatDate,calculateDate2} from '../../../core/lib/calculateDate';
 import {onlyNumber} from '../../../core/lib/formater';
 import { RoutePaths } from "../../../core/utils/path";
+import { S_IFBLK } from "constants";
 
 declare global {
   interface Window {
@@ -32,6 +33,11 @@ interface TitleComponentProps {
 
 interface Props{
   id?: string
+}
+interface ImageItemProps{
+  src : string,
+  index : number,
+  onDelete: (index?:number)=>void,
 }
 
 const TitleBar: React.FC<TitleComponentProps> = ({ text }) => {
@@ -92,7 +98,15 @@ function RealtyWriteContainer({id}:Props) {
 
     }
   }
-  
+  const onDeleteRealtyImage =(index?:number)=>{
+      setImages(realty_images.filter((item,i)=> i!==index));
+      setSrcs (realty_srcs .filter((item,i)=>i!==index))
+  }
+  const onDeleteContractImage =()=>{
+    setContractImage('');
+    setContractSrc('');
+  }
+
   // 매물 등록
   const onClickEnrollment = async()=>{
     try{
@@ -119,8 +133,8 @@ function RealtyWriteContainer({id}:Props) {
           sub_comment,
           '{gas:1}',
           realty_images,
-          '2021-05-15',
-          '2021-07-15',
+          date.start_date,
+          date.end_date,
           '1',
           contract_image,
           )
@@ -135,6 +149,37 @@ function RealtyWriteContainer({id}:Props) {
       console.log(e.response);
     }
   }
+
+  //상세정보 들고오기
+  const callGetApiRealty = async () => {
+    if(id){
+      try {
+        handleLoading(true);
+        const res = await requestGetRealty(id, access_token);
+        console.log(res);
+        if (res?.data?.message === "success") {
+          console.log(res);
+          setReatlyName(res.data.realty.realty_name);
+          setAddrDetail(res.data.realty.addr_detail);
+          setAddr(res.data.realty.addr);
+          setAllFloor(res.data.realty.realty_all_floors);
+          setMyFloor(res.data.realty.realty_my_floors);
+          setDeposit(res.data.realty.deposit)
+          setMonthRent(res.data.realty.monthly_rent)
+          setComment(res.data.realty.realty_comment);
+          setSubComment(res.data.realty.realty_subcomment);
+          setDate({
+            start_date:getFormatDate(new Date(res.data.realty.oper_start_time)) , 
+            end_date: getFormatDate(new Date(res.data.realty.oper_end_time)) 
+          })
+        }
+        handleLoading(false);
+      } catch (e) {
+        console.log(e);
+        handleLoading(false);
+      }
+    }
+  };
 
   // 매물 사진 업로드
   const onUploadFile = useCallback(async (e) => {
@@ -155,7 +200,6 @@ function RealtyWriteContainer({id}:Props) {
     }
 }, [realty_images,realty_srcs]);
 
-
 // 매물 임시 계약서 업로드
 const onUploadContract = useCallback(async (e) => {
   let file = e.target.files[0];
@@ -174,6 +218,10 @@ const onUploadContract = useCallback(async (e) => {
   }
 }, []);
 
+useEffect(()=>{
+  console.log(date);
+},[date])
+
 
 //주소창 모달 오픈
 useEffect(() => {
@@ -181,7 +229,6 @@ useEffect(() => {
     new window.daum.Postcode({
       oncomplete: async function (data: any) {
         // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-  
         // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
         // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
         var roadAddr = data.roadAddress; // 도로명 주소 변수
@@ -200,6 +247,10 @@ useEffect(() => {
     }).open();
   }
 }, [open]);
+
+useEffect(()=>{
+    callGetApiRealty();
+},[id])
 
 
 return (
@@ -302,10 +353,9 @@ return (
               <input type="file" id="realty-picture"  onChange={onUploadFile} accept="image/gif, image/jpeg, image/png, image/svg"  />
             </div>
             <div className={styles["RegisteredImage-box"]}>
-              {realty_srcs.map((item)=> <img src={item} key={item}/> )}
+              {realty_srcs.map((item,index)=> <ImageItem src={item} key={index} index={index} onDelete={onDeleteRealtyImage}/> )}
             </div>
           </div>
-
           <div className={styles["register-box"]}>
             <p className={styles["subTitle"]}>임시 계약서 등록</p>
             <p className={styles["notice"]}>
@@ -316,8 +366,7 @@ return (
               <input type="file" id="contract"  onChange={onUploadContract} accept="image/gif, image/jpeg, image/png, image/svg"  />
             </div>
             <div className={styles["RegisteredImage-box"]}>
-              {contract_src && <img src={contract_src} />}
-
+              {contract_src && <ImageItem src={contract_src} index={0} onDelete={onDeleteContractImage}/>}
             </div>
           </div>
 
@@ -331,11 +380,21 @@ return (
             ></textarea>
           </div>
 
-          <Button className={styles["registerButton"]} onClick={onClickEnrollment}>매물등록</Button>
+          <Button className={styles["registerButton"]} onClick={onClickEnrollment}>{id? '매물 수정' : '매물 등록'}</Button>
         </div>
       </div>
     </div>
   );
 }
 
+
+const ImageItem =( {src, onDelete, index}: ImageItemProps)=>{
+
+  return(
+    <div className={styles['image-item']}>
+  <img src={src}/>
+  <div className={styles['delete']} onClick={()=>onDelete(index)}><Close/></div>
+  </div>
+  )
+}
 export default RealtyWriteContainer;

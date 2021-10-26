@@ -305,5 +305,17 @@ html{
             font-size: 15px;
             letter-spacing: -1px;
         }
+        .image-item{
+            position: relative;
+            .delete{
+                position: absolute;
+                top:0;
+                right:0;
+                z-index: 1000;
+                border:1px solid #333;
+                background-color:#333;
+            }
+        }
+  
     }
 }

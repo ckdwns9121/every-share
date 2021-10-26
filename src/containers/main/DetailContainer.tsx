@@ -81,6 +81,7 @@ function DetailContainer({ id, modal }: IMatchId) {
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [test, setUrl] = useState<any>("");
 
+
   //상세정보 들고오기
   const callGetApiRealty = async () => {
     try {
@@ -100,6 +101,14 @@ function DetailContainer({ id, modal }: IMatchId) {
       handleLoading(false);
     }
   };
+  const getKind=(kind?:number | null)  =>{
+    switch(kind){
+      case 1:
+        return '원룸'
+      default :
+        return 'null'
+    }
+  }
   
   const onClickLike = async ()=>{
     try{
@@ -244,7 +253,7 @@ function DetailContainer({ id, modal }: IMatchId) {
               text={"층수"}
               value={ realty!==null ? `${realty?.realty_my_floors} /${realty?.realty_all_floors}층` : ''}
             />
-            <RealtyInfo text={"종류"} value={"복층 오피스텔"} />
+            <RealtyInfo text={"종류"} value={realty? getKind(realty.realty_kind) : ''} />
             <RealtyInfo text={"양도 시작일"} value={getFormatDateString(realty?.oper_start_time)} />
             <RealtyInfo text={"양도 마감일"} value={getFormatDateString(realty?.oper_end_time)} />
           </div>

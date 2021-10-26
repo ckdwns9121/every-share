@@ -17,6 +17,7 @@ import ErrorPage from './pages/ErrorPage';
 //hooks
 import { useEffect } from "react";
 import { useToken } from "./hooks/useStore";
+import { useUrl } from "./hooks/useScroll";
 
 //util
 import { RoutePaths } from "./core/utils/path";
@@ -71,7 +72,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <RenderHeader/>
+      <RenderHeader/>
         <Switch>
           <Route path={RoutePaths.auth.index} component={AuthPage} />
           <Route path={RoutePaths.index} component={MainPage} />

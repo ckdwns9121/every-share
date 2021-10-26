@@ -1,9 +1,11 @@
 import Header from "./Header";
 import { RoutePaths, RouteTitle } from "../../core/utils/path";
 import { useLocation } from "react-router";
+import { useUrl,useScroll } from "../../hooks/useScroll";
 
 const RenderHeader = () => {
 
+  useUrl();
   const {pathname} = useLocation();
   // 로그인
   if (pathname === RoutePaths.auth.signin) {

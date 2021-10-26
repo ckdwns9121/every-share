@@ -16,7 +16,6 @@ import {requsetMyRealtyList} from '../../../api/realty';
 //type
 import {IRealty} from '../../../types/Realty';
 
-
 function RealtyEnrollmentContainer(){
     
     const history = useHistory();
@@ -49,10 +48,6 @@ function RealtyEnrollmentContainer(){
     useEffect(()=>{
         callGetApiMyRealtyList();
     },[])
-
-    useEffect(()=>{
-        console.log(realties);
-    },[realties])
 
     return(
         <Layout>

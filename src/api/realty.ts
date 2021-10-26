@@ -1,9 +1,14 @@
-import axios from 'axios';
+import axios, { AxiosAdapter, AxiosInstance } from 'axios';
 import makeFormData from '../core/lib/makeFormData';
-import { customAxiosInstance ,cancleToken} from './init';
-const instance = customAxiosInstance();
+import { cacheAdapterEnhancer, throttleAdapterEnhancer } from 'axios-extensions';
 
-
+const axiosInstance = axios.create({
+    baseURL: '/',
+	headers: { 'Cache-Control': 'no-cache' },
+	// disable the default cache and set the cache flag
+	adapter: cacheAdapterEnhancer(axios.defaults.adapter as AxiosInstance, { enabledByDefault: true, cacheFlag: 'useCache'})
+  });
+  
 export const requestGetRealties = async(lat:number , lng :number , filter :Array<number> ,JWT_TOKEN?:string | null)=>{
     const URL = '/api/realty';
 
@@ -111,6 +116,7 @@ export const requestPostRealty = async(
 
 
 export const requsetMyRealtyList = async(JWT_TOKEN:string)=>{
+
     const URL = '/api/realty/my';
 
     const config={
@@ -119,7 +125,10 @@ export const requsetMyRealtyList = async(JWT_TOKEN:string)=>{
             'Content-Type' : 'application/json',
         }
     }
-    return await axios.get(URL,config).then((res)=> res) .catch((e)=> e);
+    const res = await axiosInstance.get(URL,{...config,cache:true});
+    console.log(res);
+    return res;
+    // return await axios.get(URL,config).then((res)=> res) .catch((e)=> e);
 } 
 
 

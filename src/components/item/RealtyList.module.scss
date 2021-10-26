@@ -14,7 +14,7 @@
     position: relative;
 
     .realty-img{
-        width: 100px;
+        min-width: 100px;
         height: 100px;
         position: relative;
         @include animation(0.5s, fadeIn);
