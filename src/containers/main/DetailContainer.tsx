@@ -89,11 +89,13 @@ function DetailContainer({ id, modal }: IMatchId) {
       const res = await requestGetRealty(id, access_token);
       console.log(res);
       if (res?.data?.message === "success") {
+
         setRealty(res.data.realty);
         setLikes(res.data.likes);
         setIsLiked(res.data.isLiked);
         setImages(JSON.parse(res.data.realty.realty_images));
         setContractImage(JSON.parse(res.data.realty.realty_contract_images));
+    
       }
       handleLoading(false);
     } catch (e) {

@@ -28,6 +28,21 @@ export const requestGetRealties = async(lat:number , lng :number , filter :Array
     return res;
 
 }
+export const requestRealtyLately = async(ids :Array<number> ,JWT_TOKEN?:string)=>{
+    const URL = '/api/realty/lately';
+
+    const config={
+        headers:{
+            'Content-Type' : 'application/json',
+            Authorization: `Bearer ${JWT_TOKEN}`,
+        },
+        params:{
+            ids
+        }
+    }
+    const res = await axios.get(URL,config);
+    return res;
+}
 
 export const requestGetRealty= async(realty_id :string | number, token? : string |null)=>{
     const URL = '/api/realty/'+realty_id;

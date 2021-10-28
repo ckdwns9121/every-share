@@ -116,6 +116,13 @@ function SlideMenu ({open,handleClose} : Props){
         }
     }
 
+    const onClickNotice =()=>{
+        handleClose();
+        setTimeout(()=>{
+            history.push(RoutePaths.main.realty.notice);
+        },500)
+    }
+
     return(
         <Fragment>
             <div className={cx('slide-menu',{open})}>
@@ -131,7 +138,7 @@ function SlideMenu ({open,handleClose} : Props){
                         </div>
                     </ButtonBase>
                     <div className={styles['top-icon']}>
-                            <IconButton className={styles['icon']}>
+                            <IconButton className={styles['icon']} onClick={onClickNotice}>
                                 <img src={PUSH}/>
                             </IconButton>
                             <IconButton className={styles['icon']}>
