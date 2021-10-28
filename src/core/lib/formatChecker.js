@@ -159,4 +159,5 @@ export const imageFormat = (image) => {
         // console.log(`${STORAGE_URL}${image.replace('uploads\\', 'uploads/')}`)
         return `${STORAGE_URL}${image.replace('uploads/', 'uploads/')}`;
     }
+    return '';
 };

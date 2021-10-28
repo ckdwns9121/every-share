@@ -219,8 +219,8 @@ const onUploadContract = useCallback(async (e) => {
 }, []);
 
 useEffect(()=>{
-  console.log(date);
-},[date])
+  window.scrollTo(0,0);
+},[])
 
 
 //주소창 모달 오픈

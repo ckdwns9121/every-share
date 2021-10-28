@@ -16,6 +16,7 @@ import styles from "./DetailContainer.module.scss";
 import Header from "../../components/header/Header";
 import Like from "../../components/asset/Like";
 import { Button, IconButton ,ButtonBase} from "@material-ui/core";
+import Swiper from '../../components/layout/SimpleSlider';
 
 //asset
 import GASSTOVE from "../../static/svg/options/gasstove.svg";
@@ -61,6 +62,7 @@ import {setLike} from '../../store/zone';
 
 //aseet
 import MARKER from '../../static/svg/map-marker.svg';
+import IMAGE from '../../static/image/realty/rinda1.jpg';
 
 function DetailContainer({ id, modal }: IMatchId) {
  
@@ -74,7 +76,7 @@ function DetailContainer({ id, modal }: IMatchId) {
   const kakao_map = useRef<any>(null); //카카오 맵
 
   const [realty, setRealty] = useState<IRealty | null>(null);
-  const [realty_images, setImages] = useState<any>([]);
+  const [realty_images, setImages] = useState<string[] | any>([]);
   const [contract_image, setContractImage] = useState<any>([]);
 
   const [likes, setLikes] = useState([]);
@@ -206,14 +208,11 @@ function DetailContainer({ id, modal }: IMatchId) {
       </Header>
       <div className={styles["container"]}>
         <div className={styles["content"]}>
-          <div
-            className={styles["realty-img"]}
-            style={{
-              backgroundImage: `url(${imageFormat(realty_images[0])})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          ></div>
+
+            <Swiper>
+            <img src ={realty_images[0] ? `http://3.36.109.145:4000/${realty_images[0]}`: IMAGE} className={styles['realty-img']}/>
+            <img src ={realty_images[1] ? `http://3.36.109.145:4000/${realty_images[1]}`: IMAGE} className={styles['realty-img']}/>
+            </Swiper>
           <div className={styles["realty-main"]}>
             <div className={styles["realty-title"]}>{realty?.realty_name}</div>
             <div className={styles["realty-comment"]}>
