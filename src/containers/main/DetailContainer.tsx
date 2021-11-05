@@ -50,6 +50,7 @@ import {
   dateToMMDD
 } from "../../core/lib/formatChecker";
 import {getFormatDateString} from '../../core/lib/calculateDate';
+import {API_PATH} from '../../core/utils/path'
 
 //hooks
 import { useToken } from "../../hooks/useStore";
@@ -210,8 +211,9 @@ function DetailContainer({ id, modal }: IMatchId) {
         <div className={styles["content"]}>
 
             <Swiper>
-            <img src ={realty_images[0] ? `http://3.36.109.145:4000/${realty_images[0]}`: IMAGE} className={styles['realty-img']}/>
-            <img src ={realty_images[1] ? `http://3.36.109.145:4000/${realty_images[1]}`: IMAGE} className={styles['realty-img']}/>
+              {realty_images.length!==0 && 
+                realty_images.map((src : string)=> <img  key ={src} src ={src ? `${API_PATH}/${src}`: IMAGE} className={styles['realty-img']} />)
+              }
             </Swiper>
           <div className={styles["realty-main"]}>
             <div className={styles["realty-title"]}>{realty?.realty_name}</div>

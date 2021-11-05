@@ -60,36 +60,36 @@ function SlideMenu ({open,handleClose} : Props){
             icon : LIKE,
             onClick :  ()=> onClick(RoutePaths.main.realty.like),
         },
-        {
-            text:'내가 문의한 매물',
-            icon : CONTACT,
-            onClick :  ()=> onClick(RoutePaths.main.realty.contact),
-        },
+        // {
+        //     text:'내가 문의한 매물',
+        //     icon : CONTACT,
+        //     onClick :  ()=> onClick(RoutePaths.main.realty.contact),
+        // },
         {
             text:'내가 등록한 매물',
             icon : ENROLLMENT,
             onClick :  ()=> onClick(RoutePaths.main.realty.enrollment),
         },
-        {
-            text:'이벤트',
-            icon : EVENT,
-            onClick :  ()=> onClick(RoutePaths.main.event.index),
-        },
-        {
-            text:'자주묻는 질문',
-            icon : QNA,
-            onClick :  ()=> onClick('/'),
-        },
-        {
-            text:'공지사항',
-            icon : NOTICE,
-            onClick :  ()=> onClick('/'),
-        },
-        {
-            text:'1:1 문의',
-            icon : ANQ,
-            onClick :  ()=> onClick('/'),
-        },
+        // {
+        //     text:'이벤트',
+        //     icon : EVENT,
+        //     onClick :  ()=> onClick(RoutePaths.main.event.index),
+        // },
+        // {
+        //     text:'자주묻는 질문',
+        //     icon : QNA,
+        //     onClick :  ()=> onClick('/'),
+        // },
+        // {
+        //     text:'공지사항',
+        //     icon : NOTICE,
+        //     onClick :  ()=> onClick('/'),
+        // },
+        // {
+        //     text:'1:1 문의',
+        //     icon : ANQ,
+        //     onClick :  ()=> onClick('/'),
+        // },
     
     ]
 
