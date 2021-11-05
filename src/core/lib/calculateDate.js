@@ -7,7 +7,6 @@ export const calculateDate2 =(start_date,end_date) =>{
     const elapsedMSec = end.getTime() - start.getTime(); // 172800000
     const elapsedDay = elapsedMSec / 1000 / 60 / 60; // 2
 
-    console.log(elapsedDay > 0);
     return elapsedDay > 0;
 
 

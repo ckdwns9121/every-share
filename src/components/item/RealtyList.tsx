@@ -38,24 +38,20 @@ function RealtyItemList ({realties,icon,msg} : Relties){
 
 function RealtyItem (props: Props){
 
-    // console.log(props.realty_images);
-    // const sumbnail = JSON.parse(props.realty_images)
-    // console.log(sumbnail);
+    const sumbnail = JSON.parse(props.realty_images)
     return(
         <Link to ={`${RoutePaths.main.detail}/${props.realty_id}`}>
             <div className={styles['realty-item']}>
             <div className={styles['realty-img']}
             
-            // style={{
-            //     backgroundImage: `url(${imageFormat(
-            //         sumbnail[0]
-            //     )})`,
-            //     backgroundSize: 'cover',
-            //     backgroundPosition: 'center',
-            // }}
+            style={{
+                backgroundImage: `url(${imageFormat(
+                    sumbnail[0]
+                )})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }}
             >
-            <img src ={TEST_IMAGE} style={{'position':'relative'}}/>
-            
             { (props.icon==='like') &&
             <div className={styles['like']}>
                  <Like on={props.isLiked} onClick={()=>{}}/>

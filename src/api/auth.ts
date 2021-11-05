@@ -11,7 +11,6 @@ export const requsetPostSignup = async (
     agree_push: boolean,
     register_type: number | null
 ) => {
-        console.log('가나');
         const URL = '/api/users/signup';
         const formdata ={
             email,
@@ -22,7 +21,6 @@ export const requsetPostSignup = async (
             agree_push,
             register_type,
         }
-        console.log('오냐');
         const res = axios.post(URL,formdata);
         return res;
     

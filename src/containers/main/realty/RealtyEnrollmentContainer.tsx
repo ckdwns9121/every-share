@@ -31,7 +31,6 @@ function RealtyEnrollmentContainer(){
                 handleLoading(true);
                 const res = await requsetMyRealtyList(access_token);
                 console.log(res);
-                console.log(emptyMessage());
                 if(res?.data?.message==='success'){
                     setRealties(res.data.my_realties);
                 }

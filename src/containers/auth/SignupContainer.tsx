@@ -120,7 +120,6 @@ function SignupContainer(){
         try{
             handleLoading(true);
             const res = await requsetPostSignup(email,null,password,phone_number,sms,false,null);
-            console.log(res);
             if(res.status===200){
                 history.push(RoutePaths.auth.sign_complete);
                 handleOpen(res.data.message,true,false,'success');
@@ -178,7 +177,6 @@ function SignupContainer(){
 
 
     useEffect(()=>{
-        console.log(ref);
         ref?.current?.focus();
     },[step])
 

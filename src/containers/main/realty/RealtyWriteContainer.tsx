@@ -158,7 +158,6 @@ function RealtyWriteContainer({id}:Props) {
         const res = await requestGetRealty(id, access_token);
         console.log(res);
         if (res?.data?.message === "success") {
-          console.log(res);
           setReatlyName(res.data.realty.realty_name);
           setAddrDetail(res.data.realty.addr_detail);
           setAddr(res.data.realty.addr);

@@ -109,10 +109,8 @@ export const requestPostRealty = async(
         realty_status,
         contract_images,
     });
-    console.log(realty_images);
 
     realty_images.forEach((item : any) => {
-        console.log(item);
         formData.append('realty_images', item, item.name)
     });
 
@@ -124,7 +122,6 @@ export const requestPostRealty = async(
     };
     // return formData;
     const response = await axios.post(URL, formData, config);
-    console.log(response);
     return response;
 
 }

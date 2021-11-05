@@ -243,7 +243,6 @@ function MapContainer({modal}:IMatchModal){
     const onSearchAddr = useCallback(async()=>{
         try{
             const res = await searchAddress(addr);
-            console.log(res);
             if(res){
                 setAddrList(res);
             }

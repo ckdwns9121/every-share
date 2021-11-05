@@ -36,7 +36,6 @@ function Header({title,children}:Props){
             <IconButton
                 className={styles['back-btn']}
                 onClick={() =>{
-                    console.log('back');
                     history.goBack()
                 }}
             >
