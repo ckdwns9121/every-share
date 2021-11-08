@@ -1,4 +1,5 @@
 
+import { API_PATH } from "../utils/path";
 export function stringNumberToInt(strNumber) {
     // 구분자가 들어간 수치 데이터를 숫자로 변경
     if (strNumber !== undefined && strNumber !== null) {
@@ -133,7 +134,7 @@ export const hideEmail = (email) => {
 };
 
 
-const STORAGE_URL = 'http://3.36.109.145:4000/';
+const STORAGE_URL = 'http://.109.145:4000/';
 
 export const DBImageFormat = (image) => {
     if (!image) {
@@ -141,7 +142,7 @@ export const DBImageFormat = (image) => {
     } else if (image.indexOf('http://') !== -1 || image.indexOf('https://') !== -1) {
         return image;
     } else {
-        return STORAGE_URL+ image.replace('uploads/', '');
+        return API_PATH+'/'+ image.replace('uploads/', '');
     }
 }
 
@@ -151,13 +152,13 @@ export const imageFormat = (image) => {
         // console.log(image);
         if (Array.isArray(image)) {
             const imgUrl = image.map(
-                (img) => `${STORAGE_URL}${img.replace('uploads/', 'uploads/')}`,
+                (img) => `${API_PATH}/${img.replace('uploads/', 'uploads/')}`,
             );
             return imgUrl;
         }
         // console.log(`${image.replace('uploads/', '')}`);
         // console.log(`${STORAGE_URL}${image.replace('uploads\\', 'uploads/')}`)
-        return `${STORAGE_URL}${image.replace('uploads/', 'uploads/')}`;
+        return `${API_PATH}/${image.replace('uploads/', 'uploads/')}`;
     }
     return '';
 };
