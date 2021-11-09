@@ -3,6 +3,7 @@ export {default as Detail} from './DetailPage';
 export {default as Event} from './EventPage';
 export {default as EventList} from './EventListPage';
 export {default as Like} from './LikePage';
+export {default as Realty} from './realty/RealtyPage';
 export {default as RealtyContact} from './realty/RealtyContactPage';
 export {default as RealtyWrite} from './realty/RealtyWritePage';
 export {default as RealtyNotice} from './realty/RealtyNoticePage';
