@@ -1,6 +1,6 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-const URL = 'http://54.180.139.91:4000';
+const URL = 'http://3.35.216.210:4000';
 // const URL = 'http://localhost:4000';
 
 module.exports = function(app){

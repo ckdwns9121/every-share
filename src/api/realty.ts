@@ -23,6 +23,7 @@ export const requestGetRealties = async(lat:number , lng :number , filter :Array
             filter
         }
     }
+    console.log('start');
     const res = await axios.get(URL,config);
     console.log(res);
     return res;

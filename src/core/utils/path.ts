@@ -88,4 +88,4 @@ export const RouteTitle  ={
         },
     },
 }
-export const API_PATH = 'http://54.180.139.91:4000';
+export const API_PATH = 'http://3.35.216.210:4000';
