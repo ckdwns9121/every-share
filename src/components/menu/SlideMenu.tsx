@@ -56,7 +56,7 @@ function SlideMenu ({open,handleClose} : Props){
             onClick :  ()=> onClick(RoutePaths.main.index),
         },
         {
-            text:'내가 찜한 매물',
+            text:'찜한 매물',
             icon : LIKE,
             onClick :  ()=> onClick(RoutePaths.main.realty.like),
         },
@@ -66,7 +66,7 @@ function SlideMenu ({open,handleClose} : Props){
         //     onClick :  ()=> onClick(RoutePaths.main.realty.contact),
         // },
         {
-            text:'내가 등록한 매물',
+            text:'등록한 매물',
             icon : ENROLLMENT,
             onClick :  ()=> onClick(RoutePaths.main.realty.enrollment),
         },
