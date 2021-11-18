@@ -3,12 +3,12 @@ import Layout from '../../components/layout/Layout';
 import Like from '../../components/asset/Like';
 import Test from '../../components/layout/SimpleSlider';
 
-function EventListContainer(){
-    return(
+function EventListContainer() {
+    return (
         <Layout>
+            <div></div>
         </Layout>
-    )
+    );
 }
-
 
 export default EventListContainer;

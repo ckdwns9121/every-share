@@ -1,240 +1,231 @@
 @import '../../styles/Root';
 
-.container{
-    @include container;
-    background-color: #ECECEC;
-    .content{
-        background-color: #fff;
-        .realty-img{
-            width: 100%;
-            height: 220px;
-            img{
-                width: 100%;
-                height: 220px;
-                object-fit: cover;
-            }
-        }
-        .realty-main{
-            position: relative;
-            .realty-title{
-             padding:$padding-side;
-                font-size: 22px;
-                font-weight: bold;
-                letter-spacing: -1px;
-                margin:15px 0;
-            }
-            .realty-comment{
-                 padding:$padding-side;
-                font-size: 12px;
-                font-weight: 500;
-                color:#555;
-                margin-top:15px;
-                padding-bottom:15px;
-                border-bottom: 1px solid #ebebeb;
-            }
-            .realty-createdAt{
-                font-size: 12px;
-                color:#777;
-                position: absolute;
-                right:20px;
-                top:5px;
-            }
-        }
-        .realty-sub{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding:$padding-side;
-            height: 80px;
-            .realty-box{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                .column{
-                    font-size: 12px;
-                    font-weight: 500;
-                    letter-spacing: -1px;
-                    color:#777;
-                }
-                .value{
-                    font-size: 16px;
-                    font-weight: bold;
-                    color:#00388b;
-                }
-            }
-        }
-        .realty-info{
-            border-top:10px solid #ebebeb;
-            width: 100%;
-            padding-bottom:15px;
-            .title{
-                padding: $padding-side;
-                padding-top: 5px;
-                padding-bottom:5px;
-                font-size: 15px;
-                font-weight: bold;
-                border-bottom:1px solid #ebebeb;
-            }
-            .info{
-                margin-top:15px;
-                padding: $padding-side;
-                width: 100%;
-                display: flex;
-                font-size: 15px;
-                .text{
-                    min-width: 80px;
-                    text-align: left;
-                }
-                .value{
-                    width: 100%;
-                    text-align: right;
-                }
-            }
-            
-            .options{
-                padding: $padding-side;
-                list-style: none;
-                width: 100%;
-                max-width: 768px;
-                margin: 15px 0;
-                box-sizing: border-box;
-                .option-item{
-                    display: inline-block;
-                    vertical-align: top;
-                    text-align: center;
-                    box-sizing: border-box;
-                    width: 20%;
-                    padding: 0 5px;
-                    // margin-bottom :15px;
-                    height: auto;
-                    cursor: pointer;
-                    .option-img{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 50px; height:50px;
-                        border: 1px solid #707070;
-                        border-radius: 100px;
-                        margin: 0 auto;
-                        // text-align: center;
-                
-                    
-                    }
-                    .option-name{
-                        text-align: center;
-                    }
-                }
-            }
-
-            .sub-comment{
-                font-size: 15px;
-                margin-top:15px;
-                padding:$padding-side;
-                min-height: 200px;
-            }
-        }
+.container {
+  @include container;
+  background-color: #ececec;
+  .content {
+    background-color: #fff;
+    .realty-img {
+      width: 100%;
+      height: 220px;
+      img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+      }
     }
-}
-
-.option-item{
-    &+&{
+    .realty-main {
+      position: relative;
+      .realty-title {
+        padding: $padding-side;
+        font-size: 22px;
+        font-weight: bold;
+        letter-spacing: -1px;
+        margin: 15px 0;
+      }
+      .realty-comment {
+        padding: $padding-side;
+        font-size: 12px;
+        font-weight: 500;
+        color: #555;
+        margin-top: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #ebebeb;
+      }
+      .realty-createdAt {
+        font-size: 12px;
+        color: #777;
+        position: absolute;
+        right: 20px;
+        top: 5px;
+      }
     }
-}
-
-html{
-    body{
-        .road-view{
-            padding :$padding-side;
-
-            .road-view-button{
-                margin-top: 15px;
-                width: 100%;
-                border:1px solid black;
-                border-radius: 5px;
-                display: flex;
-                font-size: 15px;
-            }
+    .realty-sub {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: $padding-side;
+      height: 80px;
+      .realty-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .column {
+          font-size: 12px;
+          font-weight: 500;
+          letter-spacing: -1px;
+          color: #777;
         }
-        .contact{
-            max-width: 768px;
-            padding : 20px;
-            width: 100%;
-            height: 75px;
-            background-color: $main-color;
-            position: fixed;
-            bottom: 0;
-            z-index: 1000;
-            // z-index: $level1;
-            border-radius: 0;
-            color:#fff;
+        .value {
+          font-size: 16px;
+          font-weight: bold;
+          color: #00388b;
+        }
+      }
+    }
+    .realty-info {
+      border-top: 10px solid #ebebeb;
+      width: 100%;
+      padding-bottom: 15px;
+      .title {
+        padding: $padding-side;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 15px;
+        font-weight: bold;
+        border-bottom: 1px solid #ebebeb;
+      }
+      .info {
+        margin-top: 15px;
+        padding: $padding-side;
+        width: 100%;
+        display: flex;
+        font-size: 15px;
+        .text {
+          min-width: 80px;
+          text-align: left;
+        }
+        .value {
+          width: 100%;
+          text-align: right;
+        }
+      }
+
+      .options {
+        padding: $padding-side;
+        list-style: none;
+        width: 100%;
+        max-width: 768px;
+        margin: 15px 0;
+        box-sizing: border-box;
+        .option-item {
+          display: inline-block;
+          vertical-align: top;
+          text-align: center;
+          box-sizing: border-box;
+          width: 20%;
+          padding: 0 5px;
+          // margin-bottom :15px;
+          height: auto;
+          cursor: pointer;
+          .option-img {
             display: flex;
             justify-content: center;
             align-items: center;
-            .link{
-                display:flex;
-                width: 100%;
-                justify-content: space-between;
-                align-items: center;
-                .contact-button{
-                    background-color: #fff;
-                    width: 100%;
-                    min-width: 200px;
-                    height: 50px;
-                    border-radius: 0;
-                    font-size: 14px;
-                    letter-spacing: -1px;
-                }
-                
-            }
-            a{
-                width: 100%;
-                margin-left:5px;
-            }
-
-            .button{
-                flex : 1 1 0%;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                border:1px solid #fff;
-                color:#fff;
-                height: 50px;
-                width: 100%;
-                min-width: 65px;
-                padding: 5px 5px;
-                font-size: 10px;
-                letter-spacing: -1px;
-                font-weight: 500;
-                img{
-                    width: 22px;
-                }
-            }
-        
-        }
-        .contract{
-            border:1px solid #ebebeb;
+            width: 50px;
+            height: 50px;
+            border: 1px solid #707070;
             border-radius: 100px;
-            padding:0;
-            width: 40px;
-            height:40px;
-       
-            margin-top:15px;
-            img{
-                width: 25px;
-                height: 25px;
-            }
-        }
-        .update-button{
-            font-size: 17px;
-            font-weight: bold;
-            color:#fff;
-            width: 100%;
-            padding:0;
+            margin: 0 auto;
+            // text-align: center;
+          }
+          .option-name {
             text-align: center;
+          }
         }
+      }
+
+      .sub-comment {
+        font-size: 15px;
+        margin-top: 15px;
+        padding: $padding-side;
+        min-height: 200px;
+      }
     }
-    
+  }
+}
+
+html {
+  body {
+    .road-view {
+      padding: $padding-side;
+
+      .road-view-button {
+        margin-top: 15px;
+        width: 100%;
+        border: 1px solid black;
+        border-radius: 5px;
+        display: flex;
+        font-size: 15px;
+      }
+    }
+    .contact {
+      max-width: 768px;
+      padding: 20px;
+      width: 100%;
+      height: 75px;
+      background-color: $main-color;
+      position: fixed;
+      bottom: 0;
+      z-index: 1000;
+      // z-index: $level1;
+      border-radius: 0;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .link {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        .contact-button {
+          background-color: #fff;
+          width: 100%;
+          min-width: 200px;
+          height: 50px;
+          border-radius: 0;
+          font-size: 14px;
+          letter-spacing: -1px;
+        }
+      }
+      a {
+        width: 100%;
+        margin-left: 5px;
+      }
+
+      .button {
+        flex: 1 1 0%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #fff;
+        color: #fff;
+        height: 50px;
+        width: 100%;
+        min-width: 65px;
+        padding: 5px 5px;
+        font-size: 10px;
+        letter-spacing: -1px;
+        font-weight: 500;
+        img {
+          width: 22px;
+        }
+      }
+    }
+    .contract {
+      border: 1px solid #ebebeb;
+      border-radius: 100px;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+
+      margin-top: 15px;
+      img {
+        width: 25px;
+        height: 25px;
+      }
+    }
+    .update-button {
+      font-size: 17px;
+      font-weight: bold;
+      color: #fff;
+      width: 100%;
+      padding: 0;
+      text-align: center;
+    }
+  }
 }

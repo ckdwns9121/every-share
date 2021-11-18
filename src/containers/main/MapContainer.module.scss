@@ -1,106 +1,104 @@
 @import '../../styles/_Root.scss';
 @import '../../styles/_Value.scss';
 
-$side-space :10px;
+$side-space: 10px;
 
-.container{
-    @include container(0px);
-    overflow: hidden;
-    position: relative;
-    .app-bar{
-        position:fixed;
-        height: 48px;
-        max-width: $max-width;
-        width: 100%;
-        background-color: #fff;
-        z-index:$level3;
-        display: flex;
-        padding: 0 10px;
-        justify-content: space-between;
-        .app-bar-text{
-           width: 100%;
-           max-width: 648px;
-           padding: 5px 0;
-           display: flex;
-        align-items: center;
-        }
-        .app-bar-icon{
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            width: 100px;
-            height: 48px;
-            img{
-                width: 24px;
-                height: 24px;;
-            }
-        }
-
+.container {
+  @include container(0px);
+  overflow: hidden;
+  position: relative;
+  .app-bar {
+    position: fixed;
+    height: 48px;
+    max-width: $max-width;
+    width: 100%;
+    background-color: #fff;
+    z-index: $level3;
+    display: flex;
+    padding: 0 10px;
+    justify-content: space-between;
+    .app-bar-text {
+      width: 100%;
+      max-width: 648px;
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
     }
-    .left-bar{
-        z-index:$level3;
-        position: fixed;
-        left:$side-space;
-        top:100px;
+    .app-bar-icon {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 100px;
+      height: 48px;
+      img {
+        width: 24px;
+        height: 24px;
+      }
     }
-    .right-bar{
-        z-index:$level3;
-        position: fixed;
-        right:$side-space;
-        top:100px;
-    }
+  }
+  .left-bar {
+    z-index: $level3;
+    position: fixed;
+    left: $side-space;
+    top: 100px;
+  }
+  .right-bar {
+    z-index: $level3;
+    position: fixed;
+    right: $side-space;
+    top: 100px;
+  }
 }
 
-html{
-    body{
-        .icon{
-            padding: 5px;
-        }
-        .text{
-            border: 1px solid #ebebeb;
-            border-radius: 15px;
-            padding:0;
-            width: 100%;
-            display: flex;
-            height:35px;
-            align-items: center;
-            justify-content: start;
-            padding-left:10px;
-            font-size: 14px;
-            text-align: left;
-            letter-spacing: $letter-spaceing 
-        }
+html {
+  body {
+    .icon {
+      padding: 5px;
     }
+    .text {
+      border: 1px solid #ebebeb;
+      border-radius: 15px;
+      padding: 0;
+      width: 100%;
+      display: flex;
+      height: 35px;
+      align-items: center;
+      justify-content: start;
+      padding-left: 10px;
+      font-size: 14px;
+      text-align: left;
+      letter-spacing: $letter-spaceing;
+    }
+  }
 }
-html{
-    body{
-        .zone-button{
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 100%;
-            margin : 0 auto;
-            border-radius: 0;
-            z-index: $level1;
-            width: 100%;
-            max-width: $max-width;
-            height: 60px;
-            color:#fff;
-            font-size: 18px;
-            font-weight: 500;
-            letter-spacing: -1px;
-            background-color:$main-color;
-            transition: all 0.2s ease-in-out;
-            -webkit-transform: translateY(0);
-            transform: translateY(0);
-            &.open {
-                -webkit-transform: translateY(-100%);
-                transform: translateY(-100%);
-            }
-            &:hover{
-                background-color:$main-color;
-            }
-        
-        }
+html {
+  body {
+    .zone-button {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 100%;
+      margin: 0 auto;
+      border-radius: 0;
+      z-index: $level1;
+      width: 100%;
+      max-width: $max-width;
+      height: 60px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: -1px;
+      background-color: $main-color;
+      transition: all 0.2s ease-in-out;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      &.open {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+      }
+      &:hover {
+        background-color: $main-color;
+      }
     }
+  }
 }

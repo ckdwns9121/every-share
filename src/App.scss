@@ -5,83 +5,77 @@
   outline: none;
   border: none;
   border-radius: 0;
-  font-family: 'Noto Sans KR' ,'애플 SD 산돌고딕 Neo', 'Apple SD Gothic Neo', 나눔고딕,
-      'NanumGothic', '맑은 고딕', 'Malgun Gothic', Ngothic, sans-serif;
+  font-family: 'Noto Sans KR', '애플 SD 산돌고딕 Neo', 'Apple SD Gothic Neo',
+    나눔고딕, 'NanumGothic', '맑은 고딕', 'Malgun Gothic', Ngothic, sans-serif;
 }
 .App {
   width: 100%;
   max-width: 768px;
-  margin : auto;
+  margin: auto;
   position: relative;
   overflow: hidden;
-  box-shadow: 0px 15px 15px  rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.5);
 }
-
 
 html,
 body {
-    // background-color:#333;
-    font-size: 12px;
-    letter-spacing: -0.05rem;
+  // background-color:#333;
+  font-size: 12px;
+  letter-spacing: -0.05rem;
 }
 input {
-    box-sizing: border-box;
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none;
-    -webkit-border-radius: 0;
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
 }
 // 기본 체크박스 숨기기
 input[type='checkbox'] {
-    display: none;
+  display: none;
 }
 
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 ul {
-    list-style: none;
+  list-style: none;
 }
 select {
-    /*ios대응*/
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    outline: none;
-    /*화살표 배경 넣기*/
+  /*ios대응*/
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  /*화살표 배경 넣기*/
 
-    background: url('./static/svg/select.svg') no-repeat calc(100% - 8px)
-        50% transparent;
-    /*화살표 select박스 오른쪽 중앙 배치,배경 흰색*/
+  background: url('./static/svg/select.svg') no-repeat calc(100% - 8px) 50%
+    transparent;
+  /*화살표 select박스 오른쪽 중앙 배치,배경 흰색*/
 }
 select::-ms-expand {
-    display: none; /* 화살표 없애기 for IE10, 11*/
+  display: none; /* 화살표 없애기 for IE10, 11*/
 }
-
 
 html {
-    body {
-        .MuiDialog-paperFullScreen {
-            max-width: 768px;
-        }
-        .App {
-            // background-color: #f9f9f9;
-        }
+  body {
+    .MuiDialog-paperFullScreen {
+      max-width: 768px;
     }
+  }
 }
 
-.slick-dots{
-    position: absolute;
-    bottom:5px;
-    li{
-        margin: 0;
-    }
+.slick-dots {
+  position: absolute;
+  bottom: 5px;
+  li {
+    margin: 0;
+  }
 }
-

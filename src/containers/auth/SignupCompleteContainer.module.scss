@@ -1,46 +1,45 @@
 @import '../../styles/_Root.scss';
 
-.container{
+.container {
   @include container;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
-  .content{
-      .flex-box{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding-bottom:140px;
-        .image{
-            width: 80px;
-            height: 80px;
-            margin-bottom:24px;
-            img{
-                width: 100%;
-            }
-        }
-        .main-text{
-            font-size: 24px;
-            font-weight: bold;
-            color:#333;
-            margin-bottom:15px;
-            letter-spacing: $letter-spaceing;
-        }
-        .sub-text{
-            font-size: 14px;
-            color:#777;
-            font-family: 500;
-            letter-spacing: $letter-spaceing;
-
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  .content {
+    .flex-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-bottom: 140px;
+      .image {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 24px;
+        img {
+          width: 100%;
         }
       }
+      .main-text {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+        letter-spacing: $letter-spaceing;
+      }
+      .sub-text {
+        font-size: 14px;
+        color: #777;
+        font-family: 500;
+        letter-spacing: $letter-spaceing;
+      }
+    }
   }
 }
-.button{
-    padding:$padding-side;
-    width: 100%;
-    position: fixed;
-    bottom:0;
+.button {
+  padding: $padding-side;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
 }

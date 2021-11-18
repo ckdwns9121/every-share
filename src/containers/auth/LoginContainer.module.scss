@@ -1,56 +1,55 @@
 @import '../../styles/_Root.scss';
 
-.container{
-    @include container;
-    background-color:$main-color;
-    color:#fff;
-    min-height: 100vh;
-    background-image: url('../../static/image/background.png');
-    background-position: 50% 100%;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    overflow: hidden;
-    position: relative;
-    .content{
-        .service-logo{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: row;
-            padding-top: 10vh;
-            .logo-title{
-                padding-left: 20px;
-            }
-        }
-        .wrapper{
-            width: 100%;
-            position:absolute;
-            padding: $padding-side;
-            bottom:24px;
-        }
+.container {
+  @include container;
+  background-color: $main-color;
+  color: #fff;
+  min-height: 100vh;
+  background-image: url('../../static/image/background.png');
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  overflow: hidden;
+  position: relative;
+  .content {
+    .service-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      padding-top: 10vh;
+      .logo-title {
+        padding-left: 20px;
+      }
     }
+    .wrapper {
+      width: 100%;
+      position: absolute;
+      padding: $padding-side;
+      bottom: 24px;
+    }
+  }
 }
 
-html{
-    body{
-        .login-button{
-            margin-bottom:15px;
-            width: 100%;
-            height: 50px;
-            background-color:#00BF19;
-            border-radius: 50px;
-            padding:0;
-            display: block;
-            position: relative;
-            text-align: left;
-            padding-left:60px;
-            font-size: 14px;
-            font-weight: 200;
-            .src{
-                position: absolute;
-                left:24px;
-            }
-        }
-  
+html {
+  body {
+    .login-button {
+      margin-bottom: 15px;
+      width: 100%;
+      height: 50px;
+      background-color: #00bf19;
+      border-radius: 50px;
+      padding: 0;
+      display: block;
+      position: relative;
+      text-align: left;
+      padding-left: 60px;
+      font-size: 14px;
+      font-weight: 200;
+      .src {
+        position: absolute;
+        left: 24px;
+      }
     }
+  }
 }
