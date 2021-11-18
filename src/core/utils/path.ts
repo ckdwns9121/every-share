@@ -63,9 +63,9 @@ export const RouteTitle  ={
             index:'마이페이지',
             update:{
                 index:'',
-                name:'이름변경',
+                name:'이름 변경',
                 password:'비밀번호 변경',
-                phone_number:'휴대폰번호 변경',
+                phone_number:'연락처 변경',
             }
         },
         event:{
