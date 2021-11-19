@@ -1,7 +1,5 @@
 /* 이름 업데이트 페이지 */
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { RoutePaths } from '../../../core/utils/path';
 import Layout from '../../../components/layout/Layout';
 import BasicButton from '../../../components/button/BasicButton';
 import styles from './UpdateNameContainer.module.scss';
@@ -18,7 +16,6 @@ import { useLoading, useSnackbar } from '../../../hooks/useAsset';
 function UpdateNameContainer() {
   const [name, setName] = useState('');
 
-  const history = useHistory();
   const dispatch = useDispatch();
   const access_token = useToken();
   const { handleLoading } = useLoading();
@@ -45,6 +42,7 @@ function UpdateNameContainer() {
     return () => {
       handleClose();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Layout>
