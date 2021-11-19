@@ -63,8 +63,9 @@ function MapContainer({ modal }: IMatchModal) {
   const handleFilterOpen = (type: boolean) => setFilterOpen(type);
   const history = useHistory();
   const dispatch = useDispatch();
-  const { position, level, area, address } = useSelector(
-    (state: RootState) => state.map
+  const { area } = useSelector((state: RootState) => state.map);
+  const { oneroom, tworoom, op, duplex } = useSelector(
+    (state: RootState) => state.filters
   );
   const { realties } = useSelector((state: RootState) => state.realties);
   const { zone_list } = useSelector((state: RootState) => state.zone);
@@ -277,8 +278,15 @@ function MapContainer({ modal }: IMatchModal) {
   }, []);
 
   useEffect(() => {
-    dispatch(getRealties({ lat: 0, lng: 0, filter: [1], access_token }));
-  }, [dispatch]);
+    let newArray: number[] = [];
+    [oneroom, tworoom, op, duplex].forEach((item, index) => {
+      if (item === true) {
+        newArray.push(index + 1);
+      }
+    });
+
+    dispatch(getRealties({ lat: 0, lng: 0, filter: newArray, access_token }));
+  }, [dispatch, oneroom, tworoom, op, duplex]);
 
   /* 지도 렌더 */
   useEffect(() => {
