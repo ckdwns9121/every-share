@@ -277,9 +277,7 @@ function MapContainer({ modal }: IMatchModal) {
   }, []);
 
   useEffect(() => {
-    dispatch(
-      getRealties({ lat: 0, lng: 0, filter: [1, 2, 3, 4], access_token })
-    );
+    dispatch(getRealties({ lat: 0, lng: 0, filter: [1], access_token }));
   }, [dispatch]);
 
   /* 지도 렌더 */

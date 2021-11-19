@@ -295,10 +295,9 @@ function DetailContainer({ id, modal }: IMatchId) {
               {options.induction === true && (
                 <RealtyOptionItem src={INDUCTION} name={'인덕션'} />
               )}
-              {options.induction === true && (
+              {options.ac === true && (
                 <RealtyOptionItem src={AC} name={'에어컨'} />
               )}
-              {/* <RealtyOptionItem src={GASSTOVE} name={'가스레인지'} /> */}
             </ul>
           </div>
 

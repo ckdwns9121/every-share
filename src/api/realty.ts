@@ -34,7 +34,6 @@ export const requestGetRealties = async (
       filter,
     },
   };
-  console.log('start');
   const res = await axios.get(URL, config);
   console.log(res);
   return res;
