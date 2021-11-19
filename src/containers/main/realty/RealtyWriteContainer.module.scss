@@ -1,321 +1,311 @@
 @import '../../../styles/Root';
 
-.container{
-        input,
-        select {
-            border: 1px solid #707070;
-            width: 100%;
-            height: 41px;
-            padding-left: 17px;
-            margin-bottom: 20px;
-            font-size: 12px;
-        }
-
-        input ::placeholder {
-            color: #707070;
-        }
-
-        select {
-            font-size: 12px;
-            padding-left: 12px;
-
-            & option {
-                font-size: 12px;
-            }
-        }
-
-        textarea {
-            border: 1px solid #707070;
-            resize: vertical;
-            width: 100%;
-            min-height: 145px;
-            height: auto;
-            padding: 5px 10px;
-        }
-
-    }
-
-
 .container {
-    @include container;
-    background-color: #fff;
-    color: #fff;
-    min-height: 100vh;
-    background-position: 50% 100%;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    overflow: hidden;
-    position: relative;
+  input,
+  select {
+    border: 1px solid #707070;
+    width: 100%;
+    height: 41px;
+    padding-left: 17px;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
 
-    .content {
-        .title-box {
-            display: flex;
-            align-items: center;
-            background-color: #F9F9F9;
-            width: 100%;
-            height: 56px;
-            padding-left: 24px;
+  input ::placeholder {
+    color: #707070;
+  }
 
-            .title {
-                font-size: 18px;
-                color: #000;
-            }
-        }
+  select {
+    font-size: 12px;
+    padding-left: 12px;
 
-        .info-box {
-            padding: $padding-side;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 40px;
-            align-items: center;
-            padding-top: 20px;
-            .floor{
-                position: absolute;
-                top:35%;
-                color:#707070;
-                right: 10px;
-                transform: translateY(-50%);
-            }
-
-            .divide {
-                position: relative;
-                width: 100%;
-                margin-bottom: 20px;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                p{
-                    margin: 0;
-                }
-
-                .half-box {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-                    box-sizing: border-box;
-                    padding: 0 16px;
-                    width: 150px;
-                    height: 41px;
-                    border: 1px solid #707070;
-
-                    & p {
-                        font-size: 12px;
-                        color: #707070;
-                    }
-
-                    .costInput {
-                        margin: 0 auto;
-                        text-align: center;
-                        width: 60px;
-                        height: 34px;
-                        border: none;
-
-                        & ::placeholder {
-                            text-align: center;
-                        }
-                    }
-                }
-
-                .notice {
-                    position: absolute;
-                    top: 43px;
-                    right: 0;
-                    color: #ff0000;
-                    font-size: 10px;
-                }
-            }
-
-
-
-
-
-        }
-
-        .locationInfo-box {
-            padding: $padding-side;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 27px;
-
-        }
-
-        .date-box {
-            padding: $padding-side;
-
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 27px;
-
-            .date {
-                width: 100%;
-
-                .subTitle {
-                    font-size: 12px;
-                    color: #707070;
-                    margin-bottom: 10px;
-                }
-
-            }
-
-
-        }
-
-        .additionalInfo-box {
-            padding: $padding-side;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 27px;
-
-            .option-box {
-                width: 100%;
-                margin-bottom: 27px;
-
-                .subTitle {
-                    font-size: 12px;
-                    color: #707070;
-                    margin-bottom: 6px;
-                }
-
-                .options {
-                    display: flex;
-                    flex-direction: row;
-                    flex-wrap: wrap;
-
-                    .option {
-                        box-sizing: border-box;
-                        width: 75px;
-                        height: 36px;
-                        border: 1px solid #EBEBEB;
-                        // background-color: #FFFFFF;
-                        background-color: #034B9D;
-                        font-size: 12px;
-                        color: #EBEBEB;
-                        margin: 0 5px 5px 0;
-                    }
-                }
-
-            }
-
-            .register-box {
-                width: 100%;
-                margin-bottom: 25px;
-
-                .subTitle {
-                    font-size: 12px;
-                    color: #707070;
-                    margin-bottom: 3px;
-                }
-
-                .notice {
-                    font-size: 10px;
-                    color: #ff0000;
-                    margin-bottom: 6px;
-                }
-
-                .fileInput-box {
-                    width: 100%;
-                    height: 44px;
-                    border: 1px solid #707070;
-
-                    & label {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 100%;
-                        height: 100%;
-                        color: #000;
-                        font-size: 12px;
-                        background-image: url('../../../static/svg/plus.svg');
-                        background-repeat: no-repeat;
-                        background-size: 20px 20px;
-                        background-position: 33% 60%;
-                    }
-
-                    & input[type="file"] {
-                        position: absolute;
-                        width: 1px;
-                        height: 1px;
-                        padding: 0;
-                        margin: -1px;
-                        overflow: hidden;
-                        clip: rect(0, 0, 0, 0);
-                        border: 0;
-                    }
-                   
-                }
-                 .RegisteredImage-box {
-                     display: flex;
-                     flex-wrap: wrap;
-                     margin-top: 15px;
-                     width: 100%;
-                     height: 65px;
-                     background-color: #e7e7e7;
-
-                     & img{
-                         width: 65px;
-                         height: 65px;
-                     }
-                 }
-
-            }
-
-            .registerButton {
-                margin-top: 70px;
-                width: 100%;
-                height: 56px;
-                border: none;
-                border-radius: 10px;
-                background-color: #034B9D;
-                color: #fff;
-                font-size: 16px;
-                font-weight: bold;
-                margin-bottom:15px;
-            }
-        }
-
-
-        .description-box {
-            width: 100%;
-
-            .subTitle {
-                font-size: 12px;
-                color: #707070;
-                margin-bottom: 10px;
-            }
-        }
+    & option {
+      font-size: 12px;
     }
+  }
+
+  textarea {
+    border: 1px solid #707070;
+    resize: vertical;
+    width: 100%;
+    min-height: 145px;
+    height: auto;
+    padding: 5px 10px;
+  }
 }
 
-html{
-    body{
-        .address-search{
-            width: 100%;
-            border:1px solid black;
-            height: 41px;
-            margin-bottom:15px;
-            border-radius: 0;
-            font-size: 15px;
-            letter-spacing: -1px;
-        }
-        .image-item{
-            position: relative;
-            .delete{
-                position: absolute;
-                top:0;
-                right:0;
-                z-index: 1000;
-                border:1px solid #333;
-                background-color:#333;
-            }
-        }
-  
+.container {
+  @include container;
+  background-color: #fff;
+  color: #fff;
+  min-height: 100vh;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  overflow: hidden;
+  position: relative;
+
+  .content {
+    .title-box {
+      display: flex;
+      align-items: center;
+      background-color: #f9f9f9;
+      width: 100%;
+      height: 56px;
+      padding-left: 24px;
+
+      .title {
+        font-size: 18px;
+        color: #000;
+      }
     }
+
+    .info-box {
+      padding: $padding-side;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 40px;
+      align-items: center;
+      padding-top: 20px;
+      .floor {
+        position: absolute;
+        top: 35%;
+        color: #707070;
+        right: 10px;
+        transform: translateY(-50%);
+      }
+
+      .divide {
+        position: relative;
+        width: 100%;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        p {
+          margin: 0;
+        }
+
+        .half-box {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          padding: 0 16px;
+          width: 150px;
+          height: 41px;
+          border: 1px solid #707070;
+
+          & p {
+            font-size: 12px;
+            color: #707070;
+          }
+
+          .costInput {
+            margin: 0 auto;
+            text-align: center;
+            width: 60px;
+            height: 34px;
+            border: none;
+
+            & ::placeholder {
+              text-align: center;
+            }
+          }
+        }
+
+        .notice {
+          position: absolute;
+          top: 43px;
+          right: 0;
+          color: #ff0000;
+          font-size: 10px;
+        }
+      }
+    }
+
+    .locationInfo-box {
+      padding: $padding-side;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 27px;
+    }
+
+    .date-box {
+      padding: $padding-side;
+
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 27px;
+
+      .date {
+        width: 100%;
+
+        .subTitle {
+          font-size: 12px;
+          color: #707070;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    .additionalInfo-box {
+      padding: $padding-side;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 27px;
+
+      .option-box {
+        width: 100%;
+        margin-bottom: 27px;
+
+        .subTitle {
+          font-size: 12px;
+          color: #707070;
+          margin-bottom: 6px;
+        }
+
+        .options {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+
+          .option {
+            box-sizing: border-box;
+            width: 75px;
+            height: 36px;
+            border: 1px solid #ebebeb;
+            // background-color: #FFFFFF;
+            background-color: #034b9d;
+            font-size: 12px;
+            color: #ebebeb;
+            margin: 0 5px 5px 0;
+            background-color: #777;
+            transition: all 0.3s ease-in-out;
+
+            &.checked {
+              background-color: #034b9d;
+            }
+          }
+        }
+      }
+
+      .register-box {
+        width: 100%;
+        margin-bottom: 25px;
+
+        .subTitle {
+          font-size: 12px;
+          color: #707070;
+          margin-bottom: 3px;
+        }
+
+        .notice {
+          font-size: 10px;
+          color: #ff0000;
+          margin-bottom: 6px;
+        }
+
+        .fileInput-box {
+          width: 100%;
+          height: 44px;
+          border: 1px solid #707070;
+
+          & label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            color: #000;
+            font-size: 12px;
+            background-image: url('../../../static/svg/plus.svg');
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-position: 33% 60%;
+          }
+
+          & input[type='file'] {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+          }
+        }
+        .RegisteredImage-box {
+          display: flex;
+          flex-wrap: wrap;
+          margin-top: 15px;
+          width: 100%;
+          height: 65px;
+          background-color: #e7e7e7;
+
+          & img {
+            width: 65px;
+            height: 65px;
+          }
+        }
+      }
+
+      .registerButton {
+        margin-top: 70px;
+        width: 100%;
+        height: 56px;
+        border: none;
+        border-radius: 10px;
+        background-color: #034b9d;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+    }
+
+    .description-box {
+      width: 100%;
+
+      .subTitle {
+        font-size: 12px;
+        color: #707070;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+html {
+  body {
+    .address-search {
+      width: 100%;
+      border: 1px solid black;
+      height: 41px;
+      margin-bottom: 15px;
+      border-radius: 0;
+      font-size: 15px;
+      letter-spacing: -1px;
+    }
+    .image-item {
+      position: relative;
+      .delete {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1000;
+        border: 1px solid #333;
+        background-color: #333;
+      }
+    }
+  }
 }

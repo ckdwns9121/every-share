@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="184.69" height="183.535" viewBox="0 0 184.69 183.535">
+  <g id="그룹_5142" data-name="그룹 5142" transform="translate(752.03 -4982.03)">
+    <path id="패스_2540" data-name="패스 2540" d="M-639.03,4901.9V5079.43h178.69V4901.9Z" transform="translate(-110 83.134)" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="6"/>
+    <g id="그룹_5141" data-name="그룹 5141">
+      <g id="타원_180" data-name="타원 180" transform="translate(-724.5 5005.399)" fill="none" stroke="#000" stroke-width="6">
+        <circle cx="22.5" cy="22.5" r="22.5" stroke="none"/>
+        <circle cx="22.5" cy="22.5" r="19.5" fill="none"/>
+      </g>
+      <g id="타원_183" data-name="타원 183" transform="translate(-725 5071.11)" fill="none" stroke="#000" stroke-width="6">
+        <circle cx="23" cy="23" r="23" stroke="none"/>
+        <circle cx="23" cy="23" r="20" fill="none"/>
+      </g>
+      <g id="그룹_5031" data-name="그룹 5031" transform="translate(-654.536 4997.884)">
+        <g id="타원_179" data-name="타원 179" transform="translate(18.403 19.226)" fill="none" stroke="#000" stroke-width="6">
+          <ellipse cx="16" cy="15.5" rx="16" ry="15.5" stroke="none"/>
+          <ellipse cx="16" cy="15.5" rx="13" ry="12.5" fill="none"/>
+        </g>
+        <g id="타원_181" data-name="타원 181" transform="translate(0.403 0.226)" fill="none" stroke="#000" stroke-width="6">
+          <circle cx="34.5" cy="34.5" r="34.5" stroke="none"/>
+          <circle cx="34.5" cy="34.5" r="31.5" fill="none"/>
+        </g>
+      </g>
+      <g id="그룹_5030" data-name="그룹 5030" transform="translate(-721.236 5137.396)">
+        <ellipse id="타원_184" data-name="타원 184" cx="5" cy="4.5" rx="5" ry="4.5" transform="translate(0.103 0.426)" fill="#222"/>
+        <ellipse id="타원_185" data-name="타원 185" cx="5" cy="4.5" rx="5" ry="4.5" transform="translate(20.103 0.426)" fill="#222"/>
+        <ellipse id="타원_186" data-name="타원 186" cx="5" cy="4.5" rx="5" ry="4.5" transform="translate(39.103 0.426)" fill="#222"/>
+        <ellipse id="타원_187" data-name="타원 187" cx="5" cy="4.5" rx="5" ry="4.5" transform="translate(59.103 0.426)" fill="#222"/>
+      </g>
+    </g>
+  </g>
+</svg>

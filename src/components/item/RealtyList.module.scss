@@ -1,80 +1,103 @@
 @import '../../styles/_Root.scss';
 
-@mixin font{
-    font-weight: 500;
-    color:#555;
-    $magin-bottom:5px;
+@mixin font {
+  font-weight: 500;
+  color: #555;
+  $magin-bottom: 5px;
 }
 
-.realty-item{
-    margin-bottom:20px;
-    width: 100%;
-    display: flex;
+.realty-item {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  height: 100px;
+  position: relative;
+
+  .realty-img {
+    min-width: 100px;
     height: 100px;
     position: relative;
+    @include animation(0.5s, fadeIn);
 
-    .realty-img{
-        min-width: 100px;
-        height: 100px;
-        position: relative;
-        @include animation(0.5s, fadeIn);
-
-        img{
-            width:  100px;
-            height: 100px;
-            object-fit: cover;
-        }
-        .like{
-            position: absolute;
-            right:0;
-            bottom:0;
-            button{
-                position: relative !important;
-                padding:5px;
-            }
-        }
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
     }
-    .realty-info{
-        margin-left: 15px;
-        .realty-price{
-            font-size: 18px;
-            font-weight: bold;
-            color:#333;
-            $magin-bottom:5px;
-        }
-        .realty-name{
-            font-size: 14px;
-            @include font;
-        }
-        .realty-date{
-            font-size: 12px;
-            @include font;
-
-        }
-        .realty-comment{
-            font-size: 12px;
-            @include font;
-
-        }
+    .like {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      button {
+        position: relative !important;
+        padding: 5px;
+      }
     }
-
+  }
+  .realty-info {
+    margin-left: 15px;
+    .realty-price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      $magin-bottom: 5px;
+    }
+    .realty-name {
+      font-size: 14px;
+      @include font;
+    }
+    .realty-date {
+      font-size: 12px;
+      @include font;
+    }
+    .realty-comment {
+      font-size: 12px;
+      @include font;
+    }
+  }
 }
 
-html{
-    body{
-        .icon{
-            position: absolute;
-            right: 0;
-            // bottom:px;
-        }
+html {
+  body {
+    .icon {
+      position: absolute;
+      right: 0;
+      // bottom:px;
     }
+
+    .option-item {
+      display: inline-block;
+      vertical-align: top;
+      text-align: center;
+      box-sizing: border-box;
+      width: 20%;
+      padding: 0 5px;
+      // margin-bottom :15px;
+      height: auto;
+      cursor: pointer;
+      .option-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border: 1px solid #707070;
+        border-radius: 100px;
+        margin: 0 auto;
+        // text-align: center;
+      }
+      .option-name {
+        text-align: center;
+      }
+    }
+  }
 }
 
 @include keyframe(fadeIn) {
-    from {
-        filter: blur(50px);
-    }
-    to {
-        filter: blur(0);
-    }
+  from {
+    filter: blur(50px);
+  }
+  to {
+    filter: blur(0);
+  }
 }

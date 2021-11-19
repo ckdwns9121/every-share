@@ -37,11 +37,6 @@ export interface IRealty {
   user_id: number;
 }
 
-export interface IOption {
-  gas?: boolean | number;
-  bed?: boolean | number;
-}
-
 export interface IMatchId {
   id: string;
   modal?: string | undefined;

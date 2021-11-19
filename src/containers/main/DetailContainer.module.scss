@@ -98,16 +98,15 @@
         list-style: none;
         width: 100%;
         max-width: 768px;
-        margin: 15px 0;
         box-sizing: border-box;
+        padding-top: 15px;
         .option-item {
           display: inline-block;
           vertical-align: top;
           text-align: center;
           box-sizing: border-box;
           width: 20%;
-          padding: 0 5px;
-          // margin-bottom :15px;
+          padding: 5px;
           height: auto;
           cursor: pointer;
           .option-img {
@@ -120,6 +119,10 @@
             border-radius: 100px;
             margin: 0 auto;
             // text-align: center;
+            img {
+              width: 33px;
+              height: 33px;
+            }
           }
           .option-name {
             text-align: center;

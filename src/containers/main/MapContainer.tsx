@@ -75,7 +75,7 @@ function MapContainer({ modal }: IMatchModal) {
   const [addr, setAddr] = useState<string>(''); //주소검색
   const [addrList, setAddrList] = useState<IAddress[] | null>(null);
   const zone_view = useRef<boolean>(false); // 매물 버튼 오픈 여부
-  const [zoneButtonOpen, setZoneButtonOpen] = useState<boolean>(false);
+  const [zoneOpen, setZoneOpen] = useState<boolean>(false);
 
   /* 지도를 렌더하는 함수 */
   const mapRender = useCallback(() => {
@@ -159,7 +159,7 @@ function MapContainer({ modal }: IMatchModal) {
       const new_position = { lat, lng };
       localStorage.setItem('position', JSON.stringify(new_position));
       localStorage.setItem('level', lv);
-      setZoneButtonOpen(false);
+      setZoneOpen(false);
       zone_view.current = false;
     });
 
@@ -219,7 +219,7 @@ function MapContainer({ modal }: IMatchModal) {
             });
 
             dispatch(setZone(zoneList));
-            setZoneButtonOpen(zone_view.current);
+            setZoneOpen(zone_view.current);
           }
         }
       );
@@ -323,7 +323,10 @@ function MapContainer({ modal }: IMatchModal) {
             </IconButton>
             <IconButton
               className={styles['icon']}
-              onClick={() => handleOpen(true)}
+              onClick={() => {
+                setZoneOpen(false);
+                handleOpen(true);
+              }}
             >
               <img src={MENU} alt="menu" />
             </IconButton>
@@ -339,7 +342,7 @@ function MapContainer({ modal }: IMatchModal) {
         </div>
         <SlideMenu open={menuOpen} handleClose={() => handleOpen(false)} />
         <Button
-          className={cx('zone-button', { open: zoneButtonOpen })}
+          className={cx('zone-button', { open: zoneOpen })}
           onClick={() => history.push(RoutePaths.main.index + '/zone')}
         >
           이지역 매물 {`${zone_list.length}`}개 보기

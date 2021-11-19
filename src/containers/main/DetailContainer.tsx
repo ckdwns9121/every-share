@@ -16,6 +16,8 @@ import GASSTOVE from '../../static/svg/options/gasstove.svg';
 import BED from '../../static/svg/options/bed.svg';
 import MICROWAVE from '../../static/svg/options/microwave.svg';
 import WASHER from '../../static/svg/options/washer.svg';
+import AC from '../../static/svg/options/ac.svg';
+import INDUCTION from '../../static/svg/options/induction.svg';
 
 import ROAD_VIEW from '../../static/svg/view.svg';
 import PHONE from '../../static/svg/phone.svg';
@@ -32,7 +34,7 @@ import { requestContact } from '../../api/contact';
 import { requestLike } from '../../api/like';
 
 //type
-import { IRealty } from '../../types/Realty';
+import { IRealty, IOptions } from '../../types/Realty';
 
 //lib
 
@@ -53,6 +55,8 @@ import { setLike } from '../../store/zone';
 import MARKER from '../../static/svg/map-marker.svg';
 import IMAGE from '../../static/image/realty/rinda1.jpg';
 
+//type
+
 function DetailContainer({ id, modal }: IMatchId) {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -69,6 +73,7 @@ function DetailContainer({ id, modal }: IMatchId) {
 
   const [likes, setLikes] = useState([]);
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [options, setOptions] = useState<IOptions>({});
 
   //상세정보 들고오기
   const callGetApiRealty = async () => {
@@ -77,6 +82,9 @@ function DetailContainer({ id, modal }: IMatchId) {
       const res = await requestGetRealty(id, access_token);
       console.log(res);
       if (res?.data?.message === 'success') {
+        console.log(JSON.parse(res.data.realty.realty_options));
+        const test = JSON.parse(res.data.realty.realty_options);
+        setOptions(JSON.parse(test));
         setRealty(res.data.realty);
         setLikes(res.data.likes);
         setIsLiked(res.data.isLiked);
@@ -93,6 +101,12 @@ function DetailContainer({ id, modal }: IMatchId) {
     switch (kind) {
       case 1:
         return '원룸';
+      case 2:
+        return '투룸';
+      case 3:
+        return '오피스텔';
+      case 4:
+        return '복층';
       default:
         return 'null';
     }
@@ -181,13 +195,11 @@ function DetailContainer({ id, modal }: IMatchId) {
     return () => {
       handleClose();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     callGetApiRealty();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   return (
     <Fragment>
@@ -268,10 +280,25 @@ function DetailContainer({ id, modal }: IMatchId) {
           <div className={styles['realty-info']}>
             <div className={styles['title']}>옵션</div>
             <ul className={styles['options']}>
-              <RealtyOptionItem src={GASSTOVE} name={'가스레인지'} />
-              <RealtyOptionItem src={BED} name={'침대'} />
-              <RealtyOptionItem src={WASHER} name={'세탁기'} />
-              <RealtyOptionItem src={MICROWAVE} name={'전자레인지'} />
+              {options.gas === true && (
+                <RealtyOptionItem src={GASSTOVE} name={'가스레인지'} />
+              )}
+              {options.microwave === true && (
+                <RealtyOptionItem src={MICROWAVE} name={'전자레인지'} />
+              )}
+              {options.washer === true && (
+                <RealtyOptionItem src={WASHER} name={'세탁기'} />
+              )}
+              {options.bed === true && (
+                <RealtyOptionItem src={BED} name={'침대'} />
+              )}
+              {options.induction === true && (
+                <RealtyOptionItem src={INDUCTION} name={'인덕션'} />
+              )}
+              {options.induction === true && (
+                <RealtyOptionItem src={AC} name={'에어컨'} />
+              )}
+              {/* <RealtyOptionItem src={GASSTOVE} name={'가스레인지'} /> */}
             </ul>
           </div>
 
