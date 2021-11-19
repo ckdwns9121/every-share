@@ -1,5 +1,5 @@
 /* 이름 업데이트 페이지 */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { RoutePaths } from '../../../core/utils/path';
 import Layout from '../../../components/layout/Layout';
@@ -12,24 +12,40 @@ import { updateUserName } from '../../../api/users';
 import { useToken } from '../../../hooks/useStore';
 import { useDispatch } from 'react-redux';
 
+//store
+import { update } from '../../../store/user';
+import { useLoading, useSnackbar } from '../../../hooks/useAsset';
 function UpdateNameContainer() {
   const [name, setName] = useState('');
 
   const history = useHistory();
+  const dispatch = useDispatch();
   const access_token = useToken();
+  const { handleLoading } = useLoading();
+  const { handleOpen, handleClose } = useSnackbar();
 
   const onClickButton = async () => {
     try {
       if (access_token) {
+        handleLoading(true);
         const res = await updateUserName(access_token, name);
         console.log(res);
         if (res.status === 200) {
+          dispatch(update({ name: 'name', value: name }));
+          handleOpen('성공적으로 변경되었습니다.', true, false, 'success');
         }
+        handleLoading(false);
       }
     } catch (e) {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      handleClose();
+    };
+  }, []);
   return (
     <Layout>
       <div className={styles['wrapper']}>

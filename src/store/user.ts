@@ -1,39 +1,54 @@
 //유저 스토어
-import {createAction, ActionType, createReducer} from 'typesafe-actions';
-import {IUser} from '../types/User';
+import { createAction, createReducer } from 'typesafe-actions';
+import { IUser } from '../types/User';
 
-const SET_USER  = 'user/SET_USER';
+const GET_USER = 'user/GET_USER';
 const LOGOUT = 'user/LOGOUT';
+const UPDATE = 'user/UPDATE';
 
-export const set_user = createAction(SET_USER)<any>();
+type UPDATE_KIND = 'name' | 'password' | 'phone_number';
+
+export const getUser = createAction(GET_USER)<any>();
 export const logout = createAction(LOGOUT)();
+export const update =
+  createAction(UPDATE)<{ name: UPDATE_KIND; value: string }>();
 
-const actions ={set_user,logout};
+type Actions =
+  | ReturnType<typeof getUser>
+  | ReturnType<typeof logout>
+  | ReturnType<typeof update>;
 
-type Actions = ActionType<typeof actions>
-
-type State =  IUser;
-
-const initState : State = {
-    user :null
+const initState: IUser = {
+  user: null,
 };
 
-const user = createReducer<State, Actions>(initState, {
-    [SET_USER]: (state, action) =>
-    {
-        const {type,value} = action.payload;
-        return {
-            ...state,
-            user : action.payload
-        }
-    },
-    [LOGOUT] : (state,action) =>{
-        return{
-            ...state,
-            user:null
-        }
+const userStore = createReducer<IUser, Actions>(initState, {
+  [GET_USER]: (state, action) => {
+    return {
+      ...state,
+      user: action.payload,
+    };
+  },
+  [UPDATE]: (state, action) => {
+    const { user } = state;
+    const { name, value } = action.payload;
+    if (user) {
+      if (name === 'name' || name === 'password' || name === 'phone_number') {
+        user[name] = value;
+      }
     }
+    return {
+      ...state,
+      user: user,
+    };
+  },
+  [LOGOUT]: (state, action) => {
+    return {
+      ...state,
+      user: null,
+    };
+  },
 });
 
-export type RootState = ReturnType<typeof user>;
-export default user;
+export type RootState = ReturnType<typeof userStore>;
+export default userStore;
