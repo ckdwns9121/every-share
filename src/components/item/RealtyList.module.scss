@@ -19,7 +19,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    font-size: 5px;
+    font-size: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,6 +68,15 @@
     .realty-comment {
       font-size: 12px;
       @include font;
+      overflow: hidden;
+      margin-top: 5px;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* 라인수 */
+      -webkit-box-orient: vertical;
+      word-wrap: break-word;
+      line-height: 1.2em;
+      height: 2.4em;
     }
   }
 }
