@@ -186,7 +186,7 @@ function MapContainer({ modal }: IMatchModal) {
       (cluster: any) => {
         const overlays = cluster.getMarkers();
 
-        if (overlays.length > 10 || map_level.current > 9) {
+        if (overlays.length > 10 || map_level.current > 11) {
           var level = map.getLevel() - 1;
           map.setLevel(level, {
             anchor: cluster.getCenter(),
