@@ -109,8 +109,7 @@ function RealtyWriteContainer({ id }: Props) {
   const onChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const { start_date, end_date } = date;
-    console.log(name);
-    console.log(value);
+
     if (name === 'start_date') {
       if (calculateDate2(value, end_date)) {
         setDate({
@@ -164,7 +163,6 @@ function RealtyWriteContainer({ id }: Props) {
   // 매물 등록
   const onClickEnrollment = async () => {
     try {
-      console.log(access_token);
       handleLoading(true);
       if (access_token) {
         const res = await requestPostRealty(
@@ -195,7 +193,6 @@ function RealtyWriteContainer({ id }: Props) {
           '1',
           contract_image
         );
-        console.log(res);
         if (res?.data.message === 'success') {
           history.push(RoutePaths.main.detail + '/' + res.data.data.realty_id);
         }
@@ -212,7 +209,6 @@ function RealtyWriteContainer({ id }: Props) {
       try {
         handleLoading(true);
         const res = await requestGetRealty(id, access_token);
-        console.log(res);
         if (res?.data?.message === 'success') {
           setReatlyName(res.data.realty.realty_name);
           setAddrDetail(res.data.realty.addr_detail);
@@ -296,7 +292,6 @@ function RealtyWriteContainer({ id }: Props) {
           setDepth3Name(bname);
           setAddr(roadAddr);
           const res = await requestGetAddressInfo(roadAddr);
-          console.log(res);
           if (res?.data?.documents) {
             setPosition({
               lat: res.data.documents[0].y,

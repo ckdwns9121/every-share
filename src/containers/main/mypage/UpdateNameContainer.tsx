@@ -26,7 +26,6 @@ function UpdateNameContainer() {
       if (access_token) {
         handleLoading(true);
         const res = await updateUserName(access_token, name);
-        console.log(res);
         if (res.status === 200) {
           dispatch(update({ name: 'name', value: name }));
           handleOpen('성공적으로 변경되었습니다.', true, false, 'success');

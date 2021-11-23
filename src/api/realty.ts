@@ -35,7 +35,6 @@ export const requestGetRealties = async (
     },
   };
   const res = await axios.get(URL, config);
-  console.log(res);
   return res;
 };
 export const requestRealtyLately = async (
@@ -155,7 +154,6 @@ export const requsetMyRealtyList = async (JWT_TOKEN: string) => {
     },
   };
   const res = await axiosInstance.get(URL, { ...config, cache: true });
-  console.log(res);
   return res;
   // return await axios.get(URL,config).then((res)=> res) .catch((e)=> e);
 };

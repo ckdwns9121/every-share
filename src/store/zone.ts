@@ -14,7 +14,6 @@ const zoneSlice = createSlice({
   initialState,
   reducers: {
     setZone: (state, action: PayloadAction<IRealty[]>) => {
-      console.log(action);
       state.zone_list = action.payload;
     },
     setLike: (state, action: PayloadAction<any>) => {

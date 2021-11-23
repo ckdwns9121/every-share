@@ -80,9 +80,7 @@ function DetailContainer({ id, modal }: IMatchId) {
     try {
       handleLoading(true);
       const res = await requestGetRealty(id, access_token);
-      console.log(res);
       if (res?.data?.message === 'success') {
-        console.log(JSON.parse(res.data.realty.realty_options));
         const test = JSON.parse(res.data.realty.realty_options);
         setOptions(JSON.parse(test));
         setRealty(res.data.realty);
@@ -116,7 +114,6 @@ function DetailContainer({ id, modal }: IMatchId) {
     try {
       if (access_token && realty) {
         const res = await requestLike(realty?.realty_id, access_token);
-        console.log(res);
         if (res.status === 200) {
           setIsLiked(res.data.isLiked);
           dispatch(
@@ -143,7 +140,6 @@ function DetailContainer({ id, modal }: IMatchId) {
         true,
         async () => {
           try {
-            console.log('문의');
             if (access_token) {
               const res = await requestContact(access_token, id);
               console.log(res);
@@ -154,7 +150,6 @@ function DetailContainer({ id, modal }: IMatchId) {
               }
             }
           } catch (e: any) {
-            console.log(e.response);
             handleOpen(e.response.data.message, true, false, 'error');
           }
         },
