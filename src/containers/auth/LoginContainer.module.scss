@@ -14,10 +14,12 @@
   .content {
     .service-logo {
       display: flex;
-      justify-content: center;
       align-items: center;
       flex-direction: row;
       padding-top: 10vh;
+      .logo-image {
+        margin-left: 24px;
+      }
       .logo-title {
         padding-left: 20px;
       }

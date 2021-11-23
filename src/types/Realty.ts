@@ -12,6 +12,9 @@ export interface IRealty {
   monthly_rent: number;
   oper_end_time: string;
   oper_start_time: string;
+  region_1depth_name: string | null;
+  region_2depth_name: string | null;
+  region_3depth_name: string | null;
   post_num: string | number | null;
   realty_all_floors?: string | number | null;
   realty_comment: string | null;

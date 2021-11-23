@@ -61,11 +61,13 @@ function RealtyWriteContainer({ id }: Props) {
   const [contract_image, setContractImage] = useState<string>('');
   const [realty_srcs, setSrcs] = useState<string[]>([]);
   const [contract_src, setContractSrc] = useState<string>('');
-
   const [open, setOpen] = useState<boolean>(false);
   const [realty_name, setReatlyName] = useState<string>(''); //이름
   const [addr, setAddr] = useState<string>(''); //주소
   const [addr_detail, setAddrDetail] = useState<string>('');
+  const [region_1depth_name, setDepth1Name] = useState<string>('');
+  const [region_2depth_name, setDepth2Name] = useState<string>('');
+  const [region_3depth_name, setDepth3Name] = useState<string>('');
   const [all_floor, setAllFloor] = useState<number | string>('');
   const [my_floor, setMyFloor] = useState<number | string>('');
   const [date, setDate] = useState<{ start_date: string; end_date: string }>({
@@ -179,6 +181,9 @@ function RealtyWriteContainer({ id }: Props) {
           addr, //주소
           addr_detail, //  상세주소
           '', //임시주소
+          region_1depth_name,
+          region_2depth_name,
+          region_3depth_name,
           '0',
           position.lat,
           position.lng,
@@ -285,7 +290,10 @@ function RealtyWriteContainer({ id }: Props) {
           // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
           var roadAddr = data.roadAddress; // 도로명 주소 변수
           // var extraRoadAddr = ''; // 참고 항목 변수
-          console.log(roadAddr);
+          const { sido, sigungu, bname } = data;
+          console.log(sido);
+          console.log(sigungu);
+          console.log(data);
           setAddr(roadAddr);
           const res = await requestGetAddressInfo(roadAddr);
           console.log(res);

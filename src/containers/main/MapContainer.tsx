@@ -44,6 +44,9 @@ import MENU from '../../static/svg/menu.svg';
 import AddressModal from '../../components/modal/AddressModal';
 import ZoneModal from '../../components/modal/ZoneModal';
 
+//lib
+import { getDistanceFromLatLonInKm } from '../../core/lib/distance';
+import { IRealty } from '../../types/Realty';
 const cx = cn.bind(styles);
 
 declare global {
@@ -73,6 +76,7 @@ function MapContainer({ modal }: IMatchModal) {
   const map_position = useRef<any>({ lat: 33.450701, lng: 126.570667 }); //지도 첫렌더시 좌표
   const map_level = useRef<number>(5); // 디폴트 레벨 -> //4 : 100m 6: 500m 7:1km
   const cluster_marker = useRef<any>(null);
+  const area_marker = useRef<any>(null);
   const [addr, setAddr] = useState<string>(''); //주소검색
   const [addrList, setAddrList] = useState<IAddress[] | null>(null);
   const zone_view = useRef<boolean>(false); // 매물 버튼 오픈 여부
@@ -116,6 +120,9 @@ function MapContainer({ modal }: IMatchModal) {
     if (cluster_marker.current !== null) {
       cluster_marker.current.clear();
     }
+    if (area_marker.current !== null) {
+      area_marker.current.clear();
+    }
     const map = kakao_map.current;
 
     cluster_marker.current = new window.kakao.maps.MarkerClusterer({
@@ -128,17 +135,17 @@ function MapContainer({ modal }: IMatchModal) {
           // calculator 각 사이 값 마다 적용될 스타일을 지정한다
           width: '40px',
           height: '40px',
-          // background: 'rgba(34, 34, 34, .8)',
-          background: '#0066ff',
+          background: 'rgba(34, 34, 34, .8)',
+          // background: '#0066ff',
           borderRadius: '30px',
           color: '#fff',
-          border: '0.5px solid white',
+          // border: '0.5px solid white',
           boxSizing: 'border-box',
           fontSize: '15px',
           textAlign: 'center',
           fontWeight: 'bold',
           lineHeight: '40px',
-          opacity: '0.85',
+          opacity: '0.95',
         },
       ],
     });
@@ -164,16 +171,6 @@ function MapContainer({ modal }: IMatchModal) {
       zone_view.current = false;
     });
 
-    // const markdata = realties.filter((item) => {
-    //     return (
-    //         item.addr.indexOf(area['type1']) !== -1 ||
-    //         item.addr.indexOf(area['type2']) !== -1
-    //     );
-    // });
-    // 마커 생성
-    // 스토리지에서 마지막 user_position을 기준으로 마커데이터 생성 ex) 대구좌표 -> 대구 주변 렌더
-
-    // const storage_position = JSON.parse(sessionStorage.getItem('user_position'));
     if (true) {
       const data = realties.map((el: any) => {
         const content = `<div onclick="onClickOverlay(${
@@ -192,15 +189,17 @@ function MapContainer({ modal }: IMatchModal) {
       });
       cluster_marker.current.addMarkers(data);
 
-      /*
-                클러스터 클릭이벤트
-                클러스트를 클릭하면 슬라이드 메뉴 생성
-                10개 이상이면 지도 줌 인
-            */
       window.kakao.maps.event.addListener(
         cluster_marker.current,
         'clusterclick',
         (cluster: any) => {
+          // console.log(cluster.getCenter());
+          // realties.forEach((item: IRealty) => {
+          //   const { lat, lng, realty_name } = item;
+          //   const { La, Ma } = cluster.getCenter();
+          //   console.log(realty_name);
+          //   console.log(getDistanceFromLatLonInKm(lat, lng, Ma, La));
+          // });
           const overlays = cluster.getMarkers();
 
           if (overlays.length > 10 || map_level.current > 11) {

@@ -12,6 +12,21 @@
   display: flex;
   height: 100px;
   position: relative;
+  .badge {
+    width: 49px;
+    height: 20px;
+    background-color: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ec6530;
+    color: #fff;
+    font-weight: 100;
+  }
 
   .realty-img {
     min-width: 100px;
