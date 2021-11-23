@@ -20,7 +20,6 @@
       display: flex;
       width: 100%;
       height: 100%;
-      overflow: hidden;
       text-align: left;
       color: #333;
       padding-left: 48px;
@@ -28,9 +27,10 @@
       letter-spacing: -1px;
       align-items: center;
       h1 {
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        font-weight: 500;
         font-size: 20px;
+        width: 100%;
+        @include ellipsis(1,1.2em);
       }
     }
   }
