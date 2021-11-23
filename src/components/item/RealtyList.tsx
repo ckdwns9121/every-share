@@ -60,7 +60,7 @@ function RealtyItem(props: Props) {
             {`${dateToYYYYMMDD(new Date(props.oper_start_time))}`} ~{' '}
             {`${dateToYYYYMMDD(new Date(props.oper_end_time))}`}까지
           </div>
-          <div className={styles['realty-comment']}>{props.realty_comment}</div>
+          <div className={styles['realty-area']}>{props.region_2depth_name} {props.region_3depth_name}</div>
         </div>
         <div className={styles['badge']}>집주인 허가</div>
       </div>
