@@ -291,9 +291,9 @@ function RealtyWriteContainer({ id }: Props) {
           var roadAddr = data.roadAddress; // 도로명 주소 변수
           // var extraRoadAddr = ''; // 참고 항목 변수
           const { sido, sigungu, bname } = data;
-          console.log(sido);
-          console.log(sigungu);
-          console.log(data);
+          setDepth1Name(sido);
+          setDepth2Name(sigungu);
+          setDepth3Name(bname);
           setAddr(roadAddr);
           const res = await requestGetAddressInfo(roadAddr);
           console.log(res);
