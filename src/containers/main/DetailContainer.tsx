@@ -345,13 +345,13 @@ function DetailContainer({ id, modal }: IMatchId) {
             >
               간편 문의
             </Button>
-            <a href="tel:010-4788-8227">
+            <a href="tel:010-3455-0117">
               <ButtonBase className={styles['button']}>
                 <img src={PHONE} alt="PHONE"></img>
                 전화문의
               </ButtonBase>
             </a>
-            <a href="sms:010-4788-8227&body=매물 문의합니다.">
+            <a href="sms:010-3455-0117&body=매물 문의합니다.">
               <ButtonBase className={styles['button']}>
                 <img src={MESSAGE} alt="MESSAGE"></img>
                 문자 문의
