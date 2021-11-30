@@ -189,7 +189,9 @@ function SignupContainer() {
           >
             <Arrow />
           </IconButton>
-          <div className={header_styles['title']}>회원가입</div>
+          <div className={header_styles['title']}>
+            <h1>회원가입</h1>
+          </div>
         </div>
       </div>
       <div className={styles['container']}>

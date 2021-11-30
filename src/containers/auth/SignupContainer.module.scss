@@ -1,85 +1,82 @@
 @import '../../styles/_Root.scss';
 
+.container {
+  @include container;
 
-.container{
-    @include container;
+  .content {
+    padding: $padding-side;
 
-    .content{
-        padding:$padding-side;
-
-        .wrapper{
-            .title{
-                padding-top:40px;
-            }
-            .input-box{
-                margin-top:40px;
-                width: 100%;
-                input{
-                    width: 100%;
-                    height: 48px;
-                    background:#fff;
-                    border-bottom:1px solid #222;
-                    box-sizing: border-box;
-                }
-            }
-            .step-bar{
-                margin-top:80px;
-                width: 100%;
-                height: 8px;
-                background-color:#DBDBDB;
-                .step-success{
-                    transition: all 0.3s ease-in-out;
-                    height: 8px;
-                    background-color:$main-color;
-                }
-            }
-            .check-box{
-                padding-top:15px;
-                div{
-                    color:#555;
-                    font-size: 16px;
-                }
-                // border:1px solid red;
-            }
-        
+    .wrapper {
+      .title {
+        padding-top: 40px;
+      }
+      .input-box {
+        margin-top: 40px;
+        width: 100%;
+        input {
+          width: 100%;
+          height: 48px;
+          background: #fff;
+          border-bottom: 1px solid #222;
+          box-sizing: border-box;
         }
-        .next{
-            margin-top:80px;
+      }
+      .step-bar {
+        margin-top: 80px;
+        width: 100%;
+        height: 8px;
+        background-color: #dbdbdb;
+        .step-success {
+          transition: all 0.3s ease-in-out;
+          height: 8px;
+          background-color: $main-color;
         }
+      }
+      .check-box {
+        padding-top: 15px;
+        div {
+          color: #555;
+          font-size: 16px;
+        }
+        // border:1px solid red;
+      }
     }
-
+    .next {
+      margin-top: 80px;
+    }
+  }
 }
 
-html{
-    body{
-        .basic-button{
-            width: 100%;
-            height: 56px;
-            background-color: $main-color;
-            border-radius: 10px;
-            color:#fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 17px;
-            margin: 15px 0;
-            font-weight: bold;
-            transition: all .3s ease-in;
-            &.disable{
-                background-color: $disable-color;
-            }
-        }
-
-        .white{
-            background-color: #FFFFFF;
-            border: 1px solid #EBEBEB;
-            color: #555555;
-        }
-
-        .gray{
-            border:1px solid #EBEBEB;
-            background-color: #fff;
-            color: #777777;
-        }
+html {
+  body {
+    .basic-button {
+      width: 100%;
+      height: 56px;
+      background-color: $main-color;
+      border-radius: 10px;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 17px;
+      margin: 15px 0;
+      font-weight: bold;
+      transition: all 0.3s ease-in;
+      &.disable {
+        background-color: $disable-color;
+      }
     }
+
+    .white {
+      background-color: #ffffff;
+      border: 1px solid #ebebeb;
+      color: #555555;
+    }
+
+    .gray {
+      border: 1px solid #ebebeb;
+      background-color: #fff;
+      color: #777777;
+    }
+  }
 }

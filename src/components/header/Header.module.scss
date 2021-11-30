@@ -30,7 +30,7 @@
         font-weight: 500;
         font-size: 20px;
         width: 100%;
-        @include ellipsis(1,1.2em);
+        @include ellipsis(1, 1.2em);
       }
     }
   }
