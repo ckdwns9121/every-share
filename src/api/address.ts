@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const URL = 'https://www.juso.go.kr/addrlink/addrLinkApi.do';
-const KEY = 'devU01TX0FVVEgyMDIxMDkxNDEzMTcyNjExMTY2Mjk=';
+const KEY = 'devU01TX0FVVEgyMDIyMDExMjE1NDgwNjExMjEyNTc=';
 
 export const searchAddress = async (searchAddr: string) => {
   const req = URL;

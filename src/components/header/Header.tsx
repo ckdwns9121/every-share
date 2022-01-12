@@ -15,7 +15,7 @@ interface Props {
 
 function Header({ title, children }: Props) {
   const history = useHistory();
-  const headerRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const [shadow, setShadow] = useState(false);
 
   useEffect(() => {

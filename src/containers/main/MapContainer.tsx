@@ -15,6 +15,7 @@ import { IAddress } from '../../types/Address';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useToken } from '../../hooks/useStore';
+import useDebounced from '../../hooks/useDebounced';
 
 //store
 import { RootState } from '../../store';
@@ -64,9 +65,7 @@ function MapContainer({ modal }: IMatchModal) {
   const history = useHistory();
   const dispatch = useDispatch();
   const { level } = useSelector((state: RootState) => state.map);
-  const { oneroom, tworoom, op, duplex } = useSelector(
-    (state: RootState) => state.filters
-  );
+  const { oneroom, tworoom, op, duplex } = useSelector((state: RootState) => state.filters);
   const { realties } = useSelector((state: RootState) => state.realties);
   const { zone_list } = useSelector((state: RootState) => state.zone);
   const kakao_map = useRef<any>(null); //카카오 맵
@@ -77,6 +76,8 @@ function MapContainer({ modal }: IMatchModal) {
   const [addrList, setAddrList] = useState<IAddress[] | null>(null);
   const zone_view = useRef<boolean>(false); // 매물 버튼 오픈 여부
   const [zoneOpen, setZoneOpen] = useState<boolean>(false);
+
+  const debounceSearchTerm = useDebounced(addr, 500);
 
   /* 지도를 렌더하는 함수 */
   const mapRender = useCallback(() => {
@@ -180,40 +181,36 @@ function MapContainer({ modal }: IMatchModal) {
     });
     cluster_marker.current.addMarkers(data);
 
-    window.kakao.maps.event.addListener(
-      cluster_marker.current,
-      'clusterclick',
-      (cluster: any) => {
-        const overlays = cluster.getMarkers();
+    window.kakao.maps.event.addListener(cluster_marker.current, 'clusterclick', (cluster: any) => {
+      const overlays = cluster.getMarkers();
 
-        if (overlays.length > 10 || map_level.current > 11) {
-          var level = map.getLevel() - 1;
-          map.setLevel(level, {
-            anchor: cluster.getCenter(),
-            animate: 300,
-          });
-        } else {
-          zone_view.current = true;
-          const zoneList = overlays.map((overlay: any) => {
-            const data = overlay.getContent();
-            const t_index = data.indexOf('title=');
-            const close_index = data.indexOf('>');
-            const str = data.substring(t_index + 6, close_index);
-            return JSON.parse(str);
-          });
+      if (overlays.length > 10 || map_level.current > 11) {
+        var level = map.getLevel() - 1;
+        map.setLevel(level, {
+          anchor: cluster.getCenter(),
+          animate: 300,
+        });
+      } else {
+        zone_view.current = true;
+        const zoneList = overlays.map((overlay: any) => {
+          const data = overlay.getContent();
+          const t_index = data.indexOf('title=');
+          const close_index = data.indexOf('>');
+          const str = data.substring(t_index + 6, close_index);
+          return JSON.parse(str);
+        });
 
-          dispatch(setZone(zoneList));
-          setZoneOpen(zone_view.current);
-        }
+        dispatch(setZone(zoneList));
+        setZoneOpen(zone_view.current);
       }
-    );
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   };
 
   /* 주소 검색 함수 */
-  const onSearchAddr = useCallback(async () => {
+  const onSearchAddr = useCallback(async address => {
     try {
-      const res = await searchAddress(addr);
+      const res = await searchAddress(address);
       if (res) {
         setAddrList(res);
       } else {
@@ -222,7 +219,7 @@ function MapContainer({ modal }: IMatchModal) {
     } catch (e) {
       console.log(e);
     }
-  }, [addr]);
+  }, []);
 
   /* 주소 클릭시 주소 좌표로 맵 좌표 설정 */
   const onClickAddr = useCallback(async (jibun: string) => {
@@ -240,6 +237,10 @@ function MapContainer({ modal }: IMatchModal) {
       console.log(e);
     }
   }, []);
+
+  useEffect(() => {
+    onSearchAddr(debounceSearchTerm);
+  }, [debounceSearchTerm]);
 
   /* 마지막 위치 기준으로 get_area 함수 호출하여 해당지역 받아오기 */
   useEffect(() => {
@@ -275,11 +276,6 @@ function MapContainer({ modal }: IMatchModal) {
     createParkingMarker();
   }, [realties, level]);
 
-  /* 주소 모달 검색 */
-  useEffect(() => {
-    onSearchAddr();
-  }, [onSearchAddr]);
-
   /* 모달이 꺼졌을 시 초기화 */
   useEffect(() => {
     setAddr('');
@@ -290,18 +286,12 @@ function MapContainer({ modal }: IMatchModal) {
       <div className={styles['container']}>
         <div className={styles['app-bar']}>
           <div className={styles['app-bar-text']}>
-            <ButtonBase
-              className={styles['text']}
-              onClick={() => history.push(`${RoutePaths.main.index}/address`)}
-            >
+            <ButtonBase className={styles['text']} onClick={() => history.push(`${RoutePaths.main.index}/address`)}>
               어떤 지역을 찾고계신가요?
             </ButtonBase>
           </div>
           <div className={styles['app-bar-icon']}>
-            <IconButton
-              className={styles['icon']}
-              onClick={() => history.push(`${RoutePaths.main.index}/address`)}
-            >
+            <IconButton className={styles['icon']} onClick={() => history.push(`${RoutePaths.main.index}/address`)}>
               <img src={SEARCH} alt="search" />
             </IconButton>
             <IconButton
@@ -324,26 +314,14 @@ function MapContainer({ modal }: IMatchModal) {
           <CircleButton src={LOCATION} />
         </div>
         <SlideMenu open={menuOpen} handleClose={() => sliderMenuOpen(false)} />
-        <Button
-          className={cx('zone-button', { open: zoneOpen })}
-          onClick={() => history.push(RoutePaths.main.index + '/zone')}
-        >
+        <Button className={cx('zone-button', { open: zoneOpen })} onClick={() => history.push(RoutePaths.main.index + '/zone')}>
           이지역 매물 {`${zone_list.length}`}개 보기
         </Button>
         <div id="map" style={{ width: '100%', height: '100vh', zIndex: 1 }} />
       </div>
-      <AddressModal
-        open={modal === 'address'}
-        addr={addr}
-        onChange={e => setAddr(e.target.value)}
-        list={addrList}
-        onClick={onClickAddr}
-      />
+      <AddressModal open={modal === 'address'} addr={addr} onChange={e => setAddr(e.target.value)} list={addrList} onClick={onClickAddr} />
       <ZoneModal open={modal === 'zone'} realties={zone_list} />
-      <BottomModal
-        open={filterOpen}
-        handleClose={() => handleFilterOpen(false)}
-      />
+      <BottomModal open={filterOpen} handleClose={() => handleFilterOpen(false)} />
     </Fragment>
   );
 }
