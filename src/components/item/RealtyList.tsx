@@ -26,10 +26,10 @@ interface Props extends IRealty {
 }
 
 function RealtyItemList({ realties, icon, msg }: Relties) {
-  const list = realties?.map(item => (
-    <RealtyItem {...item} key={item.realty_id} icon={icon} />
-  ));
-  return <>{list?.length !== 0 ? list : <Empty msg={msg} />}</>;
+  if (realties?.length === 0) return <Empty msg={msg} />;
+
+  const list = realties?.map(item => <RealtyItem {...item} key={item.realty_id} icon={icon} />);
+  return <>{list}</>;
 }
 
 function RealtyItem(props: Props) {
@@ -52,15 +52,14 @@ function RealtyItem(props: Props) {
           )}
         </div>
         <div className={styles['realty-info']}>
-          <div className={styles['realty-price']}>
-            월세 {`${props.deposit}/${props.monthly_rent}`}
-          </div>
+          <div className={styles['realty-price']}>월세 {`${props.deposit}/${props.monthly_rent}`}</div>
           <div className={styles['realty-name']}>{props.realty_name}</div>
           <div className={styles['realty-date']}>
-            {`${dateToYYYYMMDD(new Date(props.oper_start_time))}`} ~{' '}
-            {`${dateToYYYYMMDD(new Date(props.oper_end_time))}`}까지
+            {`${dateToYYYYMMDD(new Date(props.oper_start_time))}`} ~ {`${dateToYYYYMMDD(new Date(props.oper_end_time))}`}까지
           </div>
-          <div className={styles['realty-area']}>{props.region_2depth_name} {props.region_3depth_name}</div>
+          <div className={styles['realty-area']}>
+            {props.region_2depth_name} {props.region_3depth_name}
+          </div>
         </div>
         <div className={styles['badge']}>집주인 허가</div>
       </div>

@@ -116,12 +116,8 @@ function DetailContainer({ id, modal }: IMatchId) {
         const res = await requestLike(realty?.realty_id, access_token);
         if (res.status === 200) {
           setIsLiked(res.data.isLiked);
-          dispatch(
-            setLike({ like: res.data.isLiked, realty_id: realty.realty_id })
-          );
-          const msg = res.data.isLiked
-            ? '찜목록에 추가되었습니다'
-            : '찜목록에서 삭제하였습니다.';
+          dispatch(setLike({ like: res.data.isLiked, realty_id: realty.realty_id }));
+          const msg = res.data.isLiked ? '찜목록에 추가되었습니다' : '찜목록에서 삭제하였습니다.';
           handleOpen(msg, true, false, 'success');
         }
       } else {
@@ -170,11 +166,7 @@ function DetailContainer({ id, modal }: IMatchId) {
     var imageSrc = MARKER,
       imageSize = new window.kakao.maps.Size(40, 40),
       imageOption = { offset: new window.kakao.maps.Point(20, 40) };
-    var markerImage = new window.kakao.maps.MarkerImage(
-        imageSrc,
-        imageSize,
-        imageOption
-      ),
+    var markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
       markerPosition = new window.kakao.maps.LatLng(realty?.lat, realty?.lng);
 
     var marker = new window.kakao.maps.Marker({
@@ -206,29 +198,18 @@ function DetailContainer({ id, modal }: IMatchId) {
           <Swiper>
             {realty_images.length !== 0 &&
               realty_images.map((src: string) => (
-                <img
-                  key={src}
-                  src={src ? `${API_PATH}/${src}` : IMAGE}
-                  className={styles['realty-img']}
-                  alt="home"
-                />
+                <img key={src} src={src ? `${API_PATH}/${src}` : IMAGE} className={styles['realty-img']} alt="home" />
               ))}
           </Swiper>
           <div className={styles['realty-main']}>
             <div className={styles['realty-title']}>{realty?.realty_name}</div>
-            <div className={styles['realty-comment']}>
-              {realty?.realty_comment}
-            </div>
-            <div className={styles['realty-createdAt']}>
-              {realty && `${dateToRelative(new Date(realty?.createdAt))}`}
-            </div>
+            <div className={styles['realty-comment']}>{realty?.realty_comment}</div>
+            <div className={styles['realty-createdAt']}>{realty && `${dateToRelative(new Date(realty?.createdAt))}`}</div>
           </div>
           <div className={styles['realty-sub']}>
             <div className={styles['realty-box']}>
               <div className={styles['column']}>월세</div>
-              <div className={styles['value']}>
-                {realty && realty?.deposit + '/' + realty?.monthly_rent}
-              </div>
+              <div className={styles['value']}>{realty && realty?.deposit + '/' + realty?.monthly_rent}</div>
             </div>
             <div className={styles['realty-box']}>
               <div className={styles['column']}>관리비</div>
@@ -236,12 +217,7 @@ function DetailContainer({ id, modal }: IMatchId) {
             </div>
             <div className={styles['realty-box']}>
               <div className={styles['value']}>
-                <IconButton
-                  className={styles['contract']}
-                  onClick={() =>
-                    history.push(`${RoutePaths.main.detail}/contract/${id}`)
-                  }
-                >
+                <IconButton className={styles['contract']} onClick={() => history.push(`${RoutePaths.main.detail}/contract/${id}`)}>
                   <img src={CONTRACT} alt="contract" />
                 </IconButton>
               </div>
@@ -251,60 +227,27 @@ function DetailContainer({ id, modal }: IMatchId) {
             <div className={styles['title']}>상세정보</div>
             <RealtyInfo text={'주소'} value={realty?.addr} />
             <RealtyInfo text={'상세주소'} value={realty?.addr_detail} />
-            <RealtyInfo
-              text={'층수'}
-              value={
-                realty !== null
-                  ? `${realty?.realty_my_floors} /${realty?.realty_all_floors}층`
-                  : ''
-              }
-            />
-            <RealtyInfo
-              text={'종류'}
-              value={realty ? getKind(realty.realty_kind) : ''}
-            />
-            <RealtyInfo
-              text={'양도 시작일'}
-              value={getFormatDateString(realty?.oper_start_time)}
-            />
-            <RealtyInfo
-              text={'양도 마감일'}
-              value={getFormatDateString(realty?.oper_end_time)}
-            />
+            <RealtyInfo text={'층수'} value={realty !== null ? `${realty?.realty_my_floors} /${realty?.realty_all_floors}층` : ''} />
+            <RealtyInfo text={'종류'} value={realty ? getKind(realty.realty_kind) : ''} />
+            <RealtyInfo text={'양도 시작일'} value={getFormatDateString(realty?.oper_start_time)} />
+            <RealtyInfo text={'양도 마감일'} value={getFormatDateString(realty?.oper_end_time)} />
           </div>
           <div className={styles['realty-info']}>
             <div className={styles['title']}>옵션</div>
             <ul className={styles['options']}>
-              {options.gas === true && (
-                <RealtyOptionItem src={GASSTOVE} name={'가스레인지'} />
-              )}
-              {options.microwave === true && (
-                <RealtyOptionItem src={MICROWAVE} name={'전자레인지'} />
-              )}
-              {options.washer === true && (
-                <RealtyOptionItem src={WASHER} name={'세탁기'} />
-              )}
-              {options.bed === true && (
-                <RealtyOptionItem src={BED} name={'침대'} />
-              )}
-              {options.induction === true && (
-                <RealtyOptionItem src={INDUCTION} name={'인덕션'} />
-              )}
-              {options.ac === true && (
-                <RealtyOptionItem src={AC} name={'에어컨'} />
-              )}
+              {options.gas === true && <RealtyOptionItem src={GASSTOVE} name={'가스레인지'} />}
+              {options.microwave === true && <RealtyOptionItem src={MICROWAVE} name={'전자레인지'} />}
+              {options.washer === true && <RealtyOptionItem src={WASHER} name={'세탁기'} />}
+              {options.bed === true && <RealtyOptionItem src={BED} name={'침대'} />}
+              {options.induction === true && <RealtyOptionItem src={INDUCTION} name={'인덕션'} />}
+              {options.ac === true && <RealtyOptionItem src={AC} name={'에어컨'} />}
             </ul>
           </div>
 
           <div className={styles['realty-info']}>
             <div className={styles['title']}>위치</div>
             <div className={styles['road-view']}>
-              <Button
-                className={styles['road-view-button']}
-                onClick={() =>
-                  history.push(`${RoutePaths.main.detail}/roadview/${id}`)
-                }
-              >
+              <Button className={styles['road-view-button']} onClick={() => history.push(`${RoutePaths.main.detail}/roadview/${id}`)}>
                 <img src={ROAD_VIEW} alt="road-view"></img>
                 <span>로드뷰 보기</span>
               </Button>
@@ -321,9 +264,7 @@ function DetailContainer({ id, modal }: IMatchId) {
           </div>
           <div className={styles['realty-info']}>
             <div className={styles['title']}>추가 설명</div>
-            <div className={styles['sub-comment']}>
-              {realty?.realty_subcomment}
-            </div>
+            <div className={styles['sub-comment']}>{realty?.realty_subcomment}</div>
           </div>
         </div>
       </div>
@@ -331,18 +272,12 @@ function DetailContainer({ id, modal }: IMatchId) {
         {loading && !realty ? (
           <> </>
         ) : user?.user_id === realty?.user_id ? (
-          <Link
-            to={`${RoutePaths.main.realty.write}/${realty?.realty_id}`}
-            className={styles['update-button']}
-          >
+          <Link to={`${RoutePaths.main.realty.write}/${realty?.realty_id}`} className={styles['update-button']}>
             수정하기
           </Link>
         ) : (
           <div className={styles['link']}>
-            <Button
-              className={styles['contact-button']}
-              onClick={onClickContact}
-            >
+            <Button className={styles['contact-button']} onClick={onClickContact}>
               간편 문의
             </Button>
             <a href="tel:010-3455-0117">
@@ -360,15 +295,8 @@ function DetailContainer({ id, modal }: IMatchId) {
           </div>
         )}
       </div>
-      <RoadviewModal
-        open={modal === 'roadview'}
-        lat={realty && realty?.lat}
-        lng={realty && realty?.lng}
-      ></RoadviewModal>
-      <ContractModal
-        open={modal === 'contract'}
-        url={`${imageFormat(contract_image)}`}
-      />
+      <RoadviewModal open={modal === 'roadview'} lat={realty && realty?.lat} lng={realty && realty?.lng}></RoadviewModal>
+      <ContractModal open={modal === 'contract'} url={`${imageFormat(contract_image)}`} />
     </Fragment>
   );
 }

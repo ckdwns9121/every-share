@@ -72,9 +72,7 @@ function RealtyWriteContainer({ id }: Props) {
   const [my_floor, setMyFloor] = useState<number | string>('');
   const [date, setDate] = useState<{ start_date: string; end_date: string }>({
     start_date: getFormatDate(today),
-    end_date: getFormatDate(
-      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)
-    ),
+    end_date: getFormatDate(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)),
   });
   const [comment, setComment] = useState<string>('');
   const [sub_comment, setSubComment] = useState<string>('');
@@ -91,20 +89,13 @@ function RealtyWriteContainer({ id }: Props) {
     induction: 0,
   });
 
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setReatlyName(e.target.value);
-  const onChangeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setComment(e.target.value);
-  const onChangeSubComment = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setSubComment(e.target.value);
-  const onChangeDeposit = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setDeposit(e.target.value);
-  const onChangeMonthRent = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setMonthRent(e.target.value);
-  const onChangeAllFloor = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setAllFloor(onlyNumber(e.target.value));
-  const onChangeFloor = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setMyFloor(onlyNumber(e.target.value));
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => setReatlyName(e.target.value);
+  const onChangeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => setComment(e.target.value);
+  const onChangeSubComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => setSubComment(e.target.value);
+  const onChangeDeposit = (e: React.ChangeEvent<HTMLInputElement>) => setDeposit(e.target.value);
+  const onChangeMonthRent = (e: React.ChangeEvent<HTMLInputElement>) => setMonthRent(e.target.value);
+  const onChangeAllFloor = (e: React.ChangeEvent<HTMLInputElement>) => setAllFloor(onlyNumber(e.target.value));
+  const onChangeFloor = (e: React.ChangeEvent<HTMLInputElement>) => setMyFloor(onlyNumber(e.target.value));
 
   const onChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -121,13 +112,7 @@ function RealtyWriteContainer({ id }: Props) {
         setDate({
           ...date,
           start_date: value,
-          end_date: getFormatDate(
-            new Date(
-              newValue.getFullYear(),
-              newValue.getMonth() + 1,
-              today.getDate() + 1
-            )
-          ),
+          end_date: getFormatDate(new Date(newValue.getFullYear(), newValue.getMonth() + 1, today.getDate() + 1)),
         });
       }
     } else {
@@ -150,10 +135,7 @@ function RealtyWriteContainer({ id }: Props) {
   const onChangeKind = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setKind(e.target.value);
   };
-  const onChangeOptions = (
-    name: string,
-    value: number | boolean | undefined
-  ) => {
+  const onChangeOptions = (name: string, value: number | boolean | undefined) => {
     setOptions({
       ...options,
       [name]: !value,
@@ -220,9 +202,7 @@ function RealtyWriteContainer({ id }: Props) {
           setComment(res.data.realty.realty_comment);
           setSubComment(res.data.realty.realty_subcomment);
           setDate({
-            start_date: getFormatDate(
-              new Date(res.data.realty.oper_start_time)
-            ),
+            start_date: getFormatDate(new Date(res.data.realty.oper_start_time)),
             end_date: getFormatDate(new Date(res.data.realty.oper_end_time)),
           });
         }
@@ -336,43 +316,22 @@ function RealtyWriteContainer({ id }: Props) {
             <option value="long">장기</option>
           </select>
           <div style={{ position: 'relative', width: '100%' }}>
-            <input
-              type="text"
-              placeholder="전체층수를 입력하세요"
-              value={all_floor}
-              onChange={onChangeAllFloor}
-            />
+            <input type="text" placeholder="전체층수를 입력하세요" value={all_floor} onChange={onChangeAllFloor} />
             <span className={styles['floor']}>층</span>
           </div>
           <div style={{ position: 'relative', width: '100%' }}>
-            <input
-              style={{ position: 'relative' }}
-              type="text"
-              placeholder="해당층수를 입력하세요"
-              value={my_floor}
-              onChange={onChangeFloor}
-            />
+            <input style={{ position: 'relative' }} type="text" placeholder="해당층수를 입력하세요" value={my_floor} onChange={onChangeFloor} />
             <span className={styles['floor']}>층</span>
           </div>
           <div className={styles['divide']}>
             <div className={styles['half-box']}>
               <p>보증금</p>
-              <input
-                type="text"
-                onChange={onChangeDeposit}
-                value={numberFormat(deposit)}
-                className={styles['costInput']}
-              />
+              <input type="text" onChange={onChangeDeposit} value={numberFormat(deposit)} className={styles['costInput']} />
               <p>만원</p>
             </div>
             <div className={styles['half-box']}>
               <p>월세</p>
-              <input
-                type="text"
-                value={numberFormat(monthly_rent)}
-                onChange={onChangeMonthRent}
-                className={styles['costInput']}
-              />
+              <input type="text" value={numberFormat(monthly_rent)} onChange={onChangeMonthRent} className={styles['costInput']} />
               <p>만원</p>
             </div>
             <p className={styles['notice']}>관리비 포함으로 작성.</p>
@@ -389,43 +348,23 @@ function RealtyWriteContainer({ id }: Props) {
         </div>
         <TitleBar text="위치 정보" />
         <div className={styles['locationInfo-box']}>
-          <Button
-            className={styles['address-search']}
-            onClick={() => setOpen(true)}
-          >
+          <Button className={styles['address-search']} onClick={() => setOpen(true)}>
             주소찾기
           </Button>
           <input type="text" placeholder="주소" defaultValue={addr} readOnly />
-          <input
-            type="text"
-            placeholder="상세 주소"
-            value={addr_detail}
-            onChange={e => setAddrDetail(e.target.value)}
-          />
+          <input type="text" placeholder="상세 주소" value={addr_detail} onChange={e => setAddrDetail(e.target.value)} />
         </div>
 
         <TitleBar text="대여 기간" />
         <div className={styles['date-box']}>
           <div className={styles['date']}>
             <p className={styles['subTitle']}>입주 시작 일자</p>
-            <input
-              type="date"
-              value={date.start_date}
-              min={getFormatDate(today)}
-              onChange={onChangeDate}
-              name="start_date"
-            />
+            <input type="date" value={date.start_date} min={getFormatDate(today)} onChange={onChangeDate} name="start_date" />
           </div>
 
           <div className={styles['date']}>
             <p className={styles['subTitle']}>입주 종료 일자</p>
-            <input
-              type="date"
-              value={date.end_date}
-              min={date.start_date}
-              onChange={onChangeDate}
-              name="end_date"
-            />
+            <input type="date" value={date.end_date} min={date.start_date} onChange={onChangeDate} name="end_date" />
           </div>
         </div>
         <TitleBar text="추가 정보" />
@@ -434,40 +373,22 @@ function RealtyWriteContainer({ id }: Props) {
             <p className={styles['subTitle']}>옵션 항목</p>
 
             <div className={styles['options']}>
-              <ButtonBase
-                className={cx('option', { checked: options.gas })}
-                onClick={() => onChangeOptions('gas', options.gas)}
-              >
+              <ButtonBase className={cx('option', { checked: options.gas })} onClick={() => onChangeOptions('gas', options.gas)}>
                 가스레인지
               </ButtonBase>
-              <ButtonBase
-                className={cx('option', { checked: options.microwave })}
-                onClick={() => onChangeOptions('microwave', options.microwave)}
-              >
+              <ButtonBase className={cx('option', { checked: options.microwave })} onClick={() => onChangeOptions('microwave', options.microwave)}>
                 전자레인지
               </ButtonBase>
-              <ButtonBase
-                className={cx('option', { checked: options.bed })}
-                onClick={() => onChangeOptions('bed', options.bed)}
-              >
+              <ButtonBase className={cx('option', { checked: options.bed })} onClick={() => onChangeOptions('bed', options.bed)}>
                 침대
               </ButtonBase>
-              <ButtonBase
-                className={cx('option', { checked: options.induction })}
-                onClick={() => onChangeOptions('induction', options.induction)}
-              >
+              <ButtonBase className={cx('option', { checked: options.induction })} onClick={() => onChangeOptions('induction', options.induction)}>
                 인덕션
               </ButtonBase>
-              <ButtonBase
-                className={cx('option', { checked: options.washer })}
-                onClick={() => onChangeOptions('washer', options.washer)}
-              >
+              <ButtonBase className={cx('option', { checked: options.washer })} onClick={() => onChangeOptions('washer', options.washer)}>
                 세탁기
               </ButtonBase>
-              <ButtonBase
-                className={cx('option', { checked: options.ac })}
-                onClick={() => onChangeOptions('ac', options.ac)}
-              >
+              <ButtonBase className={cx('option', { checked: options.ac })} onClick={() => onChangeOptions('ac', options.ac)}>
                 에어컨
               </ButtonBase>
             </div>
@@ -477,46 +398,23 @@ function RealtyWriteContainer({ id }: Props) {
             <p className={styles['notice']}>실 사진을 등록해주세요</p>
             <div className={styles['fileInput-box']}>
               <label htmlFor="realty-picture">매물 사진 등록</label>
-              <input
-                type="file"
-                id="realty-picture"
-                onChange={onUploadFile}
-                accept="image/gif, image/jpeg, image/png, image/svg"
-              />
+              <input type="file" id="realty-picture" onChange={onUploadFile} accept="image/gif, image/jpeg, image/png, image/svg" />
             </div>
             <div className={styles['RegisteredImage-box']}>
               {realty_srcs.map((item, index) => (
-                <ImageItem
-                  src={item}
-                  key={index}
-                  index={index}
-                  onDelete={onDeleteRealtyImage}
-                />
+                <ImageItem src={item} key={index} index={index} onDelete={onDeleteRealtyImage} />
               ))}
             </div>
           </div>
           <div className={styles['register-box']}>
             <p className={styles['subTitle']}>임시 계약서 등록</p>
-            <p className={styles['notice']}>
-              임시계약서를 등록할 시 개인정보는 가려주세요
-            </p>
+            <p className={styles['notice']}>임시계약서를 등록할 시 개인정보는 가려주세요</p>
             <div className={styles['fileInput-box']}>
               <label htmlFor="contract">임시 계약서 등록</label>
-              <input
-                type="file"
-                id="contract"
-                onChange={onUploadContract}
-                accept="image/gif, image/jpeg, image/png, image/svg"
-              />
+              <input type="file" id="contract" onChange={onUploadContract} accept="image/gif, image/jpeg, image/png, image/svg" />
             </div>
             <div className={styles['RegisteredImage-box']}>
-              {contract_src && (
-                <ImageItem
-                  src={contract_src}
-                  index={0}
-                  onDelete={onDeleteContractImage}
-                />
-              )}
+              {contract_src && <ImageItem src={contract_src} index={0} onDelete={onDeleteContractImage} />}
             </div>
           </div>
 
@@ -530,10 +428,7 @@ function RealtyWriteContainer({ id }: Props) {
             ></textarea>
           </div>
 
-          <Button
-            className={styles['registerButton']}
-            onClick={onClickEnrollment}
-          >
+          <Button className={styles['registerButton']} onClick={onClickEnrollment}>
             {id ? '매물 수정' : '매물 등록'}
           </Button>
         </div>

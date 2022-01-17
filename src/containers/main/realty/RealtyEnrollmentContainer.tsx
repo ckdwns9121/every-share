@@ -46,10 +46,7 @@ function RealtyEnrollmentContainer() {
 
   return (
     <Layout>
-      <Button
-        className={styles['enrollment-button']}
-        onClick={() => history.push(RoutePaths.main.realty.write)}
-      >
+      <Button className={styles['enrollment-button']} onClick={() => history.push(RoutePaths.main.realty.write)}>
         방 등록하기
       </Button>
       <div className={styles['list']} style={{ marginTop: '20px' }}>
