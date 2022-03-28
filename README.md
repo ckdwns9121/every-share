@@ -48,7 +48,11 @@
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 ![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
 ![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white)
-![AWS](https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=aws&logoColor=white)
+
+## CI/CD
+
+![pm2](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=AWS-Lambda&logoColor=white)
+![pm2](https://img.shields.io/badge/pm2-000000?style=for-the-badge&logo=aws&logoColor=white)
 
 ## 📚 라우팅 구조
 
@@ -70,21 +74,21 @@
 |   |       └── phone_number: 핸드폰번호 변경
 |   |   └── drop : 회원탈퇴
 │   └── event
-|   |   └── index : 이벤트 리스트
+│   |   └── index : 이벤트 리스트
 |   |   └── detail : 이벤트 상세보기
-|
-|
+│
+│
 ├── Auth
 │   ├── login : 로그인 안내창
 │   ├── signin: 이메일 로그인
 │   ├── signup : 회원가입
 │   └── signup_complete : 회원가입 완료
 │   └── find
-|   |   └── index : 이메일/ 비밀번호 찾기
-|   |   └── email : 이메일 찾기
-|   |   └── email_complete : 이메일 찾기 완료
-|   |   └── password : 비밀번호 찾기
-|   |   └── password_complete : 비밀번호 찾기 완료
+│  |   └── index : 이메일/ 비밀번호 찾기
+│  |   └── email : 이메일 찾기
+│  │   └── email_complete : 이메일 찾기 완료
+│  │   └── password : 비밀번호 찾기
+│  |   └── password_complete : 비밀번호 찾기 완료
 └──
 ```
 
@@ -107,6 +111,8 @@
 └──
 ```
 
+## 개발 화면
+
 ## TodoList
 
 - 마이페이지 ✅
@@ -119,5 +125,3 @@
 - 매물 수정 및 삭제✅
 - 매물 문의시 POST 작업 ✅
 - 서브 페이지 (이벤트, 공지사항)
-
-## 화면
