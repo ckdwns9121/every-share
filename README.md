@@ -1,6 +1,56 @@
-# 졸업작품 - 원룸 양도 서비스
+🏘 자취방 양도 플랫폼
 
-## 1. 라우팅 구조
+## 🔎프로젝트 개요
+
+- 코로나19 때문에 늘어나는 빈 자취방
+- 하지만 매월 지불해야하는 아까운 월세
+- 방학 때 단기간 양도가 필요한 학생
+- 안전하지 못한 자취방 양도
+
+## 와이어프레임
+
+### 인증 화면
+
+![1](https://user-images.githubusercontent.com/40492343/160358578-dea6920a-d6fe-47fe-9460-567424d5ca01.png)
+
+### 메인화면1
+
+![2](https://user-images.githubusercontent.com/40492343/160358594-1efd3f70-e2a7-4151-9a6c-448cff7fb156.png)
+
+### 메인화면2
+
+![3](https://user-images.githubusercontent.com/40492343/160358619-eb162941-919d-4b39-af1f-135280ec41e3.png)
+
+## 🚩기술스택
+
+### 프론트엔드
+
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+![Sass](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
+![ts](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+
+### 백엔드
+
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![Seuelize](https://img.shields.io/badge/-Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white)
+![db](https://img.shields.io/badge/MySql-000000?style=flat-square&logo=MySQL&logoColor=white)
+
+### 협업
+
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
+![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white)
+![AWS](https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=aws&logoColor=white)
+
+## 📚 라우팅 구조
 
 ```bash
 ├── Main
@@ -38,7 +88,7 @@
 └──
 ```
 
-## 2. 디렉토리 구조
+## 📁 디렉토리 구조
 
 ```bash
 ├── src
@@ -57,7 +107,7 @@
 └──
 ```
 
-## 3. TodoList
+## TodoList
 
 - 마이페이지 ✅
 - 아이디 비밀번호 찾기✅
@@ -69,3 +119,5 @@
 - 매물 수정 및 삭제✅
 - 매물 문의시 POST 작업 ✅
 - 서브 페이지 (이벤트, 공지사항)
+
+## 화면
