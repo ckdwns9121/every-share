@@ -51,7 +51,7 @@
 
 ## CI/CD
 
-![pm2](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=AWS-Lambda&logoColor=white)
+![aws](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=Amazon-AWSa&logoColor=white)
 ![pm2](https://img.shields.io/badge/pm2-000000?style=for-the-badge&logo=aws&logoColor=white)
 
 ## 📚 라우팅 구조
